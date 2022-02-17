@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PromoitQueue": {
+      "commandName": "Project",
+      "commandLineArgs": "host start --port 7076"
+    }
+  }
+}
