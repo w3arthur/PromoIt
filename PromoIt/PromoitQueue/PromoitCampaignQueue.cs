@@ -40,8 +40,8 @@ namespace PromoitQueue
             try
             {//POST
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-                requestBody = httpClient.HttpUrlDecode(requestBody);
-                Dictionary<string, string> keyValuePairs = httpClient.PostMessageSplit(requestBody);
+                requestBody = HTTPClient.HttpUrlDecode(requestBody);
+                Dictionary<string, string> keyValuePairs = HTTPClient.PostMessageSplit(requestBody);
                 string data = keyValuePairs["data"].ToString();
                 string type = keyValuePairs["type"].ToString();
                 if (!string.IsNullOrEmpty(data) && !string.IsNullOrEmpty(type))
