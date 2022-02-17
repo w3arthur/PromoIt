@@ -17,7 +17,7 @@ namespace PromoitTwitterAPI
         private static TwitterClient twitterUserClient = Configuration.TwitterUserClient;
 
         [FunctionName("TwitterApiTimmerFunction")]
-        public async Task RunAsync([TimerTrigger("0 */60 * * * *")] TimerInfo myTimer, ILogger log)    //chenge to 1 minute for better testing
+        public async Task RunAsync([TimerTrigger("0 */60 * * * *")] TimerInfo myTimer, ILogger log)    //Change to 1 minute for better testing
         {
 
             //Please note, run it with Functions and Queue !!!
