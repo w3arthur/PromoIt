@@ -7,7 +7,7 @@
 ConnectionKeys/ConnectionKeySet.cs
 
 #Logs
-#Logs/
+Logs/
 
 # User-specific files
 *.rsuser
