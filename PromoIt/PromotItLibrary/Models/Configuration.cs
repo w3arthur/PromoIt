@@ -14,6 +14,10 @@ namespace PromotItLibrary.Models
     public class Configuration
     {
 
+        /*TODO*/
+        /*Fix MySQL (Multi) Request, For Async Method*/
+        /*Fix Modes for all Classes if(s)*/
+
         /// <summary>
         /// System global mode settings
         /// </summary>
