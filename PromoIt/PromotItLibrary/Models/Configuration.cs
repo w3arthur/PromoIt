@@ -4,11 +4,6 @@ using System.Threading.Tasks;
 using Tweetinvi;
 
 
-/**
- * Copyright:
- *  Authors: Arthur Zarankin, Ariel Hillel, Yaron Malul
-**/
-
 namespace PromotItLibrary.Models
 {
     public class Configuration
@@ -16,7 +11,13 @@ namespace PromotItLibrary.Models
 
         /*TODO*/
         /*Fix MySQL (Multi) Request, For Async Method*/
-        /*Fix Modes for all Classes if(s)*/
+        /*Fix Modes for all Classes if(s) use (Strategy) or (State Pattern)*/
+        /*Add Read From File Development*/
+        /*Add user Token For any working*/
+        /*Add Transaction to each procedure*/
+        /*Set Transactions*/
+        /*Set CosmosDB*/
+
 
         /// <summary>
         /// System global mode settings

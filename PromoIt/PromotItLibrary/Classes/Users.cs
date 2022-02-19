@@ -20,6 +20,7 @@ namespace PromotItLibrary.Classes
         public string UserPassword { get; set; }
         public string Name { get; set; }
         public string UserType { get; set; }
+        public string Token { get; set; }
 
         public Users() { }
 
@@ -29,6 +30,7 @@ namespace PromotItLibrary.Classes
             UserPassword = user.UserPassword;
             UserType = user.UserType;
             Name = user.Name;
+            Token = user.Token;
         }
 
         public async Task<Users> LoginAsync(Modes mode = null)
