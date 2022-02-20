@@ -1,7 +1,7 @@
 ﻿namespace ConnectionKeys
 {
      
-    public struct ConnectionKeySetEmpty //delete the Empty part
+    public struct ConnectionKeySet //delete the Empty part
     {
         //set as git ignore
         public static string MySQLKey_Server { get; } = "";
