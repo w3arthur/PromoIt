@@ -22,7 +22,7 @@ namespace PromotItLibrary.Models
         /*Cosmos /MongoDB*/
         /*Fix Exeption on register by check if it still count, make Exeption OOP*/
         // https://stackoverflow.com/questions/9974325/mysql-transaction-within-a-stored-procedure
-
+        /* set MySQL class to callback functions */ 
         /// <summary>
         /// System global mode settings
         /// </summary>

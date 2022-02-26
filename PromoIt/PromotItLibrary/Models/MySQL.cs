@@ -70,7 +70,7 @@ namespace PromotItLibrary.Models
                 int? outPut = Cmd?.ExecuteNonQuery();
                 if (outPut == null && outPut <= 0)
                 {
-                    while (IsTries()) return QuaryExecute();
+                    if (IsTries()) return QuaryExecute();
                     TriesReset();
                     NullifiedValues();
                     return false;
@@ -95,7 +95,7 @@ namespace PromotItLibrary.Models
                 int? outPut = await Cmd?.ExecuteNonQueryAsync();
                 if (outPut == null && outPut <= 0)
                 {
-                    while ( IsTries() )  return await QuaryExecuteAsync();
+                    if ( IsTries() )  return await QuaryExecuteAsync();
                     TriesReset();
                     NullifiedValues();
                     return false;
@@ -114,7 +114,7 @@ namespace PromotItLibrary.Models
         {
             try
             {
-                while (IsTries())
+                if (IsTries())
                 {
                     using MySqlDataReader rdr = Rdr;
                     Rdr =  Cmd?.ExecuteReader();
@@ -133,7 +133,7 @@ namespace PromotItLibrary.Models
         {
             try
             {
-                while (IsTries())
+                if (IsTries())
                 {
                     using MySqlDataReader rdr = Rdr;
                     Rdr = (MySqlDataReader)await Cmd?.ExecuteReaderAsync();
@@ -153,7 +153,7 @@ namespace PromotItLibrary.Models
         {
             try
             {
-                while (IsTries())
+                if (IsTries())
                 {
                     using MySqlDataAdapter dar = Dar;
                     Dar = new MySqlDataAdapter(Cmd);
@@ -172,7 +172,7 @@ namespace PromotItLibrary.Models
         {
             try
             {
-                while (IsTries())
+                if (IsTries())
                 {
                     using MySqlDataAdapter dar = Dar;
                     Dar = new MySqlDataAdapter(Cmd);
