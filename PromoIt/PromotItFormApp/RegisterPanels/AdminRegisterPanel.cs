@@ -15,7 +15,6 @@ namespace PromotItFormApp.RegisterPanels
 {
     public partial class AdminRegisterPanel : Form
     {
-
         public AdminRegisterPanel()
         {
             InitializeComponent();
@@ -61,12 +60,11 @@ namespace PromotItFormApp.RegisterPanels
                 }
                 
                 Configuration.CorrentUser = adminUser;
-                Configuration.LognUser = new Users(adminUser);
+                Configuration.LoginUser = new Users(adminUser);
                 Loggings.ReportLog($"Admin User registered UserName ({adminUser.UserName})");
 
                 this.Hide();
-                RegisterPanels.LoginPanel login = new RegisterPanels.LoginPanel();
-                login.ShowDialog();
+                (new LoginPanel()).ShowDialog();
                 this.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

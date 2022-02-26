@@ -17,7 +17,11 @@ namespace PromotItLibrary.Models
         /*Add Transaction to each procedure*/
         /*Set Transactions*/
         /*Set CosmosDB*/
-
+        /*Close connection*/
+        /*Check Alon Version*/
+        /*Cosmos /MongoDB*/
+        /*Fix Exeption on register by check if it still count, make Exeption OOP*/
+        // https://stackoverflow.com/questions/9974325/mysql-transaction-within-a-stored-procedure
 
         /// <summary>
         /// System global mode settings
@@ -40,7 +44,7 @@ namespace PromotItLibrary.Models
         /// Public Sources
         /// </summary>
         public static Users CorrentUser { get; set; }
-        public static Users LognUser { get; set; }
+        public static Users LoginUser { get; set; }
         public static Campaign CorrentCampaign { get; set; }
         public static ProductInCampaign CorrentProduct { get; set; }
         public static MySQL MySQL { get { MySQLStart(); return _mySQL; } set { _mySQL = value; } }
@@ -125,7 +129,7 @@ namespace PromotItLibrary.Models
         /// <summary>
         /// Sources Dispose
         /// </summary>
-        ~Configuration() { }
+        ~Configuration() {}
     }
 
 }

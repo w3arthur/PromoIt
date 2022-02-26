@@ -31,29 +31,23 @@ namespace PromotItFormApp.RegisterPanels
         private void RoleSystem_Load(object sender, EventArgs e) { }
 
 
-        private void PressingEnter(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter) btnRegister.PerformClick();
-        }
+        private void PressingEnter(KeyEventArgs e) {  if (e.KeyCode == Keys.Enter) btnRegister.PerformClick(); }
 
         private void GetRadioButtonPage() 
         {
             try
             {
+                Form? form =
+                    chkAdmin.Checked ? new AdminRegisterPanel() :
+                    chkNonProfit.Checked ? new NonProfitOrganizationPanel() :
+                    chkBuisness.Checked ? new BusinessCompanyRegisterPanel() :
+                    chkActivist.Checked ? new ActivistRegisterPanel() :
+                    null;
                 this.Hide();
-                if (chkAdmin.Checked)
-                    new AdminRegisterPanel().ShowDialog();
-                else if (chkNonProfit.Checked)
-                    new NonProfitOrganizationPanel().ShowDialog();
-                else if (chkBuisness.Checked)
-                    new BusinessCompanyRegisterPanel().ShowDialog();
-                else if (chkActivist.Checked)
-                    new ActivistRegisterPanel().ShowDialog();
-                else
-                    throw new Exception("Please select your role");
+                form?.ShowDialog();
                 this.Close();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch { }
         }
 
     }

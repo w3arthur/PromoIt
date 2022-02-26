@@ -63,12 +63,11 @@ namespace PromotItFormApp.RegisterPanels
                 }
                 
                 Configuration.CorrentUser = businessUser;
-                Configuration.LognUser = new Users(businessUser);
+                Configuration.LoginUser = new Users(businessUser);
                 Loggings.ReportLog($"Business User registered UserName ({businessUser.UserName})");
 
                 this.Hide();
-                LoginPanel login = new LoginPanel();
-                login.ShowDialog();
+                (new LoginPanel()).ShowDialog();
                 this.Close();
 
             }

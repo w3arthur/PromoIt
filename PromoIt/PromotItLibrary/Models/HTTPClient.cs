@@ -29,9 +29,9 @@ namespace PromotItLibrary.Models
 
         ~HTTPClient() => _httpClient.Dispose();
 
-        public static string ObjectToJsonString<T>(T data) => Newtonsoft.Json.JsonConvert.SerializeObject(data);
-        public static T JsonStringToSingleObject<T>(string mycontent) => Newtonsoft.Json.JsonConvert.DeserializeObject<T>(mycontent);
-        public static List<T> JsonStringToObjectList<T>(string mycontent) => Newtonsoft.Json.JsonConvert.DeserializeObject<List<T>>(mycontent);
+        public static string ObjectToJsonString<T>(T data) => JsonConvert.SerializeObject(data);
+        public static T JsonStringToSingleObject<T>(string mycontent) => JsonConvert.DeserializeObject<T>(mycontent);
+        public static List<T> JsonStringToObjectList<T>(string mycontent) => JsonConvert.DeserializeObject<List<T>>(mycontent);
         public static string HttpUrlDecode(string data) => HttpUtility.UrlDecode(data);
         public static Dictionary<string, string> PostMessageSplit(string requestBody)
             => requestBody.Split('&').Select(value => value.Split('=')).ToDictionary(pair => pair[0], pair => pair[1]);
@@ -105,9 +105,7 @@ namespace PromotItLibrary.Models
         public async Task<string> GetStringRequest(string getUrl, string objString, string type = "")
         {
             string getRequest = "type=" + type + "&data=" + objString;
-            if (Configuration.LocalMode == Modes.Local) getRequest = "?" + getRequest;
-            else if (Configuration.LocalMode == Modes.NotLocal_ProtectedKey) getRequest = "&" + getRequest;
-            else throw new Exception("Single Get Reguest wrong, Local Mode not set");
+            getRequest = (getRequest.Contains("?") ? "&" : "?") + getRequest;
             return await GetRequest(getUrl, getRequest); //Response
         }
         public async Task<string> GetRequest(string getUrl, string getRequest)

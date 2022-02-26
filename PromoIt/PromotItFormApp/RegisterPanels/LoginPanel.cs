@@ -16,7 +16,6 @@ using PromotItLibrary.Interfaces;
 
 namespace PromotItFormApp.RegisterPanels
 {
-
     public partial class LoginPanel : Form
     {
         public LoginPanel()
@@ -42,7 +41,7 @@ namespace PromotItFormApp.RegisterPanels
 
         private void UserSetValues() 
         {
-            Users user = Configuration.LognUser;
+            Users user = Configuration.LoginUser;
             if (user != null && !string.IsNullOrEmpty(user.UserName))
             {
                 txtUserName.Text = user.UserName;
@@ -67,18 +66,18 @@ namespace PromotItFormApp.RegisterPanels
                     UserName = txtUserName.Text.Trim(),
                     UserPassword = txtPassword.Text.Trim(),
                 };
-                
-                user = await user.LoginAsync();
-                if (user == null)
+
+                Users loggedinUser = await user.LoginAsync();
+                if (loggedinUser == null)
                 {
                     Loggings.ErrorLog($"User cant login UserName ({txtUserName.Text}), Wrong UserName or Password");
                     throw new Exception("Wrong username or password!");
                 }
 
-                Configuration.CorrentUser = user;
-                Configuration.LognUser = new Users(user);
+                Configuration.CorrentUser = loggedinUser;
+                Configuration.LoginUser = new Users(loggedinUser);
 
-                string? type = user.UserType;
+                string? type = loggedinUser.UserType;
                 Form? form =
                     type == "admin" ? new LandingPanels.AdminPanel() :
                     type == "non-profit" ? new LandingPanels.NonProfitPanel() :
@@ -90,7 +89,7 @@ namespace PromotItFormApp.RegisterPanels
                     Loggings.ErrorLog($"User cant login UserName ({user.UserName})");
                     throw new Exception("The system does not recognize you!");
                 }
-                Loggings.ReportLog($"User login UserName ({user.UserName})");
+                Loggings.ReportLog($"User login UserName ({loggedinUser.UserName})");
 
                 this.Hide();
                 form.ShowDialog();

@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,12 +65,11 @@ namespace PromotItFormApp.RegisterPanels
                 } 
 
                 Configuration.CorrentUser = activistUser;
-                Configuration.LognUser = new Users(activistUser);
+                Configuration.LoginUser = new Users(activistUser);
                 Loggings.ReportLog($"Activist User registered UserName ({activistUser.UserName})");
 
                 this.Hide();
-                RegisterPanels.LoginPanel login = new RegisterPanels.LoginPanel();
-                login.ShowDialog();
+                (new LoginPanel()).ShowDialog();
                 this.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

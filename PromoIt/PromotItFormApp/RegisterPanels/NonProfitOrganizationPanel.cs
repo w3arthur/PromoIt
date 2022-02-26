@@ -15,7 +15,6 @@ namespace PromotItFormApp.RegisterPanels
 {
     public partial class NonProfitOrganizationPanel : Form
     {
-
         public NonProfitOrganizationPanel()
         {
             InitializeComponent();
@@ -64,13 +63,12 @@ namespace PromotItFormApp.RegisterPanels
                     throw new Exception("Registeration Fail");
                 }
 
-                Configuration.CorrentUser = nonProfitUser;
-                Configuration.LognUser = new Users(nonProfitUser);
+                Configuration.CorrentUser = new Users(nonProfitUser);
+                Configuration.LoginUser = new Users(nonProfitUser);
                 Loggings.ReportLog($"Non Profit Company User registered UserName ({nonProfitUser.UserName})");
                 
                 this.Hide();
-                RegisterPanels.LoginPanel login = new RegisterPanels.LoginPanel();
-                login.ShowDialog();
+                (new LoginPanel()).ShowDialog();
                 this.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
