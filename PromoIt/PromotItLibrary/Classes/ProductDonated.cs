@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 
 namespace PromotItLibrary.Classes
 {
@@ -147,7 +148,7 @@ namespace PromotItLibrary.Classes
             if (productDonatedList == null)
             {
                 while (Configuration.IsTries())
-                    return await GetDonatedProductForShipping_DataTableAsync();
+                    return await new ActionsProduct(this).GetDonatedProductForShipping_DataTableAsync();
                 Loggings.ErrorLog($"Business user Got Empty list of donated products waiting for shipping, UserName ({ProductInCampaign.BusinessUser.UserName})");
                 Configuration.TriesReset();
                 return dataTable;//no results

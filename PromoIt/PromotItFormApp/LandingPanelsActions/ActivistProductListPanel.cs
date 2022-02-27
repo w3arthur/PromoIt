@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,11 +47,11 @@ namespace PromotItFormApp.LandingPanelsActions
 
             try
             {
-                bool result = await productDonated.SetBuyAnItemAsync();
+                bool result = await new ActionsProduct(productDonated).SetBuyAnItemAsync();
                 if (!result) throw new Exception("Cant Buy This Item");
                 
                 Configuration.Message = $"Thanks For ordering { productDonated.ProductInCampaign.Name} {productDonated.Quantity}pcs\n for Campaign #{Configuration.CorrentCampaign.Hashtag}";
-                Task sendATweet = productDonated.SetTwitterMessagTweet_SetBuyAnItemAsync();
+                Task sendATweet = new ActionsProduct(productDonated).SetTwitterMessagTweet_SetBuyAnItemAsync();
                 await sendATweet;
                 Loggings.ReportLog($"Activist Bought an item, Activist UserName ({productDonated.ActivistUser.UserName}) CampaignName ({productDonated.ProductInCampaign.Name}) BuisnessUserName ({productDonated.ProductInCampaign.BusinessUser.UserName})" +
                     $"\nProductId ({productDonated.ProductInCampaign.Id}) Quantity ({productDonated.Quantity})");
@@ -75,7 +76,7 @@ namespace PromotItFormApp.LandingPanelsActions
                 };
                 Configuration.CorrentProduct = productInCampaign;
                 
-                dataGridProductList.DataSource = await productInCampaign.GetList_DataTableAsync();
+                dataGridProductList.DataSource = await new ActionsProduct(productInCampaign).GetList_DataTableAsync();
                 //dataGridProductList.Columns["clmnProductId"].Visible = false; //hidden
                 //dataGridProductList.Columns["clmnBusinessUser"].Visible = false; //hidden
             }

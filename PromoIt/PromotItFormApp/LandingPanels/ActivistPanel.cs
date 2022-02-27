@@ -3,6 +3,7 @@ using PromotItFormApp.LandingPanels;
 using PromotItFormApp.LandingPanelsActions;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,8 +33,7 @@ namespace PromotItFormApp.LandingPanels
                 {
                     if (string.IsNullOrEmpty(dgrdCampaigns["clmnHashtag", e.RowIndex].Value.ToString())) return;
 
-                    Campaign campaign = new Campaign() { Hashtag = dgrdCampaigns["clmnHashtag", e.RowIndex].Value.ToString(), };
-                    Configuration.CorrentCampaign = campaign;
+                    Configuration.CorrentCampaign = new Campaign() { Hashtag = dgrdCampaigns["clmnHashtag", e.RowIndex].Value.ToString(), };
                     
                     ActivistProductListPanel productList = new ActivistProductListPanel() { };
 
@@ -59,7 +59,7 @@ namespace PromotItFormApp.LandingPanels
             ActivistUser activistUser = new ActivistUser(Configuration.CorrentUser);
             try
             {
-                ActivistUser result = (await activistUser.GetCashAmountAsync());
+                ActivistUser result = (await new ActionsUser(activistUser).GetCashAmountAsync());
                 if (result == null) throw new Exception($"Cant Receive Activist Cash report UserName ({activistUser.UserName})");
                 activistUser.Cash = result?.Cash;
                 txtCashBalanceCheck.Text = activistUser.Cash;
@@ -75,7 +75,7 @@ namespace PromotItFormApp.LandingPanels
         {
             try
             {
-                dgrdCampaigns.DataSource = await (new Campaign()).GetAllCampaigns_DataTableAsync();
+                dgrdCampaigns.DataSource = await new ActionsCampaign(new Campaign()).GetAllCampaigns_DataTableAsync();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

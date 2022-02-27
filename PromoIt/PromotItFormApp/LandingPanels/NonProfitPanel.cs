@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PromotItFormApp.LandingPanelsActions;
+using PromotItLibrary.Patterns;
 
 namespace PromotItFormApp.LandingPanels
 {
@@ -63,7 +64,7 @@ namespace PromotItFormApp.LandingPanels
                 Hashtag = dgrdNonProfit.Rows[e.RowIndex].Cells[2].Value.ToString(),
                 };
 
-                bool result = await campaign.DeleteCampaignAsync();
+                bool result = await new ActionsCampaign(campaign).DeleteCampaignAsync();
                 if (!result)
                 {
                     Loggings.ErrorLog($"Fail Non Profit Organization user to delete the campaign, UserName ({campaign.NonProfitUser.UserName}) Campaign (#{campaign.Hashtag})");
@@ -81,7 +82,7 @@ namespace PromotItFormApp.LandingPanels
         {
             try
             {
-                DataTable tbl = await (new Campaign() { NonProfitUser = Configuration.CorrentUser, }).GetAllCampaignsNonProfit_DataTableAsync();
+                DataTable tbl = await new ActionsCampaign(new Campaign() { NonProfitUser = Configuration.CorrentUser, }).GetAllCampaignsNonProfit_DataTableAsync();
                 dgrdNonProfit.DataSource = tbl;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message);}

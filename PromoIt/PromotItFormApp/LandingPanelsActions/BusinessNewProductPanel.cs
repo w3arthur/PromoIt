@@ -1,5 +1,6 @@
 ﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,7 +38,7 @@ namespace PromotItFormApp.LandingPanelsActions
                     BusinessUser = Configuration.CorrentUser,
                 };
 
-                bool result = await product.SetNewProductAsync();
+                bool result = await new ActionsProduct(product).SetNewProductAsync();
                 if (!result)
                 {
                     Loggings.ErrorLog($"Fail to insert a product by Business, UserName ({product.BusinessUser.UserName}) Campaign (#{product.Campaign.Hashtag}) Product Name ({product.Name} Quantity ({product.Quantity}) Price ({product.Price}))");

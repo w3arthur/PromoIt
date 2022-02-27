@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Patterns;
 
 namespace PromotItFormApp.RegisterPanels
 {
@@ -57,7 +58,7 @@ namespace PromotItFormApp.RegisterPanels
                     PhoneNumber = txtPhoneNumber.Text,
                 };
 
-                bool result = await activistUser.RegisterAsync();
+                bool result = await new ActionsUser(activistUser).RegisterAsync();
                 if (!result)
                 {
                     Loggings.ErrorLog($"Activist User cant register UserName ({activistUser.UserName})");

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Collections.Generic;
 
@@ -97,7 +98,7 @@ namespace PromotItLibrary.Classes
             if (tweetList == null)
             {
                 while (Configuration.IsTries())
-                    return await GetAllTweets_DataTableAsync();
+                    return await new ActionsTweet(this).GetAllTweets_DataTableAsync();
                 Loggings.ErrorLog($"Admin Requested to get all Tweets list, The list is empty, Reguested by ({Configuration.CorrentUser.UserName})");
                 Configuration.TriesReset();
                 return dataTable;//no results

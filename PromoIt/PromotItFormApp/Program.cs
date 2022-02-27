@@ -11,9 +11,6 @@ namespace PromotItFormApp
 {
     public static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
@@ -22,8 +19,6 @@ namespace PromotItFormApp
             Application.SetCompatibleTextRenderingDefault(false);
 
             Loggings.ReportLog("Windows Form Start");
-            
-
             Application.Run(new PromotIt() );
         }
 

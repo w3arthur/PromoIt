@@ -28,39 +28,12 @@ namespace PromotItFormApp
             btnX.Visible = false;            
         }
 
-        //Methods
+        private void buttonHome_Click(object sender, EventArgs e) => OpenChildForm(new ChildPanels.MenuHomePanel(), sender);
 
-        private Color SelectThemeColor()
-        {
-            int index = random.Next(ThemeColor.ColorList.Count);
+        private void buttonAbout_Click(object sender, EventArgs e) => OpenChildForm(new ChildPanels.MenuAboutPanel(), sender);
 
-            while (tempIndex == index)
-            {
-                index = random.Next(ThemeColor.ColorList.Count);
-            }
-            tempIndex = index;
-            string color = ThemeColor.ColorList[index];
-            return ColorTranslator.FromHtml(color); 
-        }
-
-        private void buttonHome_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new ChildPanels.MenuHomePanel(), sender);
-            //ActivateButton(sender);
-        }
-
-        private void buttonAbout_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new ChildPanels.MenuAboutPanel(), sender);
-            //ActivateButton(sender);
-        }
-
-        private void buttonTwitter_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new ChildPanels.MenuTwitterPanel(), sender);
-            //ActivateButton(sender);
-        }
-
+        private void buttonTwitter_Click(object sender, EventArgs e) => OpenChildForm(new ChildPanels.MenuTwitterPanel(), sender);
+        
         private void buttonRegister_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
@@ -84,8 +57,18 @@ namespace PromotItFormApp
             Reset();
         }
 
+        private Color SelectThemeColor()
+        {
+            int index = random.Next(ThemeColor.ColorList.Count);
 
-        //private void panelDesktopPanel_Paint_1(object sender, PaintEventArgs e) { }
+            while (tempIndex == index)
+            {
+                index = random.Next(ThemeColor.ColorList.Count);
+            }
+            tempIndex = index;
+            string color = ThemeColor.ColorList[index];
+            return ColorTranslator.FromHtml(color);
+        }
 
         private void ActivateButton(object btnSender)
         {
@@ -108,7 +91,6 @@ namespace PromotItFormApp
                 }
             }
         }
-
         private void OpenChildForm(Form childForm, object btnSender)
         {
             if (activeForm != null)

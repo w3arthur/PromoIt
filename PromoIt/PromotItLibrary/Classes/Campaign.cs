@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -118,7 +119,7 @@ namespace PromotItLibrary.Classes
             if (campaignsList == null)
             {
                 while (Configuration.IsTries())
-                    return await GetAllCampaignsNonProfit_DataTableAsync();
+                    return await new ActionsCampaign(this).GetAllCampaignsNonProfit_DataTableAsync();
                 Loggings.ErrorLog($"Non Profit Organization Not have any campaigns to show from GetAllCampaigns, UserName ({NonProfitUser.UserName})");
                 Configuration.TriesReset();
                 return dataTable;//no results
@@ -183,7 +184,7 @@ namespace PromotItLibrary.Classes
 
         {
             DataTable dataTable = new DataTable();
-            List<Campaign> campaignsList = await MySQL_GetAllCampaigns_ListAsync();
+            List<Campaign> campaignsList = await new ActionsCampaign(this).MySQL_GetAllCampaigns_ListAsync();
             foreach (string culmn in new[] {  "clmnHashtag", "clmnWebpage" }) dataTable.Columns.Add(culmn);
 
             if (campaignsList == null)

@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +29,7 @@ namespace PromotItFormApp.LandingPanelsActions
             try
             {
                 ProductInCampaign productInCampaign = new ProductInCampaign() { Campaign = Configuration.CorrentCampaign, };
-                dataGridProductList.DataSource = await productInCampaign.GetList_DataTableAsync();
+                dataGridProductList.DataSource = await new ActionsProduct(productInCampaign).GetList_DataTableAsync();
                 //dataGridProductList.Columns["clmnProductId"].Visible = false; //set as hidden
                 //dataGridProductList.Columns["clmnBusinessUser"].Visible = false; //set as hidden
             }

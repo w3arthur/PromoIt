@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 
 namespace PromotItLibrary.Classes
 {
@@ -46,7 +47,7 @@ namespace PromotItLibrary.Classes
         public async Task<DataTable> GetAllCampaignsAdmin_DataTableAsync()
         {
             DataTable dataTable = new DataTable();
-            List<Campaign> campaignsList = await (new Campaign()).MySQL_GetAllCampaigns_ListAsync();       //From Campaign Class
+            List<Campaign> campaignsList = await new ActionsCampaign(new Campaign()).MySQL_GetAllCampaigns_ListAsync();       //From Campaign Class
             foreach (string culmn in new[] { "Hashtag", "Webpage", "Creator" }) dataTable.Columns.Add(culmn);
 
             if (campaignsList == null)
@@ -111,7 +112,7 @@ namespace PromotItLibrary.Classes
         public async Task<DataTable> GetAllUsers_DataTableAsync()
         {
             DataTable dataTable = new DataTable();
-            List<Users> userList = await MySQL_GetAllUsers_ListAsync();
+            List<Users> userList = await new ActionsUser(this).MySQL_GetAllUsers_ListAsync();
             foreach (string culmn in new[] { "Name", "UserName", "Type" })
                 dataTable.Columns.Add(culmn);
 

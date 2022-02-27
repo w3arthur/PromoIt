@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Patterns;
 
 namespace PromotItFormApp.RegisterPanels
 {
@@ -56,7 +57,7 @@ namespace PromotItFormApp.RegisterPanels
                     WebSite = txtWebSite.Text,
                 };
 
-                bool result = await nonProfitUser.RegisterAsync();
+                bool result = await new ActionsUser(nonProfitUser).RegisterAsync();
                 if (!result)
                 {
                     Loggings.ErrorLog($"Non Profit Company User cant register UserName ({nonProfitUser.UserName})");

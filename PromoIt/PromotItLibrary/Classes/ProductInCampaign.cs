@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -60,7 +61,7 @@ namespace PromotItLibrary.Classes
             if (productInCampaignList == null)
             {
                 while ( Configuration.IsTries() )
-                    return await GetList_DataTableAsync();
+                    return await new ActionsProduct(this).GetList_DataTableAsync();
                 Loggings.ErrorLog($"No Products in Get products in campagign, Campaign (#{Campaign.Hashtag}) by ({Configuration.CorrentUser.UserName})");
                 Configuration.TriesReset();
                 return dataTable;//no results

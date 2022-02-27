@@ -50,6 +50,13 @@ namespace PromotItLibrary.Patterns
             return false;
         }
 
+
+        public async Task<ActivistUser> GetCashAmountAsync(Modes mode = null)
+        {
+            if (_activistUser == null) return null;
+            return await _activistUser.GetCashAmountAsync(mode);
+        }
+
         public async Task<DataTable> GetAllCampaignsAdmin_DataTableAsync() 
         {
             if(_adminUser == null ) return null;

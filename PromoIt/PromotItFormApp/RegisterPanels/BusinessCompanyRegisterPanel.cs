@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Patterns;
 
 namespace PromotItFormApp.RegisterPanels
 {
@@ -55,7 +56,7 @@ namespace PromotItFormApp.RegisterPanels
                     UserPassword = txtPassword.Text,
                 };
 
-                bool result = await businessUser.RegisterAsync();
+                bool result = await new ActionsUser(businessUser).RegisterAsync();
                 if (!result)
                 {
                     Loggings.ErrorLog($"Business User cant register UserName ({businessUser.UserName})");

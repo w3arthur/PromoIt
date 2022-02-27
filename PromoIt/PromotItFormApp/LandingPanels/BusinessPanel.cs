@@ -3,6 +3,7 @@ using PromotItFormApp.LandingPanels;
 using PromotItFormApp.LandingPanelsActions;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,11 +56,10 @@ namespace PromotItFormApp.LandingPanels
 
         private void GetProductListPage(DataGridViewCellEventArgs e)
         {
-            Campaign campaign = new Campaign()
+            Configuration.CorrentCampaign = new Campaign()
             {
                 Hashtag = dgrdCampains["clmnHashtag", e.RowIndex].Value.ToString(),
             };
-            Configuration.CorrentCampaign = campaign;
             (new BusinessProductListPanel()).ShowDialog(); //Pannel
         }
 
@@ -67,7 +67,7 @@ namespace PromotItFormApp.LandingPanels
         {
             try
             {
-                dgrdCampains.DataSource = await (new Campaign()).GetAllCampaigns_DataTableAsync(); ;
+                dgrdCampains.DataSource = await new ActionsCampaign(new Campaign()).GetAllCampaigns_DataTableAsync(); ;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -80,7 +80,7 @@ namespace PromotItFormApp.LandingPanels
                 {
                     ProductInCampaign =new ProductInCampaign() { BusinessUser = Configuration.CorrentUser, }
                 };
-                dgrdActivists.DataSource = await productDonated.GetDonatedProductForShipping_DataTableAsync();
+                dgrdActivists.DataSource = await new ActionsProduct(productDonated).GetDonatedProductForShipping_DataTableAsync();
                 //dataGridBuyers.Columns["clmnProductDonatedId"].Visible = false;   //hidden
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -95,7 +95,7 @@ namespace PromotItFormApp.LandingPanels
                 {
                     Id = dgrdActivists["clmnProductDonatedId", e.RowIndex].Value.ToString(),
                 };
-                bool result = await productDonated.SetProductShippingAsync();
+                bool result = await new ActionsProduct(productDonated).SetProductShippingAsync();
                 if (result) GetProductsForShippingAsync();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

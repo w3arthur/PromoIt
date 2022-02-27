@@ -1,5 +1,6 @@
 ﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,7 +39,7 @@ namespace PromotItFormApp.LandingPanelsActions
                     NonProfitUser = Configuration.CorrentUser,
                 };
 
-                var result = await campaign.SetNewCampaignAsync();
+                var result = await new ActionsCampaign(campaign).SetNewCampaignAsync();
                 if (!result)
                 {
                     Loggings.ErrorLog($"Fail to insert a campaign by Non Profit Organizatino User, UserName ({campaign.NonProfitUser.UserName}) Campaign (#{campaign.Hashtag}) WebPage ({campaign.Url})");

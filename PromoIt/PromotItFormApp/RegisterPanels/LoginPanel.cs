@@ -13,6 +13,7 @@ using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
 using PromotItFormApp;
 using PromotItLibrary.Interfaces;
+using PromotItLibrary.Patterns;
 
 namespace PromotItFormApp.RegisterPanels
 {
@@ -67,7 +68,7 @@ namespace PromotItFormApp.RegisterPanels
                     UserPassword = txtPassword.Text.Trim(),
                 };
 
-                Users loggedinUser = await user.LoginAsync();
+                Users loggedinUser = await new ActionsUser(user).LoginAsync();
                 if (loggedinUser == null)
                 {
                     Loggings.ErrorLog($"User cant login UserName ({txtUserName.Text}), Wrong UserName or Password");

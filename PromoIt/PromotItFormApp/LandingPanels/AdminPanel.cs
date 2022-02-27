@@ -1,5 +1,6 @@
 ﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,7 +48,7 @@ namespace PromotItFormApp.LandingPanels
             try
             {
                 AdminUser adminUser = new AdminUser(Configuration.CorrentUser);
-                DataTable tbl = await adminUser.GetAllUsers_DataTableAsync();
+                DataTable tbl = await new ActionsUser(adminUser).GetAllUsers_DataTableAsync();
                 dgrdReportsData.DataSource = tbl;
 
             }
@@ -58,7 +59,7 @@ namespace PromotItFormApp.LandingPanels
         {
             try
             {
-                DataTable tbl = await (new Tweet()).GetAllTweets_DataTableAsync();
+                DataTable tbl = await new ActionsTweet(new Tweet()).GetAllTweets_DataTableAsync();
                 dgrdReportsData.DataSource = tbl;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
