@@ -23,7 +23,6 @@ namespace PromotItFormApp.LandingPanelsActions
         }
 
 
-
         private void dataGridProductList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0) SetBuyAProductAsync(e);

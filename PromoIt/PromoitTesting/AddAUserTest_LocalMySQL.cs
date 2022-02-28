@@ -3,6 +3,7 @@ using PromoitTesting.TestClasses;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -42,10 +43,10 @@ namespace PromoitTesting
             await mySQL.QuaryExecuteAsync($"DELETE FROM `promoit`.`users_activists` WHERE (`user_name` = '{activistUser.UserName}');");
             await mySQL.QuaryExecuteAsync($"DELETE FROM `promoit`.`users` WHERE (`user_name` = '{activistUser.UserName}');");
 
-            bool result1 = await activistUser.RegisterAsync();
+            bool result1 = await new ActionsUser(activistUser).RegisterAsync();
             Assert.True(result1, "User Should Register / Function Mast Be Activated!");
 
-            Users loggedInUser = await activistUser.LoginAsync();
+            Users loggedInUser = await new ActionsUser(activistUser).LoginAsync();
 
             bool result2 = loggedInUser != null;
             Assert.True(result2, "Login User Should Accepted / Function Mast Be Activated");

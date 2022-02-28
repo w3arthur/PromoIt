@@ -13,14 +13,14 @@ namespace PromoitTesting.TestClasses
         public DataTest() { }
 
         public string UserName  { get; set; }= "John";
-        public string UserPassword { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string UserType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
+        public string UserPassword { get; set; }
+        public string UserType { get; set; }
+        public string Name { get; set; }
+        public string Token { get; set; }
 
         public Task<Users> LoginAsync(Modes mode = null)
         {
-            throw new NotImplementedException();
+            return null;    //throw new NotImplementedException();
         }
     }
 }

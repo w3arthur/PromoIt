@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Tweetinvi;
 using Tweetinvi.Parameters;
+using PromotItLibrary.Patterns;
 
 namespace PromoitTesting
 {
@@ -35,7 +36,7 @@ namespace PromoitTesting
                 },
             };
 
-            await productDonated.SetTwitterMessagTweet_SetBuyAnItemAsync();
+            await new ActionsProduct(productDonated).SetTwitterMessagTweet_SetBuyAnItemAsync();
 
             int attempts = 10;
             bool isAtweet = false;

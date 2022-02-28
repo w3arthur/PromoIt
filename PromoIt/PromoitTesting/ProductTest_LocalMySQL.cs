@@ -3,6 +3,7 @@ using PromoitTesting.TestClasses;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,7 +37,7 @@ namespace PromoitTesting
                 Campaign = new Campaign { Hashtag = "nisayon", },      //Awailable  Hashtag
             };
 
-            bool result1 = await productInCampaign.SetNewProductAsync();
+            bool result1 = await new ActionsProduct(productInCampaign).SetNewProductAsync();
 
             Assert.True(result1, "Campaign Should Entered to Database");
 

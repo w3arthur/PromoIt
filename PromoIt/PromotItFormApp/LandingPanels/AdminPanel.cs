@@ -38,7 +38,7 @@ namespace PromotItFormApp.LandingPanels
             try
             {
                 AdminUser adminUser = new AdminUser(Configuration.CorrentUser);
-                DataTable tbl = await adminUser.GetAllCampaignsAdmin_DataTableAsync();
+                DataTable tbl = await new ActionsUser(adminUser).GetAllCampaignsAdmin_DataTableAsync();
                 dgrdReportsData.DataSource = tbl;
 
             } catch (Exception ex) { MessageBox.Show(ex.Message); }

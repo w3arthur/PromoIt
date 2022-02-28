@@ -85,7 +85,6 @@ namespace PromoitTwitterAPI
 
             //var _tweetListDebug = tweetList;
         }
-
     }
 }
 
