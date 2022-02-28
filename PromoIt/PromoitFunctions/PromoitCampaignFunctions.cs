@@ -12,6 +12,7 @@ using System.Linq;
 using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
 using System.Threading;
+using PromotItLibrary.Patterns;
 
 namespace PromoitFunction
 {
@@ -35,7 +36,6 @@ namespace PromoitFunction
                 string type = req.Query["type"];
                 if (data != null && type != null)
                 {
-
                     try
                     {
                         if (type == "GetAllCampaignsNonProfit")
@@ -43,7 +43,7 @@ namespace PromoitFunction
                             className = "Get Campaign List for NonProfit";
                             Campaign campaign = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                             if (campaign == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<Campaign> campaignList = await campaign.MySql_GetAllCampaignsNonProfit_ListAsync(FunctionOrDatabaseMode);
+                            List<Campaign> campaignList = await new ActionsCampaign(campaign).MySql_GetAllCampaignsNonProfit_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(campaignList));
                         }
@@ -53,14 +53,13 @@ namespace PromoitFunction
                             className = "Get Campaign List";
                             Campaign campaign = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                             if (campaign == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<Campaign> campaignList = await campaign.MySQL_GetAllCampaigns_ListAsync(FunctionOrDatabaseMode);
+                            List<Campaign> campaignList = await new ActionsCampaign(campaign).MySQL_GetAllCampaigns_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(campaignList));
                         }
 
                     }
                     catch (Exception ex) { log.LogInformation($"{azureFunctionString} GET ({className}) Datanase SELECT/GET-data Fail:\n{ex.Message}"); return new BadRequestObjectResult($"Not Found ({className})"); }
-
                 }
             }
             catch (Exception ex) { log.LogInformation($"{azureFunctionString} GET ({className}) Error Fail\n{ex.Message}"); }
@@ -84,14 +83,14 @@ namespace PromoitFunction
                                 className = "Add Campaign";
                                 Campaign campaign = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                                 if (campaign == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await campaign.SetNewCampaignAsync(FunctionOrDatabaseMode);
+                                action = await new ActionsCampaign(campaign).SetNewCampaignAsync(FunctionOrDatabaseMode);
                                 break;
 
                             case "DeleteCampaign":
                                 className = "Delete Campaign";
                                 Campaign campaign2 = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                                 if (campaign2 == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await campaign2.DeleteCampaignAsync(FunctionOrDatabaseMode);
+                                action = await new ActionsCampaign(campaign2).DeleteCampaignAsync(FunctionOrDatabaseMode);
                                 break;
 
                             default:
@@ -104,7 +103,6 @@ namespace PromoitFunction
                             return new OkObjectResult("ok");        //good result
                         }
 
-
                     }
                     catch (Exception ex) { log.LogInformation($"{azureFunctionString} Not-Seccess to Insert {className} to database\nDetails:{ex}"); return new BadRequestObjectResult("fail"); } //bad result
                     log.LogInformation($"{azureFunctionString} Failed to Insert after Tried to Insert {className} to database");
@@ -115,9 +113,6 @@ namespace PromoitFunction
 
             return new BadRequestObjectResult("");//No Results
 
-
-
         }
-
     }
 }

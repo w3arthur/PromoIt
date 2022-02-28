@@ -12,6 +12,7 @@ using System.Linq;
 using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
 using System.Threading;
+using PromotItLibrary.Patterns;
 
 namespace PromoitFunction
 {
@@ -44,7 +45,7 @@ namespace PromoitFunction
                             className = "Get All Tweet List";
                             Tweet tweet = HTTPClient.JsonStringToSingleObject<Tweet>(data);
                             if (tweet == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<Tweet> campaignList = await tweet.MySQL_GetAllTweets_ListAsync(FunctionOrDatabaseMode);
+                            List<Tweet> campaignList = await new ActionsTweet(tweet).MySQL_GetAllTweets_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"Function Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(campaignList));
                         }
@@ -75,7 +76,7 @@ namespace PromoitFunction
                                 className = "Set Tweet Cash";
                                 Tweet tweet = HTTPClient.JsonStringToSingleObject<Tweet>(data);
                                 if (tweet == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await tweet.SetTweetCashAsync(FunctionOrDatabaseMode);
+                                action = await new ActionsTweet(tweet).SetTweetCashAsync(FunctionOrDatabaseMode);
                                 break;
 
                             default:
@@ -99,8 +100,6 @@ namespace PromoitFunction
 
             return new BadRequestObjectResult("");//No Results
 
-
         }
-
     }
 }

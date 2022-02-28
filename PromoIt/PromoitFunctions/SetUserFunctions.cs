@@ -12,6 +12,7 @@ using System.Linq;
 using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
 using System.Threading;
+using PromotItLibrary.Patterns;
 
 namespace PromoitFunction
 {
@@ -40,9 +41,7 @@ namespace PromoitFunction
                     if (type == "GetAllUsers")
                     {
                         className = "Get All Users List";
-                        //Users user1 = Functions.JsonStringToSingleObject<Users>(data);
-                        //if (user == null) throw new Exception($"GET: No {className} Found In Databae!");
-                        List<Users> userList = await (new AdminUser()).MySQL_GetAllUsers_ListAsync(FunctionOrDatabaseMode);
+                        List<Users> userList = await new ActionsUser(new AdminUser()).MySQL_GetAllUsers_ListAsync(FunctionOrDatabaseMode);
                         log.LogInformation($"{azureFunctionString} Found {className}");
                         return new OkObjectResult(HTTPClient.ObjectToJsonString(userList));
                     }
@@ -69,12 +68,11 @@ namespace PromoitFunction
                             if (user == null) throw new Exception($"POST: No {className} IS Enterd");
                             try
                             {
-                                user = await user.LoginAsync(FunctionOrDatabaseMode);
-                                if (user == null) throw new Exception($"POST: No {className} Found In Databae!");
-                                log.LogInformation($"{azureFunctionString} Find {className} ({user.Name}) Type ({user.UserType})");
+                                Users loggedUser = await new ActionsUser(user).LoginAsync(FunctionOrDatabaseMode);
+                                if (loggedUser == null) throw new Exception($"POST: No {className} Found In Databae!");
+                                log.LogInformation($"{azureFunctionString} Find {className} ({loggedUser.Name}) Type ({loggedUser.UserType})");
 
-                                return new OkObjectResult(HTTPClient.ObjectToJsonString(user));
-
+                                return new OkObjectResult(HTTPClient.ObjectToJsonString(loggedUser));
                             }
                             catch (Exception ex) { log.LogInformation($"{azureFunctionString} POST ({className}) Datanase SELECT/GET-data Fail:\n{ex.Message}"); return new BadRequestObjectResult($"Not Found ({className})"); }
                         }
@@ -89,22 +87,22 @@ namespace PromoitFunction
                             case "non-profit":
                                 NonProfitUser nonProfitUser = HTTPClient.JsonStringToSingleObject<NonProfitUser>(data);
                                 if (nonProfitUser == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await nonProfitUser.RegisterAsync(FunctionOrDatabaseMode);
+                                action = await new ActionsUser(nonProfitUser).RegisterAsync(FunctionOrDatabaseMode);
                                 break;
                             case "admin":
                                 AdminUser adminUser = HTTPClient.JsonStringToSingleObject<AdminUser>(data);
                                 if (adminUser == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await adminUser.RegisterAsync(FunctionOrDatabaseMode);
+                                action = await new ActionsUser(adminUser).RegisterAsync(FunctionOrDatabaseMode);
                                 break;
                             case "business":
                                 BusinessUser businessUser = HTTPClient.JsonStringToSingleObject<BusinessUser>(data);
                                 if (businessUser == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await businessUser.RegisterAsync(FunctionOrDatabaseMode);
+                                action = await new ActionsUser(businessUser).RegisterAsync(FunctionOrDatabaseMode);
                                 break;
                             case "activist":
                                 ActivistUser activistUser = HTTPClient.JsonStringToSingleObject<ActivistUser>(data);
                                 if (activistUser == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await activistUser.RegisterAsync(FunctionOrDatabaseMode);
+                                action = await new ActionsUser(activistUser).RegisterAsync(FunctionOrDatabaseMode);
                                 break;
                             default:
                                 break;
@@ -126,7 +124,6 @@ namespace PromoitFunction
 
 
             return new BadRequestObjectResult("");//No Results
-
 
         }
     }

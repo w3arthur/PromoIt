@@ -25,7 +25,7 @@ namespace PromotItLibrary.Models
         /* set MySQL class to callback functions */
         /* set patterns inside the 4 functions  new ActionsUser(this). */
         /* set patterns inside patterns from classes methods */
-
+        /*set external functions*/
         /// <summary>
         /// System global mode settings
         /// </summary>
