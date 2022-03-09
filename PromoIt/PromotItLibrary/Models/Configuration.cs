@@ -23,9 +23,11 @@ namespace PromotItLibrary.Models
         /*Fix Exeption on register by check if it still count, make Exeption OOP*/
         // https://stackoverflow.com/questions/9974325/mysql-transaction-within-a-stored-procedure
         /* set MySQL class to callback functions */
-        /* set patterns inside the 4 functions  new ActionsUser(this). */
-        /* set patterns inside patterns from classes methods */
-        /*set external functions*/
+        /*set external functions */
+        /* set cancelation token */
+        /* set interfaces*/
+        /* c# null guides https://www.youtube.com/watch?v=aIp0jUr6A24*/
+
         /// <summary>
         /// System global mode settings
         /// </summary>

@@ -17,6 +17,16 @@ namespace PromotItLibrary.Patterns
         private HTTPClient httpClient = Configuration.HTTPClient;
 
         private Tweet _tweet;
+        private List<Tweet> _tweetList;
+        private DataTable _tweetTable;
+        private string _logMessahe;
+        private bool _result;
+
+        /*
+        public T Builder<T>(T _log){
+            if (_logMessahe) return T;
+            return T;
+        }*/
 
         public ActionsTweet(Tweet tweet) => _tweet = tweet;
 

@@ -22,11 +22,23 @@ namespace PromotItLibrary.Patterns
         private NonProfitUser _nonProfitUser;
         private BusinessUser _businessUser;
 
+        private List<Users> _userList;
+        private DataTable _userTable;
+        private string _logMessahe;
+        private bool _result;
+
         public ActionsUser(Users user) => _user = user;
         public ActionsUser(ActivistUser activistUser) => _activistUser = activistUser;
         public ActionsUser(AdminUser adminUser) => _adminUser = adminUser;
         public ActionsUser(NonProfitUser nonProfitUser) => _nonProfitUser = nonProfitUser;
         public ActionsUser(BusinessUser businessUser) => _businessUser = businessUser;
+
+
+        /*
+        public T Builder<T>(T _log){
+            if (_logMessahe) return T;
+            return T;
+        }*/
 
 
         public async Task<Users> LoginAsync(Modes mode = null) 

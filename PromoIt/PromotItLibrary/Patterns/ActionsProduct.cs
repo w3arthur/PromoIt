@@ -17,10 +17,22 @@ namespace PromotItLibrary.Patterns
 
         private ProductDonated _productDonated;
         private ProductInCampaign _productInCampaign;
+        private List<ProductDonated> _productDonatedList;
+        private List<ProductInCampaign> _productInCampaignList;
+        private DataTable _productDonatedTable;
+        private DataTable _productInCampaignTable;
+        private string _logMessahe;
+        private bool _result;
 
         public ActionsProduct(ProductDonated productDonated) => _productDonated = productDonated;
         public ActionsProduct(ProductInCampaign productInCampaign) => _productInCampaign = productInCampaign;
 
+
+        /*
+        public T Builder<T>(T _log){
+            if (_logMessahe) return T;
+            return T;
+        }*/
 
         public async Task SetTwitterMessagTweet_SetBuyAnItemAsync()
         {

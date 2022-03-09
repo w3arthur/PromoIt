@@ -18,11 +18,11 @@ namespace PromotItLibrary.Models
         /*Chenge to Logging Class*/
         /*Then use it in config or logging structure*/
 
-        public static ILogger<Campaign> CampaignsLog { get; } = setLogger<Campaign>(@"../../../../../Logs/Campaigns/CampaignLog.txt");
-        public static ILogger<Users> UsersLog { get; } = setLogger<Users>(@"../../../../../Logs/Users/UsersLog.txt");
-        public static ILogger<Tweet> TweeterLogs { get;  } = setLogger<Tweet>(@"../../../../../Logs/Tweets/TweetLogs.txt");
-        private static ILogger<AdminUser> _errorLogs { get;} = setLogger<AdminUser>(@"../../../../../Logs/Errors/ErrorLogs.txt");
-        private static ILogger<AdminUser> _reportLogs { get; } = setLogger<AdminUser>(@"../../../../../Logs/Reports/ReportLogs.txt");
+        public static ILogger<Campaign> CampaignsLog { get; } = setLogger<Campaign>(@"./../../../../../Logs/Campaigns/CampaignLog.txt");
+        public static ILogger<Users> UsersLog { get; } = setLogger<Users>(@"./../../../../../Logs/Users/UsersLog.txt");
+        public static ILogger<Tweet> TweeterLogs { get;  } = setLogger<Tweet>(@"./../../../../../Logs/Tweets/TweetLogs.txt");
+        private static ILogger<AdminUser> _errorLogs { get;} = setLogger<AdminUser>(@"./../../../../../Logs/Errors/ErrorLogs.txt");
+        private static ILogger<AdminUser> _reportLogs { get; } = setLogger<AdminUser>(@"./../../../../../Logs/Reports/ReportLogs.txt");
 
         public static void ReportLog(string logString) 
         {

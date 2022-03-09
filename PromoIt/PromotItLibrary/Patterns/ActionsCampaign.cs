@@ -16,9 +16,19 @@ namespace PromotItLibrary.Patterns
         private HTTPClient httpClient = Configuration.HTTPClient;
 
         private Campaign _campaign;
+        private List<Campaign> _campaignList;
+        private DataTable _campaignTable;
+        private string _logMessahe;
+        private bool _result;
 
         public ActionsCampaign(Campaign campaign) => _campaign = campaign;
 
+        /*
+        public T Builder<T>(T _log){
+            if (_logMessahe) return T;
+            return T;
+        }*/
+        
 
         public async Task<bool> SetNewCampaignAsync(Modes mode = null) 
         {
