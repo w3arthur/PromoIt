@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace PromotItLibrary.Models
 {
-    public class MySQL
+    public class MySQL: IDisposable
     {
         private string _server;
         private string _userId;
@@ -39,6 +39,9 @@ namespace PromotItLibrary.Models
             try { ConnectionOpen(); } catch { Console.WriteLine($"Connection Error\n"); }
         }
         ~MySQL() => ConnectClose();
+
+        public void Dispose() => ConnectClose(); 
+
 
         public void Procedure(string proc) { Quary(proc); Procedure(); }
         public void Procedure() { if (Cmd != null) Cmd.CommandType = CommandType.StoredProcedure; }

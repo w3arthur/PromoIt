@@ -17,7 +17,7 @@ namespace PromotItLibrary.Models
     /*Disable internal Modes.Local/Modes.NotLocal and Loggings*/
 
 
-    public class HTTPClient
+    public class HTTPClient: IDisposable
     {
         private HttpClient _httpClient;
 
@@ -28,6 +28,9 @@ namespace PromotItLibrary.Models
         }
 
         ~HTTPClient() => _httpClient.Dispose();
+
+        public void Dispose() => _httpClient.Dispose();
+
 
         public static string ObjectToJsonString<T>(T data) => JsonConvert.SerializeObject(data);
         public static T JsonStringToSingleObject<T>(string mycontent) => JsonConvert.DeserializeObject<T>(mycontent);

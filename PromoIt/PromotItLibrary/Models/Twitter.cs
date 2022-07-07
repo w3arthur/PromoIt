@@ -9,12 +9,14 @@ using Tweetinvi.Parameters;
 
 namespace PromotItLibrary.Models
 {
-    public class Twitter
+    public class Twitter: IDisposable
     {
         private static TwitterClient twitterUserClient = Configuration.TwitterUserClient;
 
         //Twitter Message
         public static async Task SetTwitterMessage_SetBuyAnItemAsync(string message)
             => await twitterUserClient.Tweets.PublishTweetAsync(new PublishTweetParameters { Text = message, });
+
+        public void Dispose() { }
     }
 }

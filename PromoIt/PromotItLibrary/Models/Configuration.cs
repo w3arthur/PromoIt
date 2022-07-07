@@ -8,9 +8,12 @@ namespace PromotItLibrary.Models
 {
     public class Configuration
     {
-
         /*TODO*/
+        /*set web assembly*/
+        /*add readonly to functions*/
+        /*add IDisposible to each class, like MySQL, and using for each applying in programming*/
         /*Fix MySQL (Multi) Request, For Async Method*/
+        /*fix close mysql after each call*/
         /*Fix Modes for all Classes if(s) use (Strategy) or (State Pattern)*/
         /*Add Read From File Development*/
         /*Add user Token For any working*/
