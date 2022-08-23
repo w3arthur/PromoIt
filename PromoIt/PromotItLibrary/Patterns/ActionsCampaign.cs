@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns.DataTables;
+using PromotItLibrary.Patterns.LinkedLists;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,21 +16,30 @@ namespace PromotItLibrary.Patterns
     {
         private static MySQL mySQL = Configuration.MySQL;
         private HTTPClient httpClient = Configuration.HTTPClient;
-
         private Campaign _campaign;
+        private LinkedListCampaign linkedListCampaign;
+        private DataTableCampaign dataTableCampaign;
+
+
         private List<Campaign> _campaignList;
         private DataTable _campaignTable;
-        private string _logMessahe;
+        private string _logMessage;
         private bool _result;
 
-        public ActionsCampaign(Campaign campaign) => _campaign = campaign;
-
+        public ActionsCampaign(Campaign campaign)
+        { 
+            _campaign = campaign;
+            linkedListCampaign = new LinkedListCampaign(_campaign, mySQL, httpClient);
+            dataTableCampaign = new DataTableCampaign(_campaign);
+        }
+        // private Campaign _campaign;
+        // new ActionsCampaign(_campaign).foo();
         /*
         public T Builder<T>(T _log){
             if (_logMessahe) return T;
             return T;
         }*/
-        
+
 
         public async Task<bool> SetNewCampaignAsync(Modes mode = null) 
         {
@@ -75,144 +86,17 @@ namespace PromotItLibrary.Patterns
             return false;
         }
 
-        public async Task<List<Campaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
-        {
-            try
-            {   //Queue and Functions
-                if ((mode ?? Configuration.Mode) == Modes.Queue)
-                    return await httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignQueue, _campaign, "GetAllCampaignsNonProfit");
-                else if ((mode ?? Configuration.Mode) == Modes.Functions)
-                    return await httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignFunctions, _campaign, "GetAllCampaignsNonProfit");
-            }
-            catch { return null; }
 
-            if ((mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-            {
-                // Error, no npo user
-                if (_campaign.NonProfitUser.UserName == null) throw new Exception("No set for npo User");
-                mySQL.Quary("SELECT * FROM campaigns where non_profit_user_name=@np_user_name"); //replace with mySQL.Procedure() //add LIMIT 20 ~
-                mySQL.ProcedureParameter("np_user_name", _campaign.NonProfitUser.UserName);
-                using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();
-                List<Campaign> campaignsList = new List<Campaign>();
-                while (results != null && results.Read()) //for 1 result: if (mdr.Read())
-                {
-                    try
-                    {
-                        campaignsList.Add
-                            (
-                                new Campaign()
-                                {
-                                    Name = results.GetString("name"),
-                                    Hashtag = results.GetString("hashtag"),
-                                    Url = results.GetString("webpage"),
-                                    NonProfitUser = new NonProfitUser() { UserName = results.GetString("non_profit_user_name"), },
-                                }
-                            );
-                    }
-                    catch { };
-                }
-                return campaignsList;
-            }
+        public async Task<List<Campaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null) =>
+            await linkedListCampaign.MySql_GetAllCampaignsNonProfit_ListAsync(mode);
 
-            return null;
-        }
+        public async Task<DataTable> GetAllCampaignsNonProfit_DataTableAsync() =>
+            await dataTableCampaign.GetAllCampaignsNonProfit_DataTableAsync();
 
-        public async Task<DataTable> GetAllCampaignsNonProfit_DataTableAsync()
-        {
-            DataTable dataTable = new DataTable();
-            List<Campaign> campaignsList = await MySql_GetAllCampaignsNonProfit_ListAsync();
-            foreach (string culmn in new[] { "clmnCampaignName", "clmnHashtag", "clmnWebsite", "clmnCreator" })
-                dataTable.Columns.Add(culmn);
+        public async Task<List<Campaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null) =>
+            await linkedListCampaign.MySQL_GetAllCampaigns_ListAsync(mode);
 
-            if (campaignsList == null)
-            {
-                while (Configuration.IsTries())
-                    return await new ActionsCampaign(_campaign).GetAllCampaignsNonProfit_DataTableAsync();
-                Loggings.ErrorLog($"Non Profit Organization Not have any campaigns to show from GetAllCampaigns, UserName ({_campaign.NonProfitUser.UserName})");
-                Configuration.TriesReset();
-                return dataTable;//no results
-            }
-            Configuration.TriesReset();
-
-            foreach (Campaign campaign in campaignsList)
-            {
-                DataRow dataRow = dataTable.NewRow();
-                foreach (var (key, value) in new[] { ("clmnCampaignName", campaign.Name), ("clmnHashtag", campaign.Hashtag), ("clmnWebsite", campaign.Url), ("clmnCreator", campaign.NonProfitUser.UserName) })
-                    dataRow[key] = value;
-                dataTable.Rows.Add(dataRow);
-            }
-
-            Loggings.ReportLog($"Non Profit Organization GetAllCampaigns, UserName ({_campaign.NonProfitUser.UserName})");
-            return dataTable;
-        }
-
-        public async Task<List<Campaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null)
-        {
-            try
-            {   //Queue and Functions
-                if ((mode ?? Configuration.Mode) == Modes.Queue)
-                    return await httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignQueue, _campaign, "GetAllCampaigns");
-                else if ((mode ?? Configuration.Mode) == Modes.Functions)
-                    return await httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignFunctions, _campaign, "GetAllCampaigns");
-            }
-            catch
-            {
-                return null;
-            }
-
-            if ((mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-            {
-                mySQL.Quary("SELECT * FROM campaigns");
-                using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();
-                List<Campaign> campaignsList = new List<Campaign>();
-                while (results != null && results.Read())
-                {
-                    try
-                    {
-                        campaignsList.Add
-                            (
-                                new Campaign()
-                                {
-                                    Hashtag = results.GetString("hashtag"),
-                                    Url = results.GetString("webpage"),
-                                    NonProfitUser = new NonProfitUser() { UserName = results.GetString("non_profit_user_name"), },
-                                }
-                            );
-                    }
-                    catch { };
-                }
-                return campaignsList;
-            }
-
-            return null;
-        }
-
-        public async Task<DataTable> GetAllCampaigns_DataTableAsync()
-        {
-            DataTable dataTable = new DataTable();
-            List<Campaign> campaignsList = await new ActionsCampaign(_campaign).MySQL_GetAllCampaigns_ListAsync();
-            foreach (string culmn in new[] { "clmnHashtag", "clmnWebpage" }) dataTable.Columns.Add(culmn);
-
-            if (campaignsList == null)
-            {
-                while (Configuration.IsTries()) return await GetAllCampaigns_DataTableAsync();
-                Loggings.ErrorLog($"Cant find any campaign to show from GetAllCampaigns request");
-                Configuration.TriesReset();
-                return dataTable;//no results
-            }
-            Configuration.TriesReset();
-
-            foreach (Campaign campaign in campaignsList)
-            {
-                DataRow dataRow = dataTable.NewRow();
-                foreach (var (key, value) in new[] { ("clmnHashtag", campaign.Hashtag), ("clmnWebpage", campaign.Url) }) dataRow[key] = value;
-                dataTable.Rows.Add(dataRow);
-            }
-
-            Loggings.ReportLog($"GetAllCampaigns Requested");
-
-            return dataTable;
-        }
-
+        public async Task<DataTable> GetAllCampaigns_DataTableAsync() => 
+            await dataTableCampaign.GetAllCampaigns_DataTableAsync();
     }
 }

@@ -18,4 +18,8 @@
     <ProjectReference Include="..\..\ConnectionKeys\ConnectionKeys.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\DataTables\" />
+  </ItemGroup>
+
 </Project>

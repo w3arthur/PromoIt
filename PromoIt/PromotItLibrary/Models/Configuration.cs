@@ -9,6 +9,7 @@ namespace PromotItLibrary.Models
     public class Configuration
     {
         /*TODO*/
+        // why there is static on mySQL ?
         /*set web assembly*/
         /*add readonly to functions*/
         /*add IDisposible to each class, like MySQL, and using for each applying in programming*/

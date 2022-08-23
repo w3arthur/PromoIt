@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using PromotItLibrary.Patterns.LinkedLists;
+using PromotItLibrary.Patterns.DataTables;
 
 namespace PromotItLibrary.Patterns
 {
@@ -22,6 +24,9 @@ namespace PromotItLibrary.Patterns
         private NonProfitUser _nonProfitUser;
         private BusinessUser _businessUser;
 
+        private LinkeListUser linkeListUser;
+        private DataTableUser dataTableUser;
+
         private List<Users> _userList;
         private DataTable _userTable;
         private string _logMessahe;
@@ -29,7 +34,12 @@ namespace PromotItLibrary.Patterns
 
         public ActionsUser(Users user) => _user = user;
         public ActionsUser(ActivistUser activistUser) => _activistUser = activistUser;
-        public ActionsUser(AdminUser adminUser) => _adminUser = adminUser;
+        public ActionsUser(AdminUser adminUser) 
+        { 
+            _adminUser = adminUser;
+            linkeListUser = new LinkeListUser(adminUser, mySQL, httpClient);
+            dataTableUser = new DataTableUser(adminUser);
+        }
         public ActionsUser(NonProfitUser nonProfitUser) => _nonProfitUser = nonProfitUser;
         public ActionsUser(BusinessUser businessUser) => _businessUser = businessUser;
 
@@ -211,106 +221,14 @@ namespace PromotItLibrary.Patterns
             return null;
         }
 
-        public async Task<DataTable> GetAllCampaignsAdmin_DataTableAsync() 
-        {
-            if(_adminUser == null ) return null;
+        public async Task<List<Users>> MySQL_GetAllUsers_ListAsync(Modes mode = null) =>
+            await linkeListUser.MySQL_GetAllUsers_ListAsync(mode);
 
-            DataTable dataTable = new DataTable();
-            List<Campaign> campaignsList = await new ActionsCampaign(new Campaign()).MySQL_GetAllCampaigns_ListAsync();       //From Campaign Class
-            foreach (string culmn in new[] { "Hashtag", "Webpage", "Creator" }) dataTable.Columns.Add(culmn);
+        public async Task<DataTable> GetAllUsers_DataTableAsync() =>
+            await dataTableUser.GetAllUsers_DataTableAsync();
 
-            if (campaignsList == null)
-            {
-                while (Configuration.IsTries())
-                    return await GetAllCampaignsAdmin_DataTableAsync();
-                Loggings.ErrorLog($"Admin Requested to get all campaigns list, The list is empty, Reguested by ({_adminUser.UserName})");
-                Configuration.TriesReset();
-                return dataTable;//no results
-            }
-            Configuration.TriesReset();
-
-            Loggings.CampaignsLog.LogInformation($"Campaign List, Reguested by ({_adminUser.UserName})");
-            foreach (Campaign campaign in campaignsList)
-            {
-                DataRow dataRow = dataTable.NewRow();
-                foreach (var (key, value) in new[] { ("Hashtag", campaign.Hashtag), ("Webpage", campaign.Url), ("Creator", campaign.NonProfitUser.UserName) }) dataRow[key] = value;
-                dataTable.Rows.Add(dataRow);
-                Loggings.CampaignsLog.LogInformation($"Campaign Hashtag (#{campaign.Hashtag}) Creator ({campaign.NonProfitUser.UserName}) Webpage ({campaign.Url})");
-            }
-            Loggings.CampaignsLog.LogInformation($"Report end");
-            Loggings.ReportLog($"Admin Requested to get all campaigns list, Reguested by ({_adminUser.UserName})");
-            return dataTable;
-        }
-
-        public async Task<List<Users>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
-        {
-            if (_adminUser == null) return null;
-
-            try
-            {   //Queue and Functions
-                if ((mode ?? Configuration.Mode) == Modes.Queue)
-                    return await httpClient.GetMultipleDataRequest(Configuration.SetUserQueue, new Users(), "GetAllUsers");
-                if ((mode ?? Configuration.Mode) == Modes.Functions)
-                    return await httpClient.GetMultipleDataRequest(Configuration.SetUserFunctions, new Users(), "GetAllUsers");
-            }
-            catch { return null; }
-
-            if ((mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-            {
-                mySQL.Quary("SELECT name,user_name,user_type FROM users");
-                using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();
-                List<Users> userList = new List<Users>();
-                while (results != null && results.Read()) //for 1 result: if (mdr.Read())
-                {
-                    try
-                    {
-                        userList.Add
-                            (
-                                new Users()
-                                {
-                                    Name = results.GetString("name"),
-                                    UserName = results.GetString("user_name"),
-                                    UserType = results.GetString("user_type"),
-                                }
-                            );
-                    }
-                    catch { };
-                }
-                return userList;
-            }
-            return null;
-        }
-
-        public async Task<DataTable> GetAllUsers_DataTableAsync()
-        {
-            if (_adminUser == null) return null;
-
-            DataTable dataTable = new DataTable();
-            List<Users> userList = await new ActionsUser(_adminUser).MySQL_GetAllUsers_ListAsync();
-            foreach (string culmn in new[] { "Name", "UserName", "Type" })
-                dataTable.Columns.Add(culmn);
-
-            if (userList == null)
-            {
-                while (Configuration.IsTries()) return await GetAllUsers_DataTableAsync();
-                Loggings.ErrorLog($"Admin Requested to get all users list, The list is empty, Reguested by ({_adminUser.UserName})");
-                Configuration.TriesReset();
-                return dataTable;//no results
-            }
-            Configuration.TriesReset();
-
-            Loggings.UsersLog.LogInformation($"Users List, Reguested by ({_adminUser.UserName})");
-            foreach (Users user in userList)
-            {
-                DataRow dataRow = dataTable.NewRow();
-                foreach (var (key, value) in new[] { ("Name", user.Name), ("UserName", user.UserName), ("Type", user.UserType) }) dataRow[key] = value;
-                dataTable.Rows.Add(dataRow);
-                Loggings.UsersLog.LogInformation($"User UserName (#{user.UserName}) Name ({user.Name}) Type ({user.UserType})");
-            }
-            Loggings.UsersLog.LogInformation($"Report end");
-            Loggings.ReportLog($"Admin Requested to get all users list, Reguested by ({_adminUser.UserName})");
-            return dataTable;
-        }
+        public async Task<DataTable> GetAllCampaignsAdmin_DataTableAsync() =>
+       await dataTableUser.GetAllCampaignsAdmin_DataTableAsync();
 
     }
 }
