@@ -10,6 +10,7 @@ namespace PromotItLibrary.Models
     {
         /*TODO*/
         // why there is static on mySQL ?
+        // check if can change linkedlist to array
         /*set web assembly*/
         /*add readonly to functions*/
         /*add IDisposible to each class, like MySQL, and using for each applying in programming*/
