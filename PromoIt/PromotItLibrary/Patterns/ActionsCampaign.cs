@@ -20,6 +20,8 @@ namespace PromotItLibrary.Patterns
         private LinkedListCampaign linkedListCampaign;
         private DataTableCampaign dataTableCampaign;
 
+        private Modes _mode = null;
+
 
         private List<Campaign> _campaignList;
         private DataTable _campaignTable;
@@ -43,16 +45,18 @@ namespace PromotItLibrary.Patterns
 
         public async Task<bool> SetNewCampaignAsync(Modes mode = null) 
         {
+            _mode = mode;
+
             try
             {   //Queue and Functions
-                if ((mode ?? Configuration.Mode) == Modes.Queue)
+                if ((_mode ?? Configuration.Mode) == Modes.Queue)
                     return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitCampaignQueue, _campaign, "SetNewCampaign");
-                else if ((mode ?? Configuration.Mode) == Modes.Functions)
+                else if ((_mode ?? Configuration.Mode) == Modes.Functions)
                     return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitCampaignFunctions, _campaign, "SetNewCampaign");
             }
             catch { return false; }
 
-            if ((mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
             {
                 mySQL.Procedure("add_campaign");
                 mySQL.SetParameter("_name", _campaign.Name);
