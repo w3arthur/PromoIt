@@ -37,7 +37,7 @@ namespace PromoitTesting
                 Campaign = new Campaign { Hashtag = "nisayon", },      //Awailable  Hashtag
             };
 
-            bool result1 = await new ActionsProduct(productInCampaign).SetNewProductAsync();
+            bool result1 = await new BuilderProduct(productInCampaign).SetNewProductAsync();
 
             Assert.True(result1, "Campaign Should Entered to Database");
 

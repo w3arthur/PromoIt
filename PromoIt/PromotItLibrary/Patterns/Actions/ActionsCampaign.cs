@@ -1,49 +1,31 @@
-﻿using MySql.Data.MySqlClient;
-using PromotItLibrary.Classes;
+﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns.DataTables;
-using PromotItLibrary.Patterns.LinkedLists;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PromotItLibrary.Patterns
+namespace PromotItLibrary.Patterns.Actions
 {
     public class ActionsCampaign
     {
-        private static MySQL mySQL = Configuration.MySQL;
-        private HTTPClient httpClient = Configuration.HTTPClient;
+        private static MySQL mySQL;
+        private HTTPClient httpClient;
         private Campaign _campaign;
-        private LinkedListCampaign linkedListCampaign;
-        private DataTableCampaign dataTableCampaign;
 
         private Modes _mode = null;
 
 
-        private List<Campaign> _campaignList;
-        private DataTable _campaignTable;
-        private string _logMessage;
-        private bool _result;
-
-        public ActionsCampaign(Campaign campaign)
-        { 
+        public ActionsCampaign(Campaign campaign, MySQL _mySQL, HTTPClient _httpClient)
+        {
             _campaign = campaign;
-            linkedListCampaign = new LinkedListCampaign(_campaign, mySQL, httpClient);
-            dataTableCampaign = new DataTableCampaign(_campaign);
+            mySQL = _mySQL;
+            httpClient = _httpClient;
         }
-        // private Campaign _campaign;
-        // new ActionsCampaign(_campaign).foo();
-        /*
-        public T Builder<T>(T _log){
-            if (_logMessahe) return T;
-            return T;
-        }*/
 
 
-        public async Task<bool> SetNewCampaignAsync(Modes mode = null) 
+        public async Task<bool> SetNewCampaignAsync(Modes mode = null)
         {
             _mode = mode;
 
@@ -69,7 +51,7 @@ namespace PromotItLibrary.Patterns
             return false;
         }
 
-        public async Task<bool> DeleteCampaignAsync(Modes mode = null) 
+        public async Task<bool> DeleteCampaignAsync(Modes mode = null)
         {
             try
             {   //Queue and Functions
@@ -91,16 +73,5 @@ namespace PromotItLibrary.Patterns
         }
 
 
-        public async Task<List<Campaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null) =>
-            await linkedListCampaign.MySql_GetAllCampaignsNonProfit_ListAsync(mode);
-
-        public async Task<DataTable> GetAllCampaignsNonProfit_DataTableAsync() =>
-            await dataTableCampaign.GetAllCampaignsNonProfit_DataTableAsync();
-
-        public async Task<List<Campaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null) =>
-            await linkedListCampaign.MySQL_GetAllCampaigns_ListAsync(mode);
-
-        public async Task<DataTable> GetAllCampaigns_DataTableAsync() => 
-            await dataTableCampaign.GetAllCampaigns_DataTableAsync();
     }
 }

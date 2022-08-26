@@ -3,20 +3,17 @@ using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using PromotItLibrary.Patterns.LinkedLists;
-using PromotItLibrary.Patterns.DataTables;
 
-namespace PromotItLibrary.Patterns
+namespace PromotItLibrary.Patterns.Actions
 {
     public class ActionsUser
     {
-        private static MySQL mySQL = Configuration.MySQL;
-        private HTTPClient httpClient = Configuration.HTTPClient;
+
+        private static MySQL mySQL;
+        private HTTPClient httpClient;
 
         private Users _user;
         private ActivistUser _activistUser;
@@ -24,36 +21,41 @@ namespace PromotItLibrary.Patterns
         private NonProfitUser _nonProfitUser;
         private BusinessUser _businessUser;
 
-        private LinkeListUser linkeListUser;
-        private DataTableUser dataTableUser;
 
-        private List<Users> _userList;
-        private DataTable _userTable;
-        private string _logMessahe;
-        private bool _result;
-
-        public ActionsUser(Users user) => _user = user;
-        public ActionsUser(ActivistUser activistUser) => _activistUser = activistUser;
-        public ActionsUser(AdminUser adminUser) 
-        { 
-            _adminUser = adminUser;
-            linkeListUser = new LinkeListUser(adminUser, mySQL, httpClient);
-            dataTableUser = new DataTableUser(adminUser);
-        }
-        public ActionsUser(NonProfitUser nonProfitUser) => _nonProfitUser = nonProfitUser;
-        public ActionsUser(BusinessUser businessUser) => _businessUser = businessUser;
-
-
-        /*
-        public T Builder<T>(T _log){
-            if (_logMessahe) return T;
-            return T;
-        }*/
-
-
-        public async Task<Users> LoginAsync(Modes mode = null) 
+        public ActionsUser(Users user, MySQL _mySQL, HTTPClient _httpClient)
         {
-            if(_user == null) return null;  //throw
+            _user = user;
+            mySQL = _mySQL;
+            httpClient = _httpClient;
+        }
+        public ActionsUser(ActivistUser activistUser, MySQL _mySQL, HTTPClient _httpClient)
+        {
+            _activistUser = activistUser;
+            mySQL = _mySQL;
+            httpClient = _httpClient;
+        }
+        public ActionsUser(AdminUser adminUser, MySQL _mySQL, HTTPClient _httpClient)
+        {
+            _adminUser = adminUser;
+            mySQL = _mySQL;
+            httpClient = _httpClient;
+        }
+        public ActionsUser(NonProfitUser nonProfitUser, MySQL _mySQL, HTTPClient _httpClient)
+        {
+            _nonProfitUser = nonProfitUser;
+            mySQL = _mySQL;
+            httpClient = _httpClient;
+        }
+        public ActionsUser(BusinessUser businessUser, MySQL _mySQL, HTTPClient _httpClient)
+        {
+            _businessUser = businessUser;
+            mySQL = _mySQL;
+            httpClient = _httpClient;
+        }
+
+        public async Task<Users> LoginAsync(Modes mode = null)
+        {
+            if (_user == null) return null;  //throw
 
             try
             {   //Queue and Functions
@@ -90,7 +92,7 @@ namespace PromotItLibrary.Patterns
             return null;
         }
 
-        public async Task<bool> RegisterAsync(Modes mode = null) 
+        public async Task<bool> RegisterAsync(Modes mode = null)
         {
             if (_activistUser != null)
             {
@@ -220,15 +222,6 @@ namespace PromotItLibrary.Patterns
             }
             return null;
         }
-
-        public async Task<List<Users>> MySQL_GetAllUsers_ListAsync(Modes mode = null) =>
-            await linkeListUser.MySQL_GetAllUsers_ListAsync(mode);
-
-        public async Task<DataTable> GetAllUsers_DataTableAsync() =>
-            await dataTableUser.GetAllUsers_DataTableAsync();
-
-        public async Task<DataTable> GetAllCampaignsAdmin_DataTableAsync() =>
-       await dataTableUser.GetAllCampaignsAdmin_DataTableAsync();
 
     }
 }

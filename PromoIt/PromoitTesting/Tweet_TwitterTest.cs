@@ -36,7 +36,7 @@ namespace PromoitTesting
                 },
             };
 
-            await new ActionsProduct(productDonated).SetTwitterMessagTweet_SetBuyAnItemAsync();
+            await new BuilderProduct(productDonated).SetTwitterMessagTweet_SetBuyAnItemAsync();
 
             int attempts = 10;
             bool isAtweet = false;

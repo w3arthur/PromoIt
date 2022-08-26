@@ -29,7 +29,7 @@ namespace PromoitTwitterAPI
             // Please write sites without WWW and campaigns without #
             List<Tweet> tweetList = new List<Tweet>();
             Campaign campaign1 = new Campaign();
-            List<Campaign> campaignList = await new ActionsCampaign(campaign1).MySQL_GetAllCampaigns_ListAsync();    //MYSQL QUERY
+            List<Campaign> campaignList = await new BuilderCampaign(campaign1).MySQL_GetAllCampaigns_ListAsync();    //MYSQL QUERY
             foreach (Campaign campaign in campaignList)    // Each Campaogn
             {
                     var searchIterator = twitterUserClient.SearchV2.GetSearchTweetsV2Iterator("#" + campaign.Hashtag);  //#
@@ -64,7 +64,7 @@ namespace PromoitTwitterAPI
                                         Hashtag = campaign.Hashtag,
                                         Url = campaign.Url, },
                                 };
-                                try { await new ActionsTweet(tweet).SetTweetCashAsync(); }  //Database Set
+                                try { await new BuilderTweet(tweet).SetTweetCashAsync(); }  //Database Set
                                 catch { tweet.IsApproved = false; }
                                 tweetList.Add(tweet);
                                 string logString = $"Activist UserName ({tweet.ActivistUser.UserName}) Campaign WebPage ({tweet.Campaign.Url})" +

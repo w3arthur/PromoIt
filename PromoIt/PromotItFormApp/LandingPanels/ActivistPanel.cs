@@ -59,7 +59,7 @@ namespace PromotItFormApp.LandingPanels
             ActivistUser activistUser = new ActivistUser(Configuration.CorrentUser);
             try
             {
-                ActivistUser result = (await new ActionsUser(activistUser).GetCashAmountAsync());
+                ActivistUser result = (await new BuilderUser(activistUser).GetCashAmountAsync());
                 if (result == null) throw new Exception($"Cant Receive Activist Cash report UserName ({activistUser.UserName})");
                 activistUser.Cash = result?.Cash;
                 txtCashBalanceCheck.Text = activistUser.Cash;
@@ -75,7 +75,7 @@ namespace PromotItFormApp.LandingPanels
         {
             try
             {
-                dgrdCampaigns.DataSource = await new ActionsCampaign(new Campaign()).GetAllCampaigns_DataTableAsync();
+                dgrdCampaigns.DataSource = await new BuilderCampaign(new Campaign()).GetAllCampaigns_DataTableAsync();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

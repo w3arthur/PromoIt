@@ -53,7 +53,7 @@ namespace PromotItFormApp.RegisterPanels
                     UserPassword = txtPassword.Text,
                 };
                 
-                bool result = await new ActionsUser(adminUser).RegisterAsync();
+                bool result = await new BuilderUser(adminUser).RegisterAsync();
                 if (!result)
                 {
                     Loggings.ErrorLog($"Admin User cant register UserName ({adminUser.UserName})");

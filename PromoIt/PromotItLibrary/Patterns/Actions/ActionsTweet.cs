@@ -1,43 +1,24 @@
-﻿using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
-using PromotItLibrary.Classes;
+﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns.DataTables;
-using PromotItLibrary.Patterns.LinkedLists;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PromotItLibrary.Patterns
+namespace PromotItLibrary.Patterns.Actions
 {
     public class ActionsTweet
     {
-        private static MySQL mySQL = Configuration.MySQL;
-        private HTTPClient httpClient = Configuration.HTTPClient;
+        private static MySQL mySQL;
+        private HTTPClient httpClient;
 
         private Tweet _tweet;
 
-        private LinkedListTweet linkedListTweet;
-        private DataTableTweet dataTableTweet;
-
-        private List<Tweet> _tweetList;
-        private DataTable _tweetTable;
-        private string _logMessahe;
-        private bool _result;
-
-        /*
-        public T Builder<T>(T _log){
-            if (_logMessahe) return T;
-            return T;
-        }*/
-
-        public ActionsTweet(Tweet tweet) 
+        public ActionsTweet(Tweet tweet, MySQL _mySQL, HTTPClient _httpClient)
         {
-            linkedListTweet = new LinkedListTweet(tweet, mySQL, httpClient);
-            dataTableTweet = new DataTableTweet(tweet);
+            mySQL = _mySQL;
+            httpClient = _httpClient;
             _tweet = tweet;
         }
 
@@ -64,12 +45,5 @@ namespace PromotItLibrary.Patterns
             }
             return false;
         }
-
-        public async Task<List<Tweet>> MySQL_GetAllTweets_ListAsync(Modes mode = null) =>
-            await linkedListTweet.MySQL_GetAllTweets_ListAsync(mode);
-
-        public async Task<DataTable> GetAllTweets_DataTableAsync() =>
-            await dataTableTweet.GetAllTweets_DataTableAsync();
-
     }
 }

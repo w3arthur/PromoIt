@@ -38,7 +38,7 @@ namespace PromotItFormApp.LandingPanels
             try
             {
                 AdminUser adminUser = new AdminUser(Configuration.CorrentUser);
-                DataTable tbl = await new ActionsUser(adminUser).GetAllCampaignsAdmin_DataTableAsync();
+                DataTable tbl = await new BuilderUser(adminUser).GetAllCampaignsAdmin_DataTableAsync();
                 dgrdReportsData.DataSource = tbl;
 
             } catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -48,7 +48,7 @@ namespace PromotItFormApp.LandingPanels
             try
             {
                 AdminUser adminUser = new AdminUser(Configuration.CorrentUser);
-                DataTable tbl = await new ActionsUser(adminUser).GetAllUsers_DataTableAsync();
+                DataTable tbl = await new BuilderUser(adminUser).GetAllUsers_DataTableAsync();
                 dgrdReportsData.DataSource = tbl;
 
             }
@@ -59,7 +59,7 @@ namespace PromotItFormApp.LandingPanels
         {
             try
             {
-                DataTable tbl = await new ActionsTweet(new Tweet()).GetAllTweets_DataTableAsync();
+                DataTable tbl = await new BuilderTweet(new Tweet()).GetAllTweets_DataTableAsync();
                 dgrdReportsData.DataSource = tbl;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

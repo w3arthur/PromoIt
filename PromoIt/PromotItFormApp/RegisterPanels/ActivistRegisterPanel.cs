@@ -58,7 +58,7 @@ namespace PromotItFormApp.RegisterPanels
                     PhoneNumber = txtPhoneNumber.Text,
                 };
 
-                bool result = await new ActionsUser(activistUser).RegisterAsync();
+                bool result = await new BuilderUser(activistUser).RegisterAsync();
                 if (!result)
                 {
                     Loggings.ErrorLog($"Activist User cant register UserName ({activistUser.UserName})");

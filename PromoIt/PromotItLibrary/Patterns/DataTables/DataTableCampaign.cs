@@ -23,14 +23,14 @@ namespace PromotItLibrary.Patterns.DataTables
         public async Task<DataTable> GetAllCampaignsNonProfit_DataTableAsync()
         {
             DataTable dataTable = new DataTable();
-            List<Campaign> campaignsList = await new ActionsCampaign(_campaign).MySql_GetAllCampaignsNonProfit_ListAsync();
+            List<Campaign> campaignsList = await new BuilderCampaign(_campaign).MySql_GetAllCampaignsNonProfit_ListAsync();
             foreach (string culmn in new[] { "clmnCampaignName", "clmnHashtag", "clmnWebsite", "clmnCreator" })
                 dataTable.Columns.Add(culmn);
 
             if (campaignsList == null)
             {
                 while (Configuration.IsTries())
-                    return await new ActionsCampaign(_campaign).GetAllCampaignsNonProfit_DataTableAsync();
+                    return await new BuilderCampaign(_campaign).GetAllCampaignsNonProfit_DataTableAsync();
                 Loggings.ErrorLog($"Non Profit Organization Not have any campaigns to show from GetAllCampaigns, UserName ({_campaign.NonProfitUser.UserName})");
                 Configuration.TriesReset();
                 return dataTable;//no results
@@ -52,7 +52,7 @@ namespace PromotItLibrary.Patterns.DataTables
         public async Task<DataTable> GetAllCampaigns_DataTableAsync()
         {
             DataTable dataTable = new DataTable();
-            List<Campaign> campaignsList = await new ActionsCampaign(_campaign).MySQL_GetAllCampaigns_ListAsync();
+            List<Campaign> campaignsList = await new BuilderCampaign(_campaign).MySQL_GetAllCampaigns_ListAsync();
             foreach (string culmn in new[] { "clmnHashtag", "clmnWebpage" }) dataTable.Columns.Add(culmn);
 
             if (campaignsList == null)

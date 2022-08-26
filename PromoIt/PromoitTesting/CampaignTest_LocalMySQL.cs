@@ -36,15 +36,15 @@ namespace PromoitTesting
                 NonProfitUser = new NonProfitUser() { UserName = "n", },    //awailable activist user!!!
             };
 
-            await new ActionsCampaign(campaign).DeleteCampaignAsync();
+            await new BuilderCampaign(campaign).DeleteCampaignAsync();
 
 
-            bool result1 = await new ActionsCampaign(campaign).SetNewCampaignAsync();
+            bool result1 = await new BuilderCampaign(campaign).SetNewCampaignAsync();
 
             Assert.True(result1, "Campaign Should Entered to Database");
 
 
-            bool result2 = await new ActionsCampaign(campaign).DeleteCampaignAsync();
+            bool result2 = await new BuilderCampaign(campaign).DeleteCampaignAsync();
 
             Assert.True(result2, "Campaign Should Deleted from Database");
 

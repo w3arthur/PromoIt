@@ -45,7 +45,7 @@ namespace PromoitFunction
                             className = "Get Product List";
                             ProductInCampaign productInCampaign = HTTPClient.JsonStringToSingleObject<ProductInCampaign>(data);
                             if (productInCampaign == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<ProductInCampaign> productInCampaignList = await new ActionsProduct(productInCampaign).MySQL_GetProductList_ListAsync(FunctionOrDatabaseMode);
+                            List<ProductInCampaign> productInCampaignList = await new BuilderProduct(productInCampaign).MySQL_GetProductList_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(productInCampaignList));
                         }
@@ -55,7 +55,7 @@ namespace PromoitFunction
                             className = "Get Product List";
                             ProductDonated productDonated = HTTPClient.JsonStringToSingleObject<ProductDonated>(data);
                             if (productDonated == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<ProductDonated> productInCampaignList = await new ActionsProduct(productDonated).MySQL_GetDonatedProductForShipping_ListAsync(FunctionOrDatabaseMode);
+                            List<ProductDonated> productInCampaignList = await new BuilderProduct(productDonated).MySQL_GetDonatedProductForShipping_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(productInCampaignList));
                         }
@@ -66,7 +66,7 @@ namespace PromoitFunction
                             className = "Activist Get Cash Amount";
                             ActivistUser activistUser = HTTPClient.JsonStringToSingleObject<ActivistUser>(data);
                             if (activistUser == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            activistUser = await new ActionsUser(activistUser).GetCashAmountAsync(FunctionOrDatabaseMode);
+                            activistUser = await new BuilderUser(activistUser).GetCashAmountAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(activistUser));
                         }
@@ -98,14 +98,14 @@ namespace PromoitFunction
                                 className = "Set New Product";
                                 ProductInCampaign ProductInCampaign = HTTPClient.JsonStringToSingleObject<ProductInCampaign>(data);
                                 if (ProductInCampaign == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await new ActionsProduct(ProductInCampaign).SetNewProductAsync(FunctionOrDatabaseMode);
+                                action = await new BuilderProduct(ProductInCampaign).SetNewProductAsync(FunctionOrDatabaseMode);
                                 break;
 
                             case "SetBuyAnItem":
                                 className = "Buy An Item";
                                 ProductDonated productDonated = HTTPClient.JsonStringToSingleObject<ProductDonated>(data);
                                 if (productDonated == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await new ActionsProduct(productDonated).SetBuyAnItemAsync(FunctionOrDatabaseMode);
+                                action = await new BuilderProduct(productDonated).SetBuyAnItemAsync(FunctionOrDatabaseMode);
                                 break;
 
 
@@ -113,7 +113,7 @@ namespace PromoitFunction
                                 className = "Set Product Shipping";
                                 ProductDonated productDonated2 = HTTPClient.JsonStringToSingleObject<ProductDonated>(data);
                                 if (productDonated2 == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await new ActionsProduct(productDonated2).SetProductShippingAsync(FunctionOrDatabaseMode);
+                                action = await new BuilderProduct(productDonated2).SetProductShippingAsync(FunctionOrDatabaseMode);
                                 break;
 
 

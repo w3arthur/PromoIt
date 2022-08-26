@@ -1,55 +1,30 @@
-﻿using MySql.Data.MySqlClient;
-using PromotItLibrary.Classes;
+﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns.LinkedLists;
-using PromotItLibrary.Patterns.DataTables;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PromotItLibrary.Patterns
+namespace PromotItLibrary.Patterns.Actions
 {
     public class ActionsProduct
     {
-        private static MySQL mySQL = Configuration.MySQL;
-        private HTTPClient httpClient = Configuration.HTTPClient;
+
+        private static MySQL mySQL;
+        private HTTPClient httpClient;
 
         private ProductDonated _productDonated;
         private ProductInCampaign _productInCampaign;
 
-        private LinkedListProduct linkedListProduct;
-        private DataTabletProduct dataTabletProduct;
-
-
-        private List<ProductDonated> _productDonatedList;
-        private List<ProductInCampaign> _productInCampaignList;
-        private DataTable _productDonatedTable;
-        private DataTable _productInCampaignTable;
-        private string _logMessahe;
-        private bool _result;
-
-        public ActionsProduct(ProductDonated productDonated) 
+        public ActionsProduct(ProductDonated productDonated, ProductInCampaign productInCampaign, MySQL _mySQL, HTTPClient _httpClient)
         {
+            mySQL = _mySQL;
+            httpClient = _httpClient;
             _productDonated = productDonated;
-            linkedListProduct = new LinkedListProduct(_productDonated, _productInCampaign, mySQL, httpClient);
-            dataTabletProduct = new DataTabletProduct(_productDonated, _productInCampaign);
+            _productInCampaign = productInCampaign;
         }
 
-
-        public ActionsProduct(ProductInCampaign productInCampaign) 
-        {
-            _productInCampaign = productInCampaign;
-            linkedListProduct = new LinkedListProduct(_productDonated, _productInCampaign, mySQL, httpClient);
-            dataTabletProduct = new DataTabletProduct(_productDonated, _productInCampaign);
-        } 
-
-        /* public T Builder<T>(T _log){
-            if (_logMessahe) return T;
-            return T;
-        }*/
 
         public async Task SetTwitterMessagTweet_SetBuyAnItemAsync()
         {
@@ -146,17 +121,6 @@ namespace PromotItLibrary.Patterns
             return false;
         }
 
-        public async Task<List<ProductDonated>> MySQL_GetDonatedProductForShipping_ListAsync(Modes mode = null) =>
-             await linkedListProduct.MySQL_GetDonatedProductForShipping_ListAsync(mode);
-
-        public async Task<DataTable> GetDonatedProductForShipping_DataTableAsync() =>
-             await dataTabletProduct.GetDonatedProductForShipping_DataTableAsync();
-
-        public async Task<DataTable> GetList_DataTableAsync() =>
-             await dataTabletProduct.GetList_DataTableAsync();
-
-        public async Task<List<ProductInCampaign>> MySQL_GetProductList_ListAsync(Modes mode = null) =>
-             await linkedListProduct.MySQL_GetProductList_ListAsync(mode);
 
     }
 }

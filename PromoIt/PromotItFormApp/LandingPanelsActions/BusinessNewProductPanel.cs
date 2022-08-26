@@ -38,7 +38,7 @@ namespace PromotItFormApp.LandingPanelsActions
                     BusinessUser = Configuration.CorrentUser,
                 };
 
-                bool result = await new ActionsProduct(product).SetNewProductAsync();
+                bool result = await new BuilderProduct(product).SetNewProductAsync();
                 if (!result)
                 {
                     Loggings.ErrorLog($"Fail to insert a product by Business, UserName ({product.BusinessUser.UserName}) Campaign (#{product.Campaign.Hashtag}) Product Name ({product.Name} Quantity ({product.Quantity}) Price ({product.Price}))");

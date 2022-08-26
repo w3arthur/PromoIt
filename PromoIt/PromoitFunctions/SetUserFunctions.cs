@@ -41,7 +41,7 @@ namespace PromoitFunction
                     if (type == "GetAllUsers")
                     {
                         className = "Get All Users List";
-                        List<Users> userList = await new ActionsUser(new AdminUser()).MySQL_GetAllUsers_ListAsync(FunctionOrDatabaseMode);
+                        List<Users> userList = await new BuilderUser(new AdminUser()).MySQL_GetAllUsers_ListAsync(FunctionOrDatabaseMode);
                         log.LogInformation($"{azureFunctionString} Found {className}");
                         return new OkObjectResult(HTTPClient.ObjectToJsonString(userList));
                     }
@@ -68,7 +68,7 @@ namespace PromoitFunction
                             if (user == null) throw new Exception($"POST: No {className} IS Enterd");
                             try
                             {
-                                Users loggedUser = await new ActionsUser(user).LoginAsync(FunctionOrDatabaseMode);
+                                Users loggedUser = await new BuilderUser(user).LoginAsync(FunctionOrDatabaseMode);
                                 if (loggedUser == null) throw new Exception($"POST: No {className} Found In Databae!");
                                 log.LogInformation($"{azureFunctionString} Find {className} ({loggedUser.Name}) Type ({loggedUser.UserType})");
 
@@ -87,22 +87,22 @@ namespace PromoitFunction
                             case "non-profit":
                                 NonProfitUser nonProfitUser = HTTPClient.JsonStringToSingleObject<NonProfitUser>(data);
                                 if (nonProfitUser == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await new ActionsUser(nonProfitUser).RegisterAsync(FunctionOrDatabaseMode);
+                                action = await new BuilderUser(nonProfitUser).RegisterAsync(FunctionOrDatabaseMode);
                                 break;
                             case "admin":
                                 AdminUser adminUser = HTTPClient.JsonStringToSingleObject<AdminUser>(data);
                                 if (adminUser == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await new ActionsUser(adminUser).RegisterAsync(FunctionOrDatabaseMode);
+                                action = await new BuilderUser(adminUser).RegisterAsync(FunctionOrDatabaseMode);
                                 break;
                             case "business":
                                 BusinessUser businessUser = HTTPClient.JsonStringToSingleObject<BusinessUser>(data);
                                 if (businessUser == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await new ActionsUser(businessUser).RegisterAsync(FunctionOrDatabaseMode);
+                                action = await new BuilderUser(businessUser).RegisterAsync(FunctionOrDatabaseMode);
                                 break;
                             case "activist":
                                 ActivistUser activistUser = HTTPClient.JsonStringToSingleObject<ActivistUser>(data);
                                 if (activistUser == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await new ActionsUser(activistUser).RegisterAsync(FunctionOrDatabaseMode);
+                                action = await new BuilderUser(activistUser).RegisterAsync(FunctionOrDatabaseMode);
                                 break;
                             default:
                                 break;

@@ -43,7 +43,7 @@ namespace PromoitFunction
                             className = "Get Campaign List for NonProfit";
                             Campaign campaign = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                             if (campaign == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<Campaign> campaignList = await new ActionsCampaign(campaign).MySql_GetAllCampaignsNonProfit_ListAsync(FunctionOrDatabaseMode);
+                            List<Campaign> campaignList = await new BuilderCampaign(campaign).MySql_GetAllCampaignsNonProfit_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(campaignList));
                         }
@@ -53,7 +53,7 @@ namespace PromoitFunction
                             className = "Get Campaign List";
                             Campaign campaign = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                             if (campaign == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<Campaign> campaignList = await new ActionsCampaign(campaign).MySQL_GetAllCampaigns_ListAsync(FunctionOrDatabaseMode);
+                            List<Campaign> campaignList = await new BuilderCampaign(campaign).MySQL_GetAllCampaigns_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(campaignList));
                         }
@@ -83,14 +83,14 @@ namespace PromoitFunction
                                 className = "Add Campaign";
                                 Campaign campaign = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                                 if (campaign == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await new ActionsCampaign(campaign).SetNewCampaignAsync(FunctionOrDatabaseMode);
+                                action = await new BuilderCampaign(campaign).SetNewCampaignAsync(FunctionOrDatabaseMode);
                                 break;
 
                             case "DeleteCampaign":
                                 className = "Delete Campaign";
                                 Campaign campaign2 = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                                 if (campaign2 == null) throw new Exception($"POST: No {className} IS Enterd");
-                                action = await new ActionsCampaign(campaign2).DeleteCampaignAsync(FunctionOrDatabaseMode);
+                                action = await new BuilderCampaign(campaign2).DeleteCampaignAsync(FunctionOrDatabaseMode);
                                 break;
 
                             default:
