@@ -1,9 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using PromotItLibrary.Patterns.Actions;
+using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using PromotItLibrary.Patterns.DataTables;
 using PromotItLibrary.Patterns.LinkedLists;
+using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Classes
 {
-    public class Campaign
+    public class Campaign : ICampaign, IActionsCampaign, ILinkedListCampaign
     {
         //Move to Interfaces
         private static MySQL mySQL = Configuration.MySQL;

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
 {
-    public class LinkeListUser_MySql : ILinkeListUser
+    public class LinkeListUser_MySql : ILinkeListUser_Admin
     {
 
         private static MySQL mySQL;
@@ -29,7 +29,7 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
         }
 
 
-        public async Task<List<Users>> MySQL_GetAllUsers_ListAsync()
+        public async Task<List<Users>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
         {
             mySQL.Quary("SELECT name,user_name,user_type FROM users");
             using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();

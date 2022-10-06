@@ -6,26 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using PromotItLibrary.Patterns.Actions;
 using PromotItLibrary.Patterns.LinkedLists;
+using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 
 namespace PromotItLibrary.Classes
 {
-    public class AdminUser : Users
+    public class AdminUser : Users, IAdminUser, ILinkeListUser_Admin
     {
         public AdminUser() : base() {
             UserType = "admin";
             actionsUser = new ActionsUser(this, mySQL, httpClient);
-            linkeListUser = new LinkeListUser(this, mySQL, httpClient);
+            linkeListUser = new LinkeListUser_Admin(this, mySQL, httpClient);
             dataTableUser = new DataTableUser(this);
 
         }
         public AdminUser(Users user) : base(user) {
             UserType = "admin";
             actionsUser = new ActionsUser(this, mySQL, httpClient);
-            linkeListUser = new LinkeListUser(this, mySQL, httpClient);
+            linkeListUser = new LinkeListUser_Admin(this, mySQL, httpClient);
             dataTableUser = new DataTableUser(this);
         }
 

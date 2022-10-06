@@ -54,12 +54,12 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Queue_State
             httpClient = _httpClient;
         }
 
-        public async Task<Users> LoginAsync()
+        public async Task<Users> LoginAsync(Modes mode = null)
         {
             return await httpClient.PostSingleDataRequest(Configuration.SetUserQueue, _user, "Login");
         }
 
-        public async Task<bool> RegisterAsync()
+        public async Task<bool> RegisterAsync(Modes mode = null)
         {
             if (_activistUser != null)
             {
@@ -80,7 +80,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Queue_State
             return false;
         }
 
-        public async Task<ActivistUser> GetCashAmountAsync()
+        public async Task<ActivistUser> GetCashAmountAsync(Modes mode = null)
         {
             return await httpClient.GetSingleDataRequest(Configuration.PromoitProductQueue, _activistUser, "GetCashAmount");
         }

@@ -61,7 +61,7 @@ namespace PromotItLibrary.Models
         public static HTTPClient HTTPClient { get { HTTPClientStart(); return _httpClient; } set { _httpClient = value; } }
         public static string Message { get; set; }
         public static TwitterClient TwitterUserClient { get { TwitterUserClientStart(); return _twitterUserClient; } set { _twitterUserClient = value; } }
-
+        public static string ActivistCashDefultSet { get; } = "1000.0"; //set to 0
 
         /// <summary>
         /// Sorces start private functions

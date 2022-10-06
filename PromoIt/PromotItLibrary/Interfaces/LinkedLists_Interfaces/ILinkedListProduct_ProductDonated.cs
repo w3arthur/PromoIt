@@ -10,9 +10,8 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces
 {
-    interface ILinkedListCampaign
+    interface ILinkedListProduct_ProductDonated
     {
-        Task<List<Campaign>> MySql_GetAllCampaignsNonProfit_ListAsync();
-        Task<List<Campaign>> MySQL_GetAllCampaigns_ListAsync();
+        Task<List<ProductDonated>> MySQL_GetDonatedProductForShipping_ListAsync(Modes mode = null);
     }
 }

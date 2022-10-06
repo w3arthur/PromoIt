@@ -26,7 +26,7 @@ namespace PromotItLibrary.Patterns.LinkedLists.Queue_State
             _tweet = tweet;
         }
 
-        public async Task<List<Tweet>> MySQL_GetAllTweets_ListAsync()
+        public async Task<List<Tweet>> MySQL_GetAllTweets_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest(Configuration.PromoitTweetQueue, _tweet, "GetAllTweets");
         }

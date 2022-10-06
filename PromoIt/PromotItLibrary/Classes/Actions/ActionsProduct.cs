@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions
 {
-    public class ActionsProduct
+    public class ActionsProduct : IActionsProduct
     {
 
         private static MySQL mySQL;

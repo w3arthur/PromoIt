@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State
 {
-    public class LinkedListProduct_Function : ILinkedListProduct
+    public class LinkedListProduct_Function : ILinkedListProduct, ILinkedListProduct_ProductDonated
     {
 
         private static MySQL mySQL;
@@ -28,12 +28,12 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State
         }
 
 
-        public async Task<List<ProductDonated>> MySQL_GetDonatedProductForShipping_ListAsync()
+        public async Task<List<ProductDonated>> MySQL_GetDonatedProductForShipping_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest(Configuration.PromoitProductFunctions, _productDonated, "GetDonatedProductForShipping");
         }
 
-        public async Task<List<ProductInCampaign>> MySQL_GetProductList_ListAsync()
+        public async Task<List<ProductInCampaign>> MySQL_GetProductList_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest(Configuration.PromoitProductFunctions, _productInCampaign, "GetProductList");
         }

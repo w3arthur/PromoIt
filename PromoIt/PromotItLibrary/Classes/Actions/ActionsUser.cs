@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions
 {
-    public class ActionsUser
+    public class ActionsUser : IActionsUser
     {
 
         private static MySQL mySQL;

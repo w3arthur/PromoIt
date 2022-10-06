@@ -1,10 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using PromotItLibrary.Patterns.Actions;
+using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using PromotItLibrary.Patterns.DataTables;
 using PromotItLibrary.Patterns.LinkedLists;
+using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -16,7 +19,7 @@ using Tweetinvi.Core.Models;
 
 namespace PromotItLibrary.Classes
 {
-    public class Tweet
+    public class Tweet : ITweet, IActionsTweet, ILinkedListTweet
     {
         private static MySQL mySQL = Configuration.MySQL;
         private HTTPClient httpClient = Configuration.HTTPClient;

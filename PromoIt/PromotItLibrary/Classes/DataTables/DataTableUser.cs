@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns.LinkedLists.DataTables_Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists
 {
-    public class DataTableUser
+    public class DataTableUser : IDataTableUser
     {
 
         private AdminUser _adminUser;

@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
 {
-    interface IActionsProduct
+    interface IActionsProduct : IActionsProduct_ProductDonated, IActionsProduct_ProductInCampaign
     {
-        Task<bool> SetBuyAnItemAsync();
-        Task<bool> SetProductShippingAsync();
-        Task<bool> SetNewProductAsync();
+
     }
 }

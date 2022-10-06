@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.DataTables
 {
-    public class DataTabletProduct
+    public class DataTabletProduct : IDataTabletProduct
     {
 
         private ProductDonated _productDonated;

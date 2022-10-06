@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.Actions;
 
 namespace PromotItLibrary.Classes
 {
-    public class NonProfitUser : Users
-    {
+    public class NonProfitUser : Users, INonProfitUser
+    { 
         public string Email { get; set; }
         public string WebSite { get; set; }
 

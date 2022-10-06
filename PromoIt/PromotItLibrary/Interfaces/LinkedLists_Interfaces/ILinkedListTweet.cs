@@ -13,6 +13,6 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedL
 {
     interface ILinkedListTweet
     {
-        Task<List<Tweet>> MySQL_GetAllTweets_ListAsync();
+        Task<List<Tweet>> MySQL_GetAllTweets_ListAsync(Modes mode = null);
     }
 }

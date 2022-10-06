@@ -1,4 +1,5 @@
-﻿using PromotItLibrary.Classes;
+﻿using MySql.Data.MySqlClient;
+using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
 {
-    interface IActionsCampaign
+    interface IActionsUser_AllUsers
     {
-        Task<bool> SetNewCampaignAsync();
-        Task<bool> DeleteCampaignAsync();
+        Task<Users> LoginAsync(Modes mode = null);
+        Task<bool> RegisterAsync(Modes mode = null);
     }
 }

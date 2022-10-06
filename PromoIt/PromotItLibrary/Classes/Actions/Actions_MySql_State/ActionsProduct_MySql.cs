@@ -25,7 +25,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
             _productInCampaign = productInCampaign;
         }
 
-        public async Task<bool> SetBuyAnItemAsync()
+        public async Task<bool> SetBuyAnItemAsync(Modes mode = null)
         {
             mySQL.Procedure("buy_a_product");
             mySQL.SetParameter("_product_id", _productDonated.ProductInCampaign.Id);
@@ -35,7 +35,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
             return await mySQL.ProceduteExecuteAsync();
         }
 
-        public async Task<bool> SetProductShippingAsync()
+        public async Task<bool> SetProductShippingAsync(Modes mode = null)
         {
             mySQL.Quary("UPDATE `promoit`.`products_donated` SET `shipped` = @_shipping WHERE (`id2` = @_donated_product_id);");
             mySQL.SetParameter("_donated_product_id", _productDonated.Id);
@@ -43,7 +43,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
             return await mySQL.ProceduteExecuteAsync();
         }
 
-        public async Task<bool> SetNewProductAsync()
+        public async Task<bool> SetNewProductAsync(Modes mode = null)
         {
             mySQL.Quary("INSERT INTO `promoit`.`products_in_campaign` (`name`, `quantity`, `price`, `business_user_name`, `campaign_hashtag`) VALUES (@_name, @_quantity, @_price, @_business_user_name, @_campaign_hashtag);");
             mySQL.SetParameter("_name", _productInCampaign.Name);

@@ -15,21 +15,21 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists
 {
-    public class LinkeListUser
+    public class LinkeListUser_Admin : ILinkeListUser_Admin
     {
 
         private static MySQL mySQL;
         private HTTPClient httpClient;
         private AdminUser _adminUser;
-        ILinkeListUser linkeListUser;
+        ILinkeListUser_Admin linkeListUser;
 
-        public LinkeListUser(AdminUser adminUser, MySQL _mySQL, HTTPClient _httpClient) 
+        public LinkeListUser_Admin(AdminUser adminUser, MySQL _mySQL, HTTPClient _httpClient) 
         {
             _adminUser = adminUser;
             mySQL= _mySQL;
             httpClient = _httpClient;
         }
-        private ILinkeListUser LinkedListMode(Modes _mode)  //only for admin
+        private ILinkeListUser_Admin LinkedListMode(Modes _mode)  //only for admin
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
                 linkeListUser = new LinkeListUser_Queue(_adminUser, mySQL, httpClient);

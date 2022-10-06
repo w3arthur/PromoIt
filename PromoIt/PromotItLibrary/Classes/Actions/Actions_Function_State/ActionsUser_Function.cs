@@ -54,12 +54,12 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Fuction_State
             httpClient = _httpClient;
         }
 
-        public async Task<Users> LoginAsync()
+        public async Task<Users> LoginAsync(Modes mode = null)
         {
             return await httpClient.PostSingleDataRequest(Configuration.SetUserFunctions, _user, "Login");
         }
 
-        public async Task<bool> RegisterAsync()
+        public async Task<bool> RegisterAsync(Modes mode = null)
         {
             if (_activistUser != null)
             {
@@ -81,7 +81,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Fuction_State
         }
 
 
-        public async Task<ActivistUser> GetCashAmountAsync()
+        public async Task<ActivistUser> GetCashAmountAsync(Modes mode = null)
         {
             return await httpClient.GetSingleDataRequest(Configuration.PromoitProductFunctions, _activistUser, "GetCashAmount");
         }

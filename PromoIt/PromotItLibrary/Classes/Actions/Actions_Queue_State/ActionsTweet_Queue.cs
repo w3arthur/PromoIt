@@ -23,7 +23,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Queue_State
             _tweet = tweet;
         }
 
-        public async Task<bool> SetTweetCashAsync()
+        public async Task<bool> SetTweetCashAsync(Modes mode = null)
         {
             return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitTweetQueue, _tweet, "SetTweetCash");
         }

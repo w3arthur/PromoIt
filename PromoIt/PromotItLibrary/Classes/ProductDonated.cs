@@ -10,10 +10,14 @@ using PromotItLibrary.Patterns;
 using PromotItLibrary.Patterns.Actions;
 using PromotItLibrary.Patterns.DataTables;
 using PromotItLibrary.Patterns.LinkedLists;
+using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
+using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
+using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
+using PromotItLibrary.Interfaces;
 
 namespace PromotItLibrary.Classes
 {
-    public class ProductDonated
+    public class ProductDonated : IProductDonated, IActionsProduct_ProductDonated, ILinkedListProduct_ProductDonated, IDataTabletProduct_ProductDonated
     {
         private static MySQL mySQL = Configuration.MySQL;
         private HTTPClient httpClient = Configuration.HTTPClient;

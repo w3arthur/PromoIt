@@ -24,7 +24,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
         }
 
 
-        public async Task<bool> SetNewCampaignAsync()
+        public async Task<bool> SetNewCampaignAsync(Modes mode = null)
         {
             mySQL.Procedure("add_campaign");
             mySQL.SetParameter("_name", _campaign.Name);
@@ -34,7 +34,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
             return await mySQL.ProceduteExecuteAsync();
         }
 
-        public async Task<bool> DeleteCampaignAsync()
+        public async Task<bool> DeleteCampaignAsync(Modes mode = null)
         {
             mySQL.Procedure("delete_campaign");
             mySQL.QuaryParameter("_hashtag", _campaign.Hashtag);

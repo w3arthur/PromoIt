@@ -49,7 +49,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
             mySQL = _mySQL;
         }
 
-        public async Task<Users> LoginAsync()
+        public async Task<Users> LoginAsync(Modes mode = null)
         {
             mySQL.SetQuary("SELECT * FROM users where user_name=@username and user_password=@password limit 1");
             mySQL.QuaryParameter("@username", _user.UserName);
@@ -73,7 +73,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
             return null;
         }
 
-        public async Task<bool> RegisterAsync()
+        public async Task<bool> RegisterAsync(Modes mode = null)
         {
             if (_activistUser != null)
             {
@@ -117,7 +117,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
         }
 
 
-        public async Task<ActivistUser> GetCashAmountAsync()
+        public async Task<ActivistUser> GetCashAmountAsync(Modes mode = null)
         {
             mySQL.Quary("SELECT cash FROM promoit.users_activists Where user_name = @_username LIMIT 1");
             mySQL.ProcedureParameter("_username", _activistUser.UserName);

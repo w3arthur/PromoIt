@@ -26,17 +26,17 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Queue_State
         }
 
 
-        public async Task<bool> SetBuyAnItemAsync()
+        public async Task<bool> SetBuyAnItemAsync(Modes mode = null)
         {
             return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductQueue, _productDonated, "SetBuyAnItem");
         }
 
-        public async Task<bool> SetProductShippingAsync()
+        public async Task<bool> SetProductShippingAsync(Modes mode = null)
         {
             return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductQueue, _productDonated, "SetProductShipping");
         }
 
-        public async Task<bool> SetNewProductAsync()
+        public async Task<bool> SetNewProductAsync(Modes mode = null)
         {
             return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductQueue, _productInCampaign, "SetNewProduct");
         }

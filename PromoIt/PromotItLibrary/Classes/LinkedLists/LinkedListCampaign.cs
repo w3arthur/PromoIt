@@ -19,7 +19,7 @@ using PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State;
 
 namespace PromotItLibrary.Patterns.LinkedLists
 {
-    public class LinkedListCampaign
+    public class LinkedListCampaign : ILinkedListCampaign
     {
 
         private static MySQL mySQL;

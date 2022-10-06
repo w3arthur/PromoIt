@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists.Queue_State
 {
-    public class LinkeListUser_Queue : ILinkeListUser
+    public class LinkeListUser_Queue : ILinkeListUser_Admin
     {
 
         private static MySQL mySQL;
@@ -29,7 +29,7 @@ namespace PromotItLibrary.Patterns.LinkedLists.Queue_State
         }
 
 
-        public async Task<List<Users>> MySQL_GetAllUsers_ListAsync()
+        public async Task<List<Users>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest(Configuration.SetUserQueue, new Users(), "GetAllUsers");
         }

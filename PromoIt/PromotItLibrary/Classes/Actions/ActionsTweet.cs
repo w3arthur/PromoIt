@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions
 {
-    public class ActionsTweet
+    public class ActionsTweet : IActionsTweet
     {
         private static MySQL mySQL;
         private HTTPClient httpClient;

@@ -5,6 +5,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Classes\DataTables\Function_State\**" />
+    <Compile Remove="Classes\DataTables\Interfaces\**" />
+    <Compile Remove="Classes\DataTables\MySql_State\**" />
+    <Compile Remove="Classes\DataTables\Queue_State\**" />
+    <Compile Remove="Interfaces\DataTables\**" />
+    <EmbeddedResource Remove="Classes\DataTables\Function_State\**" />
+    <EmbeddedResource Remove="Classes\DataTables\Interfaces\**" />
+    <EmbeddedResource Remove="Classes\DataTables\MySql_State\**" />
+    <EmbeddedResource Remove="Classes\DataTables\Queue_State\**" />
+    <EmbeddedResource Remove="Interfaces\DataTables\**" />
+    <None Remove="Classes\DataTables\Function_State\**" />
+    <None Remove="Classes\DataTables\Interfaces\**" />
+    <None Remove="Classes\DataTables\MySql_State\**" />
+    <None Remove="Classes\DataTables\Queue_State\**" />
+    <None Remove="Interfaces\DataTables\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.28" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="TweetinviAPI" Version="5.0.4" />
@@ -16,14 +34,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ConnectionKeys\ConnectionKeys.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Classes\DataTables\Function_State\" />
-    <Folder Include="Classes\DataTables\Interfaces\" />
-    <Folder Include="Classes\DataTables\MySql_State\" />
-    <Folder Include="Classes\DataTables\Queue_State\" />
-    <Folder Include="Interfaces\DataTables\" />
   </ItemGroup>
 
 </Project>

@@ -22,7 +22,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
             _tweet = tweet;
         }
 
-        public async Task<bool> SetTweetCashAsync()
+        public async Task<bool> SetTweetCashAsync(Modes mode = null)
         {
             mySQL.Procedure("add_tweet");
             mySQL.ProcedureParameter("_tweeter_id", long.Parse(_tweet.Id));

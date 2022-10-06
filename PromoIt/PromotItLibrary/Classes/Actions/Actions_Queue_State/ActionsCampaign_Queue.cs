@@ -24,12 +24,12 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Queue_State
         }
 
 
-        public async Task<bool> SetNewCampaignAsync()
+        public async Task<bool> SetNewCampaignAsync(Modes mode = null)
         {
             return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitCampaignQueue, _campaign, "SetNewCampaign");
         }
 
-        public async Task<bool> DeleteCampaignAsync()
+        public async Task<bool> DeleteCampaignAsync(Modes mode = null)
         {
             return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitCampaignQueue, _campaign, "DeleteCampaign");
         }

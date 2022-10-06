@@ -3,16 +3,15 @@ using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
+namespace PromotItLibrary.Patterns.DataTables.DataTables_Interfaces
 {
-    interface IActionsUser
+    interface IDataTabletProduct : IDataTabletProduct_ProductDonated, IDataTabletProduct_ProductInCampaign
     {
-        Task<Users> LoginAsync();
-        Task<bool> RegisterAsync();
-        Task<ActivistUser> GetCashAmountAsync();
+
     }
 }

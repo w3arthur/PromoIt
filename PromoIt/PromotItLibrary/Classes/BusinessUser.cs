@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.Actions;
 
 namespace PromotItLibrary.Classes
 {
-    public class BusinessUser : Users
+    public class BusinessUser : Users, IBusinessUser
     {
         public BusinessUser() : base() 
         {

@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
 using System;
@@ -11,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces
 {
-    interface ILinkeListUser
+    interface ILinkedListProduct : ILinkedListProduct_ProductDonated, ILinkedListProduct_ProductInCampaign
     {
-         Task<List<Users>> MySQL_GetAllUsers_ListAsync();
+
     }
 }

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists
 {
-    public class LinkedListTweet
+    public class LinkedListTweet : ILinkedListTweet
     {
 
         private static MySQL mySQL;
