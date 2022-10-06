@@ -43,10 +43,10 @@ namespace PromoitTesting
             await mySQL.QuaryExecuteAsync($"DELETE FROM `promoit`.`users_activists` WHERE (`user_name` = '{activistUser.UserName}');");
             await mySQL.QuaryExecuteAsync($"DELETE FROM `promoit`.`users` WHERE (`user_name` = '{activistUser.UserName}');");
 
-            bool result1 = await new BuilderUser(activistUser).RegisterAsync();
+            bool result1 = await activistUser.RegisterAsync();
             Assert.True(result1, "User Should Register / Function Mast Be Activated!");
 
-            Users loggedInUser = await new BuilderUser(activistUser).LoginAsync();
+            Users loggedInUser = await activistUser.LoginAsync();
 
             bool result2 = loggedInUser != null;
             Assert.True(result2, "Login User Should Accepted / Function Mast Be Activated");

@@ -67,7 +67,7 @@ namespace PromotItFormApp.LandingPanels
         {
             try
             {
-                dgrdCampains.DataSource = await new BuilderCampaign(new Campaign()).GetAllCampaigns_DataTableAsync(); ;
+                dgrdCampains.DataSource = await (new Campaign()).GetAllCampaigns_DataTableAsync(); ;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -80,7 +80,7 @@ namespace PromotItFormApp.LandingPanels
                 {
                     ProductInCampaign =new ProductInCampaign() { BusinessUser = Configuration.CorrentUser, }
                 };
-                dgrdActivists.DataSource = await new BuilderProduct(productDonated).GetDonatedProductForShipping_DataTableAsync();
+                dgrdActivists.DataSource = await productDonated.GetDonatedProductForShipping_DataTableAsync();
                 //dataGridBuyers.Columns["clmnProductDonatedId"].Visible = false;   //hidden
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -95,7 +95,7 @@ namespace PromotItFormApp.LandingPanels
                 {
                     Id = dgrdActivists["clmnProductDonatedId", e.RowIndex].Value.ToString(),
                 };
-                bool result = await new BuilderProduct(productDonated).SetProductShippingAsync();
+                bool result = await productDonated.SetProductShippingAsync();
                 if (result) GetProductsForShippingAsync();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns.Actions;
 
 namespace PromotItLibrary.Classes
 {
@@ -13,8 +14,8 @@ namespace PromotItLibrary.Classes
         public string Email { get; set; }
         public string WebSite { get; set; }
 
-        public NonProfitUser() : base() { UserType = "non-profit"; }
-        public NonProfitUser(Users user) : base(user) { UserType = "non-profit"; }
+        public NonProfitUser() : base() { UserType = "non-profit"; actionsUser = new ActionsUser(this, mySQL, httpClient); }
+        public NonProfitUser(Users user) : base(user) { UserType = "non-profit"; actionsUser = new ActionsUser(this, mySQL, httpClient); }
 
     }
 }

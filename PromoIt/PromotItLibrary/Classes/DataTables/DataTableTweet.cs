@@ -23,14 +23,14 @@ namespace PromotItLibrary.Patterns.DataTables
         public async Task<DataTable> GetAllTweets_DataTableAsync()
         {
             DataTable dataTable = new DataTable();
-            List<Tweet> tweetList = await new BuilderTweet(_tweet).MySQL_GetAllTweets_ListAsync();
+            List<Tweet> tweetList = await _tweet.MySQL_GetAllTweets_ListAsync();
             foreach (string culmn in new[] { "Hashtag", "UserName", "Retweets" })
                 dataTable.Columns.Add(culmn);
 
             if (tweetList == null)
             {
                 while (Configuration.IsTries())
-                    return await new BuilderTweet(_tweet).GetAllTweets_DataTableAsync();
+                    return await _tweet.GetAllTweets_DataTableAsync();
                 Loggings.ErrorLog($"Admin Requested to get all Tweets list, The list is empty, Reguested by ({Configuration.CorrentUser.UserName})");
                 Configuration.TriesReset();
                 return dataTable;//no results

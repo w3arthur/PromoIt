@@ -72,7 +72,7 @@ namespace PromotItLibrary.Models
             => MySQL =
                 (
                     (LocalMode == Modes.NotLocal_ProtectedKey) ? _mySQL ?? new MySQL(ConnectionKeySet.MySQLKey_Server, ConnectionKeySet.MySQLKey_User, ConnectionKeySet.MySQLKey_Password, ConnectionKeySet.MySQLKey_Database)
-                    : (LocalMode == Modes.Local) ? _mySQL ?? new MySQL("localhost", "root", "admin", "promoit")
+                    : (LocalMode == Modes.Local) ? _mySQL ?? new MySQL(ConnectionKeySet.MySQLKey_Server_Local, ConnectionKeySet.MySQLKey_User_Local, ConnectionKeySet.MySQLKey_Password_Local, ConnectionKeySet.MySQLKey_Database_Local)
                     : _mySQL ?? null
                 );
 

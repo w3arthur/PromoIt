@@ -27,14 +27,14 @@ namespace PromotItLibrary.Patterns.DataTables
             if (_productDonated == null) return null;
 
             DataTable dataTable = new DataTable();
-            List<ProductDonated> productDonatedList = await new BuilderProduct(_productDonated).MySQL_GetDonatedProductForShipping_ListAsync();
+            List<ProductDonated> productDonatedList = await _productDonated.MySQL_GetDonatedProductForShipping_ListAsync();
             foreach (string culmn in new[] { "clmnActivist", "clmnProduct", "clmnProductDonatedId" })
                 dataTable.Columns.Add(culmn);
 
             if (productDonatedList == null)
             {
                 while (Configuration.IsTries())
-                    return await new BuilderProduct(_productDonated).GetDonatedProductForShipping_DataTableAsync();
+                    return await _productDonated.GetDonatedProductForShipping_DataTableAsync();
                 Loggings.ErrorLog($"Business user Got Empty list of donated products waiting for shipping, UserName ({_productDonated.ProductInCampaign.BusinessUser.UserName})");
                 Configuration.TriesReset();
                 return dataTable;//no results
@@ -58,13 +58,13 @@ namespace PromotItLibrary.Patterns.DataTables
             if (_productInCampaign == null) return null;
 
             DataTable dataTable = new DataTable();
-            List<ProductInCampaign> productInCampaignList = await new BuilderProduct(_productInCampaign).MySQL_GetProductList_ListAsync();
+            List<ProductInCampaign> productInCampaignList = await _productInCampaign.MySQL_GetProductList_ListAsync();
             foreach (string culmn in new[] { "clmnProductId", "clmnBusinessUser", "clmnProductName", "clmnProductQuantity", "clmnProductPrice" })
                 dataTable.Columns.Add(culmn);
             if (productInCampaignList == null)
             {
                 while (Configuration.IsTries())
-                    return await new BuilderProduct(_productInCampaign).GetList_DataTableAsync();
+                    return await _productInCampaign.GetList_DataTableAsync();
                 Loggings.ErrorLog($"No Products in Get products in campagign, Campaign (#{_productInCampaign.Campaign.Hashtag}) by ({Configuration.CorrentUser.UserName})");
                 Configuration.TriesReset();
                 return dataTable;//no results

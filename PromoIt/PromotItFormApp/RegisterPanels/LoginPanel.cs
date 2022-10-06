@@ -68,7 +68,7 @@ namespace PromotItFormApp.RegisterPanels
                     UserPassword = txtPassword.Text.Trim(),
                 };
 
-                Users loggedinUser = await new BuilderUser(user).LoginAsync();
+                Users loggedinUser = await user.LoginAsync();
                 if (loggedinUser == null)
                 {
                     Loggings.ErrorLog($"User cant login UserName ({txtUserName.Text}), Wrong UserName or Password");

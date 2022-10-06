@@ -6,18 +6,30 @@ using System.Text;
 using System.Threading.Tasks;
 using PromotItLibrary.Models;
 using PromotItLibrary.Interfaces;
+using PromotItLibrary.Patterns.Actions;
+using PromotItLibrary.Patterns.LinkedLists;
+using Tweetinvi.Core.Models;
 
 namespace PromotItLibrary.Classes
 {
     public class Users : IUsers
     {
+        protected static MySQL mySQL = Configuration.MySQL;
+        protected HTTPClient httpClient = Configuration.HTTPClient;
+
+        protected ActionsUser actionsUser;
+        protected LinkeListUser linkeListUser;
+        protected DataTableUser dataTableUser;
+
         public string UserName { get; set; }
         public string UserPassword { get; set; }
         public string Name { get; set; }
         public string UserType { get; set; }
         public string Token { get; set; }
-
-        public Users() { }
+        public Users() 
+        {
+            actionsUser = new ActionsUser(this, mySQL, httpClient);
+        }
 
         public Users(Users user) : this()
         {
@@ -27,5 +39,12 @@ namespace PromotItLibrary.Classes
             Name = user.Name;
             Token = user.Token;
         }
+
+        //Actions
+        public async Task<Users> LoginAsync(Modes mode = null) =>
+            await actionsUser.LoginAsync(mode);
+        public async Task<bool> RegisterAsync(Modes mode = null) =>
+            await actionsUser.RegisterAsync(mode);
+
     }
 }

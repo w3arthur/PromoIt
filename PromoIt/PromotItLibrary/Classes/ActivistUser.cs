@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns.Actions;
 
 namespace PromotItLibrary.Classes
 {
@@ -18,8 +19,11 @@ namespace PromotItLibrary.Classes
         public string PhoneNumber { get; set; }
         public string Cash { get; set; }
 
-        public ActivistUser() : base() { UserType = "activist"; }
-        public ActivistUser(Users user) : base(user) { UserType = "activist";  }
+        public ActivistUser() : base() { UserType = "activist"; actionsUser = new ActionsUser(this, mySQL, httpClient); }
+        public ActivistUser(Users user) : base(user) { UserType = "activist"; actionsUser = new ActionsUser(this, mySQL, httpClient); }
 
+        //Actions
+        public async Task<ActivistUser> GetCashAmountAsync(Modes mode = null) =>
+            await actionsUser.GetCashAmountAsync(mode);
     }
 }

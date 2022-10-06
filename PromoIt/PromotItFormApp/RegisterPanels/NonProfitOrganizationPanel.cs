@@ -57,7 +57,7 @@ namespace PromotItFormApp.RegisterPanels
                     WebSite = txtWebSite.Text,
                 };
 
-                bool result = await new BuilderUser(nonProfitUser).RegisterAsync();
+                bool result = await nonProfitUser.RegisterAsync();
                 if (!result)
                 {
                     Loggings.ErrorLog($"Non Profit Company User cant register UserName ({nonProfitUser.UserName})");
