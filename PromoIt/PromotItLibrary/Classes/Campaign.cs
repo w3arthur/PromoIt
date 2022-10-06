@@ -40,7 +40,7 @@ namespace PromotItLibrary.Classes
 
         //Actions
         public async Task<bool> SetNewCampaignAsync(Modes mode = null) =>
-        await SetNewCampaignAsync(mode);
+        await actionsCampaign.SetNewCampaignAsync(mode);
 
         public async Task<bool> DeleteCampaignAsync(Modes mode = null) =>
             await actionsCampaign.DeleteCampaignAsync(mode);

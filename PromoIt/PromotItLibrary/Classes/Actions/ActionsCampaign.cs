@@ -1,5 +1,9 @@
 ﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns.Actions.Fuction_State;
+using PromotItLibrary.Patterns.Actions.Interfaces;
+using PromotItLibrary.Patterns.Actions.MySql_State;
+using PromotItLibrary.Patterns.Actions.Queue_State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +17,7 @@ namespace PromotItLibrary.Patterns.Actions
         private static MySQL mySQL;
         private HTTPClient httpClient;
         private Campaign _campaign;
-
-        private Modes _mode = null;
+        IActionsCampaign actionsCampaign;
 
         public ActionsCampaign(Campaign campaign, MySQL _mySQL, HTTPClient _httpClient)
         {
@@ -23,52 +26,26 @@ namespace PromotItLibrary.Patterns.Actions
             httpClient = _httpClient;
         }
 
+        private IActionsCampaign AtionMode(Modes _mode) 
+        {
+            if ((_mode ?? Configuration.Mode) == Modes.Queue)
+                actionsCampaign = new ActionsCampaign_Queue(_campaign, mySQL, httpClient);
+            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
+                actionsCampaign = new ActionsCampaign_Function(_campaign, mySQL, httpClient);
+            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                actionsCampaign = new ActionsCampaign_MySql(_campaign, mySQL, httpClient);
+            return actionsCampaign;
+        }
+
 
         public async Task<bool> SetNewCampaignAsync(Modes mode = null)
         {
-            _mode = mode;
-
-            try
-            {   //Queue and Functions
-                if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitCampaignQueue, _campaign, "SetNewCampaign");
-                else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitCampaignFunctions, _campaign, "SetNewCampaign");
-            }
-            catch { return false; }
-
-            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-            {
-                mySQL.Procedure("add_campaign");
-                mySQL.SetParameter("_name", _campaign.Name);
-                mySQL.SetParameter("_hashtag", _campaign.Hashtag);
-                mySQL.SetParameter("_webpage", _campaign.Url);
-                mySQL.SetParameter("_non_profit_user_name", _campaign.NonProfitUser.UserName);
-                return await mySQL.ProceduteExecuteAsync();
-            }
-
-            return false;
+            return await AtionMode(mode).SetNewCampaignAsync();
         }
 
         public async Task<bool> DeleteCampaignAsync(Modes mode = null)
         {
-            try
-            {   //Queue and Functions
-                if ((mode ?? Configuration.Mode) == Modes.Queue)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitCampaignQueue, _campaign, "DeleteCampaign");
-                else if ((mode ?? Configuration.Mode) == Modes.Functions)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitCampaignFunctions, _campaign, "DeleteCampaign");
-            }
-            catch { return false; }
-
-            if ((mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-            {
-                mySQL.Procedure("delete_campaign");
-                mySQL.QuaryParameter("_hashtag", _campaign.Hashtag);
-                return await mySQL.ProceduteExecuteAsync();
-            }
-
-            return false;
+            return await AtionMode(mode).DeleteCampaignAsync();
         }
 
 

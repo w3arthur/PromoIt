@@ -1,5 +1,9 @@
 ﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns.Actions.Fuction_State;
+using PromotItLibrary.Patterns.Actions.Interfaces;
+using PromotItLibrary.Patterns.Actions.MySql_State;
+using PromotItLibrary.Patterns.Actions.Queue_State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +16,8 @@ namespace PromotItLibrary.Patterns.Actions
     {
         private static MySQL mySQL;
         private HTTPClient httpClient;
-
         private Tweet _tweet;
+        IActionsTweet actionsTweet;
 
         public ActionsTweet(Tweet tweet, MySQL _mySQL, HTTPClient _httpClient)
         {
@@ -21,29 +25,20 @@ namespace PromotItLibrary.Patterns.Actions
             httpClient = _httpClient;
             _tweet = tweet;
         }
+        private IActionsTweet AtionMode(Modes _mode)
+        {
+            if ((_mode ?? Configuration.Mode) == Modes.Queue)
+                actionsTweet = new ActionsTweet_Queue(_tweet, mySQL, httpClient);
+            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
+                actionsTweet = new ActionsTweet_Function(_tweet, mySQL, httpClient);
+            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                actionsTweet = new ActionsTweet_MySql(_tweet, mySQL, httpClient);
+            return actionsTweet;
+        }
 
         public async Task<bool> SetTweetCashAsync(Modes mode = null)
         {
-            try
-            {   //Queue and Functions
-                if ((mode ?? Configuration.Mode) == Modes.Queue)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitTweetQueue, _tweet, "SetTweetCash");
-                else if ((mode ?? Configuration.Mode) == Modes.Functions)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitTweetFunctions, _tweet, "SetTweetCash");
-            }
-            catch { return false; }
-
-            if ((mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-            {
-                mySQL.Procedure("add_tweet");
-                mySQL.ProcedureParameter("_tweeter_id", long.Parse(_tweet.Id));
-                mySQL.ProcedureParameter("_campaign_hashtag", _tweet.Campaign.Hashtag);
-                mySQL.ProcedureParameter("_activist_user_name", _tweet.ActivistUser.UserName);
-                mySQL.ProcedureParameter("_added_cash", _tweet.Cash);
-                mySQL.ProcedureParameter("_tweeter_retweets", _tweet.Retweets);
-                return await mySQL.ProceduteExecuteAsync();
-            }
-            return false;
+            return await AtionMode(mode).SetTweetCashAsync();
         }
     }
 }

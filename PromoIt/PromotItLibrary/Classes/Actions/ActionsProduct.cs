@@ -1,5 +1,9 @@
 ﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns.Actions.Fuction_State;
+using PromotItLibrary.Patterns.Actions.Interfaces;
+using PromotItLibrary.Patterns.Actions.MySql_State;
+using PromotItLibrary.Patterns.Actions.Queue_State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +17,9 @@ namespace PromotItLibrary.Patterns.Actions
 
         private static MySQL mySQL;
         private HTTPClient httpClient;
-
         private ProductDonated _productDonated;
         private ProductInCampaign _productInCampaign;
+        IActionsProduct actionsProduct;
 
         public ActionsProduct(ProductDonated productDonated, ProductInCampaign productInCampaign, MySQL _mySQL, HTTPClient _httpClient)
         {
@@ -25,11 +29,21 @@ namespace PromotItLibrary.Patterns.Actions
             _productInCampaign = productInCampaign;
         }
 
+        private IActionsProduct AtionMode(Modes _mode)
+        {
+            if ((_mode ?? Configuration.Mode) == Modes.Queue)
+                actionsProduct = new ActionsProduct_Queue(_productDonated, _productInCampaign, mySQL, httpClient);
+            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
+                actionsProduct = new ActionsProduct_Function(_productDonated, _productInCampaign, mySQL, httpClient);
+            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                actionsProduct = new ActionsProduct_MySql(_productDonated, _productInCampaign, mySQL, httpClient);
+            return actionsProduct;
+        }
+
 
         public async Task SetTwitterMessagTweet_SetBuyAnItemAsync()
         {
             if (_productDonated == null) return;
-
             try
             {
                 await Twitter.SetTwitterMessage_SetBuyAnItemAsync($"Product: {_productDonated.ProductInCampaign.Name}, Quantity {_productDonated.Quantity}" +
@@ -48,77 +62,19 @@ namespace PromotItLibrary.Patterns.Actions
         public async Task<bool> SetBuyAnItemAsync(Modes mode = null)
         {
             if (_productDonated == null) return false;
-
-            try
-            {   //Queue and Functions
-                if ((mode ?? Configuration.Mode) == Modes.Queue)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductQueue, _productDonated, "SetBuyAnItem");
-                else if ((mode ?? Configuration.Mode) == Modes.Functions)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductFunctions, _productDonated, "SetBuyAnItem");
-            }
-            catch { return false; }
-
-            if ((mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-            {
-                mySQL.Procedure("buy_a_product");
-                mySQL.SetParameter("_product_id", _productDonated.ProductInCampaign.Id);
-                mySQL.SetParameter("_quantity", _productDonated.Quantity);
-                mySQL.SetParameter("_activist_user_name", _productDonated.ActivistUser.UserName);
-                mySQL.SetParameter("_shipping", "not_shipped");
-                return await mySQL.ProceduteExecuteAsync();
-            }
-
-            return false;
+            return await AtionMode(mode).SetBuyAnItemAsync();
         }
 
         public async Task<bool> SetProductShippingAsync(Modes mode = null)
         {
             if (_productDonated == null) return false;
-
-            try
-            {   //Queue and Functions
-                if ((mode ?? Configuration.Mode) == Modes.Queue)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductQueue, _productDonated, "SetProductShipping");
-                else if ((mode ?? Configuration.Mode) == Modes.Functions)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductFunctions, _productDonated, "SetProductShipping");
-            }
-            catch { return false; }
-
-            if ((mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-            {
-                mySQL.Quary("UPDATE `promoit`.`products_donated` SET `shipped` = @_shipping WHERE (`id2` = @_donated_product_id);");
-                mySQL.SetParameter("_donated_product_id", _productDonated.Id);
-                mySQL.SetParameter("_shipping", "shipped");
-                return await mySQL.ProceduteExecuteAsync();
-            }
-
-            return false;
+            return await AtionMode(mode).SetProductShippingAsync();
         }
 
         public async Task<bool> SetNewProductAsync(Modes mode = null)
         {
             if (_productInCampaign == null) return false;
-
-            try
-            {   //Queue and Functions
-                if ((mode ?? Configuration.Mode) == Modes.Queue)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductQueue, _productInCampaign, "SetNewProduct");
-                else if ((mode ?? Configuration.Mode) == Modes.Functions)
-                    return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductFunctions, _productInCampaign, "SetNewProduct");
-            }
-            catch { return false; }
-
-            if ((mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-            {
-                mySQL.Quary("INSERT INTO `promoit`.`products_in_campaign` (`name`, `quantity`, `price`, `business_user_name`, `campaign_hashtag`) VALUES (@_name, @_quantity, @_price, @_business_user_name, @_campaign_hashtag);");
-                mySQL.SetParameter("_name", _productInCampaign.Name);
-                mySQL.SetParameter("_quantity", decimal.Parse(_productInCampaign.Quantity));
-                mySQL.SetParameter("_business_user_name", _productInCampaign.BusinessUser.UserName);
-                mySQL.SetParameter("_price", int.Parse(_productInCampaign.Price));
-                mySQL.SetParameter("_campaign_hashtag", _productInCampaign.Campaign.Hashtag);
-                return await mySQL.ProceduteExecuteAsync();
-            }
-            return false;
+            return await AtionMode(mode).SetNewProductAsync();
         }
 
 
