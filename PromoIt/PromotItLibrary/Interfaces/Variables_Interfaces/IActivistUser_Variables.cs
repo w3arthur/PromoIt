@@ -5,15 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using PromotItLibrary.Interfaces.Variables_Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.Actions;
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 
-namespace PromotItLibrary.Interfaces
+namespace PromotItLibrary.Interfaces.Variables_Interfaces
 {
-    public interface IActivistUser : IUsers, IActivistUser_Variables, IActionsUser_ActivistUser
+    public interface IActivistUser_Variables
     {
+        static string CashDefultSet { get; }
 
+        string Email { get; set; }
+        string Address { get; set; }
+        string PhoneNumber { get; set; }
+        string Cash { get; set; }
     }
 }

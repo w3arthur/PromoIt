@@ -1,4 +1,4 @@
-﻿using PromotItLibrary.Classes;
+﻿using PromotItLibrary.Enums;
 using PromotItLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
 {
-    interface IActionsCampaign
+    public interface IActionsCampaign
     {
         Task<bool> SetNewCampaignAsync(Modes mode = null);
         Task<bool> DeleteCampaignAsync(Modes mode = null);

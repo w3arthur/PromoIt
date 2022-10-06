@@ -1,5 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -9,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
 {
-    interface IActionsUser_ActivistUser
+    public interface IActionsUser_ActivistUser
     {
-        Task<ActivistUser> GetCashAmountAsync(Modes mode = null);
+        Task<IActivistUser> GetCashAmountAsync(Modes mode = null);
     }
 }

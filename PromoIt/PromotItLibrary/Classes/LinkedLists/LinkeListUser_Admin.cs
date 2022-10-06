@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
@@ -40,7 +42,7 @@ namespace PromotItLibrary.Patterns.LinkedLists
             return linkeListUser;
         }
 
-        public async Task<List<Users>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
+        public async Task<List<IUsers>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
         {
             if (_adminUser == null) return null;
             return await LinkedListMode(mode).MySQL_GetAllUsers_ListAsync();

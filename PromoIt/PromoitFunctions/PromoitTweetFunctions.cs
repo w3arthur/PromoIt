@@ -13,6 +13,7 @@ using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
 using System.Threading;
 using PromotItLibrary.Patterns;
+using PromotItLibrary.Enums;
 
 namespace PromoitFunction
 {

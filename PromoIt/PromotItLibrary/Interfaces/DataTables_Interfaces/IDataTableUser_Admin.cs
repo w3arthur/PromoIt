@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists.DataTables_Interfaces
 {
-    interface IDataTableUser
+    public interface IDataTableUser_Admin
     {
         Task<DataTable> GetAllUsers_DataTableAsync();
         Task<DataTable> GetAllCampaignsAdmin_DataTableAsync();

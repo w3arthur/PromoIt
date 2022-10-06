@@ -1,5 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -10,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces
 {
-    interface ILinkedListCampaign
+    public interface ILinkedListCampaign
     {
-        Task<List<Campaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null);
-        Task<List<Campaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null);
+        Task<List<ICampaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null);
+        Task<List<ICampaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null);
     }
 }

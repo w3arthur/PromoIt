@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
 using PromotItLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces
 {
-    interface ILinkedListTweet
+    public interface ILinkedListTweet
     {
         Task<List<Tweet>> MySQL_GetAllTweets_ListAsync(Modes mode = null);
     }

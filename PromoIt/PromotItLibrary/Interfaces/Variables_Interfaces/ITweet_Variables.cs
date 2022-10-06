@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
-using PromotItLibrary.Interfaces.Variables_Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using PromotItLibrary.Patterns.Actions;
@@ -18,10 +17,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Tweetinvi.Core.Models;
 
-namespace PromotItLibrary.Interfaces
+namespace PromotItLibrary.Interfaces.Variables_Interfaces
 {
-    public interface ITweet : ITweet_Variables, IActionsTweet, ILinkedListTweet
+    public interface ITweet_Variables
     {
-
+        string Id { get; set; }
+        ICampaign Campaign { get; set; }
+        IUsers ActivistUser { get; set; }
+        decimal Cash { get; set; }
+        int Retweets { get; set; }
+        bool IsApproved { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 using Moq;
 using PromoitTesting.TestClasses;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;

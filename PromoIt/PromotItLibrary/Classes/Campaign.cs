@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Classes
 {
-    public class Campaign : ICampaign, IActionsCampaign, ILinkedListCampaign
+    public class Campaign : ICampaign
     {
         //Move to Interfaces
         private static MySQL mySQL = Configuration.MySQL;
@@ -29,7 +30,7 @@ namespace PromotItLibrary.Classes
         public string Name { get; set; }
         public string Hashtag { get; set; }
         public string Url { get; set; }
-        public Users NonProfitUser { get; set; }
+        public IUsers NonProfitUser { get; set; }
 
 
 
@@ -49,13 +50,13 @@ namespace PromotItLibrary.Classes
             await actionsCampaign.DeleteCampaignAsync(mode);
 
         //List and DataTable
-        public async Task<List<Campaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null) =>
+        public async Task<List<ICampaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null) =>
             await linkedListCampaign.MySql_GetAllCampaignsNonProfit_ListAsync(mode);
 
         public async Task<DataTable> GetAllCampaignsNonProfit_DataTableAsync() =>
             await dataTableCampaign.GetAllCampaignsNonProfit_DataTableAsync();
 
-        public async Task<List<Campaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null) =>
+        public async Task<List<ICampaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null) =>
             await linkedListCampaign.MySQL_GetAllCampaigns_ListAsync(mode);
 
         public async Task<DataTable> GetAllCampaigns_DataTableAsync() =>

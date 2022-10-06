@@ -1,4 +1,4 @@
-﻿using PromotItLibrary.Classes;
+﻿using PromotItLibrary.Enums;
 using PromotItLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
 {
-    interface IActionsProduct_ProductDonated
+    public interface IActionsProduct_ProductDonated
     {
         Task<bool> SetBuyAnItemAsync(Modes mode = null);
         Task<bool> SetProductShippingAsync(Modes mode = null);

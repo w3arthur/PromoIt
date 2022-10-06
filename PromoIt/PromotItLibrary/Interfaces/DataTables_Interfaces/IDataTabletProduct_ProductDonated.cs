@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.DataTables.DataTables_Interfaces
 {
-    interface IDataTabletProduct_ProductDonated
+    public interface IDataTabletProduct_ProductDonated
     {
         Task<DataTable> GetDonatedProductForShipping_DataTableAsync();
     }

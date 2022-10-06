@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 using System;
@@ -29,9 +31,9 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State
         }
 
 
-        public async Task<List<Users>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
+        public async Task<List<IUsers>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
         {
-            return await httpClient.GetMultipleDataRequest(Configuration.SetUserFunctions, new Users(), "GetAllUsers");
+            return await httpClient.GetMultipleDataRequest<IUsers>(Configuration.SetUserFunctions, null, "GetAllUsers");
         }
 
     }

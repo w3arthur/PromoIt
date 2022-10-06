@@ -1,4 +1,5 @@
 ﻿using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using System;

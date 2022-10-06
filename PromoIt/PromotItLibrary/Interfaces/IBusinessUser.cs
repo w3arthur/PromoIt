@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PromotItLibrary.Interfaces.Variables_Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.Actions;
 
 namespace PromotItLibrary.Interfaces
 {
-    interface IBusinessUser : IUsers
+    public interface IBusinessUser : IUsers, IBusinessUser_Variables
     {
 
     }

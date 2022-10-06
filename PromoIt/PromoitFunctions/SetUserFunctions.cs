@@ -13,6 +13,8 @@ using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
 using System.Threading;
 using PromotItLibrary.Patterns;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 
 namespace PromoitFunction
 {
@@ -41,7 +43,7 @@ namespace PromoitFunction
                     if (type == "GetAllUsers")
                     {
                         className = "Get All Users List";
-                        List<Users> userList = await (new AdminUser()).MySQL_GetAllUsers_ListAsync(FunctionOrDatabaseMode);
+                        List<IUsers> userList = await (new AdminUser()).MySQL_GetAllUsers_ListAsync(FunctionOrDatabaseMode);
                         log.LogInformation($"{azureFunctionString} Found {className}");
                         return new OkObjectResult(HTTPClient.ObjectToJsonString(userList));
                     }
@@ -64,11 +66,11 @@ namespace PromoitFunction
                     {
                         if (type == "Login")
                         {
-                            Users user = HTTPClient.JsonStringToSingleObject<Users>(data);
+                            IUsers user = HTTPClient.JsonStringToSingleObject<Users>(data);
                             if (user == null) throw new Exception($"POST: No {className} IS Enterd");
                             try
                             {
-                                Users loggedUser = await user.LoginAsync(FunctionOrDatabaseMode);
+                                IUsers loggedUser = await user.LoginAsync(FunctionOrDatabaseMode);
                                 if (loggedUser == null) throw new Exception($"POST: No {className} Found In Databae!");
                                 log.LogInformation($"{azureFunctionString} Find {className} ({loggedUser.Name}) Type ({loggedUser.UserType})");
 

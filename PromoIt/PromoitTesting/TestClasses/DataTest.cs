@@ -1,4 +1,5 @@
 ﻿using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,14 @@ namespace PromoitTesting.TestClasses
         public string Name { get; set; }
         public string Token { get; set; }
 
-        public Task<Users> LoginAsync(Modes mode = null)
+        public Task<IUsers> LoginAsync(Modes mode = null)
         {
             return null;    //throw new NotImplementedException();
+        }
+
+        public Task<bool> RegisterAsync(Modes mode = null)
+        {
+            throw new NotImplementedException();
         }
     }
 }

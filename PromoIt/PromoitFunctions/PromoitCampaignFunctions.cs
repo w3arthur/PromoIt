@@ -13,6 +13,8 @@ using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
 using System.Threading;
 using PromotItLibrary.Patterns;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 
 namespace PromoitFunction
 {
@@ -43,7 +45,7 @@ namespace PromoitFunction
                             className = "Get Campaign List for NonProfit";
                             Campaign campaign = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                             if (campaign == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<Campaign> campaignList = await campaign.MySql_GetAllCampaignsNonProfit_ListAsync(FunctionOrDatabaseMode);
+                            List<ICampaign> campaignList = await campaign.MySql_GetAllCampaignsNonProfit_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(campaignList));
                         }
@@ -53,7 +55,7 @@ namespace PromoitFunction
                             className = "Get Campaign List";
                             Campaign campaign = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                             if (campaign == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<Campaign> campaignList = await campaign.MySQL_GetAllCampaigns_ListAsync(FunctionOrDatabaseMode);
+                            List<ICampaign> campaignList = await campaign.MySQL_GetAllCampaigns_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(campaignList));
                         }

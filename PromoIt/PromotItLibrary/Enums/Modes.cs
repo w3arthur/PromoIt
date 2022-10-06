@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PromotItLibrary.Classes
+namespace PromotItLibrary.Enums
 {
     public class Modes
     {

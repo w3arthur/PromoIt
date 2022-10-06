@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.DataTables.DataTables_Interfaces
 {
-    interface IDataTableTweet
+    public interface IDataTableTweet
     {
         Task<DataTable> GetAllTweets_DataTableAsync();
     }

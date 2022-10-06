@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
 {
-    interface IActionsUser : IActionsUser_ActivistUser, IActionsUser_AllUsers
+    public interface IActionsUser : IActionsUser_ActivistUser, IActionsUser_AllUsers
     {
 
     }

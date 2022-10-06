@@ -11,17 +11,18 @@ using PromotItLibrary.Patterns.LinkedLists;
 using Tweetinvi.Core.Models;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
+using PromotItLibrary.Enums;
 
 namespace PromotItLibrary.Classes
 {
-    public class Users : IUsers, IActionsUser_AllUsers
+    public class Users : IUsers
     {
         protected static MySQL mySQL = Configuration.MySQL;
         protected HTTPClient httpClient = Configuration.HTTPClient;
 
         protected ActionsUser actionsUser;
         protected LinkeListUser_Admin linkeListUser;
-        protected DataTableUser dataTableUser;
+        protected DataTableUser_Admin dataTableUser;
 
         public string UserName { get; set; }
         public string UserPassword { get; set; }
@@ -33,7 +34,7 @@ namespace PromotItLibrary.Classes
             actionsUser = new ActionsUser(this, mySQL, httpClient);
         }
 
-        public Users(Users user) : this()
+        public Users(IUsers user) : this()
         {
             UserName = user.UserName;
             UserPassword = user.UserPassword;
@@ -43,7 +44,7 @@ namespace PromotItLibrary.Classes
         }
 
         //Actions
-        public async Task<Users> LoginAsync(Modes mode = null) =>
+        public async Task<IUsers> LoginAsync(Modes mode = null) =>
             await actionsUser.LoginAsync(mode);
         public async Task<bool> RegisterAsync(Modes mode = null) =>
             await actionsUser.RegisterAsync(mode);

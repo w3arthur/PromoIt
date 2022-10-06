@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Interfaces.Variables_Interfaces;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +11,8 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Interfaces
 {
-    public interface IUsers
+    public interface IUsers : IUsers_Variables, IActionsUser_AllUsers
     {
-        string UserName { get; set; }
-        string UserPassword { get; set; }
-        string UserType { get; set; }
-        string Name { get; set; }
-        string Token { get; set; }
+
     }
 }

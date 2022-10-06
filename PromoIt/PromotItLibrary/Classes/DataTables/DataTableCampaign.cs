@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
 using System;
@@ -24,7 +25,7 @@ namespace PromotItLibrary.Patterns.DataTables
         public async Task<DataTable> GetAllCampaignsNonProfit_DataTableAsync()
         {
             DataTable dataTable = new DataTable();
-            List<Campaign> campaignsList = await _campaign.MySql_GetAllCampaignsNonProfit_ListAsync();
+            List<ICampaign> campaignsList = await _campaign.MySql_GetAllCampaignsNonProfit_ListAsync();
             foreach (string culmn in new[] { "clmnCampaignName", "clmnHashtag", "clmnWebsite", "clmnCreator" })
                 dataTable.Columns.Add(culmn);
 
@@ -53,7 +54,7 @@ namespace PromotItLibrary.Patterns.DataTables
         public async Task<DataTable> GetAllCampaigns_DataTableAsync()
         {
             DataTable dataTable = new DataTable();
-            List<Campaign> campaignsList = await _campaign.MySQL_GetAllCampaigns_ListAsync();
+            List<ICampaign> campaignsList = await _campaign.MySQL_GetAllCampaigns_ListAsync();
             foreach (string culmn in new[] { "clmnHashtag", "clmnWebpage" }) dataTable.Columns.Add(culmn);
 
             if (campaignsList == null)

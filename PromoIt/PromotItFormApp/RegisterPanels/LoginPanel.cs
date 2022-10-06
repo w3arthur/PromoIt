@@ -42,7 +42,7 @@ namespace PromotItFormApp.RegisterPanels
 
         private void UserSetValues() 
         {
-            Users user = Configuration.LoginUser;
+            IUsers user = Configuration.LoginUser;
             if (user != null && !string.IsNullOrEmpty(user.UserName))
             {
                 txtUserName.Text = user.UserName;
@@ -62,13 +62,13 @@ namespace PromotItFormApp.RegisterPanels
             {
                 if (txtUserName.Text == "" || txtPassword.Text == "")
                     throw new Exception("Please provide a username and password");
-                Users user = new Users()
+                IUsers user = new Users()
                 {
                     UserName = txtUserName.Text.Trim(),
                     UserPassword = txtPassword.Text.Trim(),
                 };
 
-                Users loggedinUser = await user.LoginAsync();
+                IUsers loggedinUser = await user.LoginAsync();
                 if (loggedinUser == null)
                 {
                     Loggings.ErrorLog($"User cant login UserName ({txtUserName.Text}), Wrong UserName or Password");

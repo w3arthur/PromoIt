@@ -1,6 +1,7 @@
 using Moq;
 using PromoitTesting.TestClasses;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
@@ -46,7 +47,7 @@ namespace PromoitTesting
             bool result1 = await activistUser.RegisterAsync();
             Assert.True(result1, "User Should Register / Function Mast Be Activated!");
 
-            Users loggedInUser = await activistUser.LoginAsync();
+            IUsers loggedInUser = await activistUser.LoginAsync();
 
             bool result2 = loggedInUser != null;
             Assert.True(result2, "Login User Should Accepted / Function Mast Be Activated");

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
+using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
@@ -19,7 +20,7 @@ using Tweetinvi.Core.Models;
 
 namespace PromotItLibrary.Classes
 {
-    public class Tweet : ITweet, IActionsTweet, ILinkedListTweet
+    public class Tweet : ITweet
     {
         private static MySQL mySQL = Configuration.MySQL;
         private HTTPClient httpClient = Configuration.HTTPClient;
@@ -29,8 +30,8 @@ namespace PromotItLibrary.Classes
         private ActionsTweet actionsTweet;
 
         public string Id { get; set; }
-        public Campaign Campaign { get; set; }
-        public Users ActivistUser { get; set; }
+        public ICampaign Campaign { get; set; }
+        public IUsers ActivistUser { get; set; }
         public decimal Cash { get; set; }
         public int Retweets { get; set; }
         public bool IsApproved { get; set; }

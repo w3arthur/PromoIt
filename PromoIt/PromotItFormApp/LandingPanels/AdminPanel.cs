@@ -1,4 +1,5 @@
 ﻿using PromotItLibrary.Classes;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using System;
@@ -37,7 +38,7 @@ namespace PromotItFormApp.LandingPanels
         {
             try
             {
-                AdminUser adminUser = new AdminUser(Configuration.CorrentUser);
+                IAdminUser adminUser = new AdminUser(Configuration.CorrentUser);
                 DataTable tbl = await adminUser.GetAllCampaignsAdmin_DataTableAsync();
                 dgrdReportsData.DataSource = tbl;
 
@@ -47,7 +48,7 @@ namespace PromotItFormApp.LandingPanels
         {
             try
             {
-                AdminUser adminUser = new AdminUser(Configuration.CorrentUser);
+                IAdminUser adminUser = new AdminUser(Configuration.CorrentUser);
                 DataTable tbl = await adminUser.GetAllUsers_DataTableAsync();
                 dgrdReportsData.DataSource = tbl;
 

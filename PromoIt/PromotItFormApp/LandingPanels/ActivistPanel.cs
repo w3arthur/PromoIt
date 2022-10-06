@@ -2,6 +2,7 @@
 using PromotItFormApp.LandingPanels;
 using PromotItFormApp.LandingPanelsActions;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using System;
@@ -56,10 +57,10 @@ namespace PromotItFormApp.LandingPanels
 
         private async Task GetCashAmountAsync()
         {
-            ActivistUser activistUser = new ActivistUser(Configuration.CorrentUser);
+            IActivistUser activistUser = new ActivistUser(Configuration.CorrentUser);
             try
             {
-                ActivistUser result = (await activistUser.GetCashAmountAsync());
+                IActivistUser result = (await activistUser.GetCashAmountAsync());
                 if (result == null) throw new Exception($"Cant Receive Activist Cash report UserName ({activistUser.UserName})");
                 activistUser.Cash = result?.Cash;
                 txtCashBalanceCheck.Text = activistUser.Cash;

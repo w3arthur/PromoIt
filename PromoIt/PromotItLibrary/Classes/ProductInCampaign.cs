@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
@@ -18,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Classes
 {
-    public class ProductInCampaign : IProductInCampaign, IActionsProduct_ProductInCampaign, ILinkedListProduct_ProductInCampaign, IDataTabletProduct_ProductInCampaign
+    public class ProductInCampaign : IProductInCampaign
     {
         private static MySQL mySQL = Configuration.MySQL;
         private HTTPClient httpClient = Configuration.HTTPClient;
@@ -32,8 +33,8 @@ namespace PromotItLibrary.Classes
         public string Name { get; set; }
         public string Quantity { get; set; }
         public string Price { get; set; }
-        public Users BusinessUser { get; set; }
-        public Campaign Campaign { get; set; }
+        public IUsers BusinessUser { get; set; }
+        public ICampaign Campaign { get; set; }
 
         public ProductInCampaign()
         {

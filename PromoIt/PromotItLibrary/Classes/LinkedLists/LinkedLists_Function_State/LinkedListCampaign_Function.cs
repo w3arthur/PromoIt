@@ -1,5 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 using System;
@@ -16,21 +18,21 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State
 
         private static MySQL mySQL;
         private HTTPClient httpClient;
-        private Campaign _campaign;
+        private ICampaign _campaign;
 
-        public LinkedListCampaign_Function(Campaign campaign, MySQL _mySQL, HTTPClient _httpClient) 
+        public LinkedListCampaign_Function(ICampaign campaign, MySQL _mySQL, HTTPClient _httpClient) 
         {
             _campaign = campaign;
             mySQL = _mySQL;
             httpClient = _httpClient;
         }
 
-        public async Task<List<Campaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
+        public async Task<List<ICampaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignFunctions, _campaign, "GetAllCampaignsNonProfit");
         }
 
-        public async Task<List<Campaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null)
+        public async Task<List<ICampaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignFunctions, _campaign, "GetAllCampaigns");
         }

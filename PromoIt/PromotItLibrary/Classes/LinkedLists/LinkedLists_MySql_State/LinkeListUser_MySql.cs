@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 using System;
@@ -29,11 +31,11 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
         }
 
 
-        public async Task<List<Users>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
+        public async Task<List<IUsers>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
         {
             mySQL.Quary("SELECT name,user_name,user_type FROM users");
             using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();
-            List<Users> userList = new List<Users>();
+            List<IUsers> userList = new List<IUsers>();
             while (results != null && results.Read()) //for 1 result: if (mdr.Read())
             {
                 try

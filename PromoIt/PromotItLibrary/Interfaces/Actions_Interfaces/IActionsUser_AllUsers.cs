@@ -1,5 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -9,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
 {
-    interface IActionsUser_AllUsers
+    public interface IActionsUser_AllUsers
     {
-        Task<Users> LoginAsync(Modes mode = null);
+        Task<IUsers> LoginAsync(Modes mode = null);
         Task<bool> RegisterAsync(Modes mode = null);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
 using PromotItLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces
 {
-    interface ILinkedListProduct_ProductDonated
+    public interface ILinkedListProduct_ProductDonated
     {
         Task<List<ProductDonated>> MySQL_GetDonatedProductForShipping_ListAsync(Modes mode = null);
     }

@@ -1,5 +1,7 @@
 ﻿using ConnectionKeys;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 using System.Threading.Tasks;
 using Tweetinvi;
 
@@ -9,7 +11,9 @@ namespace PromotItLibrary.Models
     public class Configuration
     {
         /*TODO*/
-        // set state pattern foir configureations for 
+        // Fix Enums
+        // refactore
+        // set state pattern for configureations for 
         // why there is static on mySQL ?
         // check if can change linkedlist to array
         /*set web assembly*/
@@ -53,10 +57,10 @@ namespace PromotItLibrary.Models
         /// <summary>
         /// Public Sources
         /// </summary>
-        public static Users CorrentUser { get; set; }
-        public static Users LoginUser { get; set; }
-        public static Campaign CorrentCampaign { get; set; }
-        public static ProductInCampaign CorrentProduct { get; set; }
+        public static IUsers CorrentUser { get; set; }
+        public static IUsers LoginUser { get; set; }
+        public static ICampaign CorrentCampaign { get; set; }
+        public static IProductInCampaign CorrentProduct { get; set; }
         public static MySQL MySQL { get { MySQLStart(); return _mySQL; } set { _mySQL = value; } }
         public static HTTPClient HTTPClient { get { HTTPClientStart(); return _httpClient; } set { _httpClient = value; } }
         public static string Message { get; set; }

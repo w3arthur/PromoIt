@@ -1,5 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using System;
@@ -54,7 +56,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Fuction_State
             httpClient = _httpClient;
         }
 
-        public async Task<Users> LoginAsync(Modes mode = null)
+        public async Task<IUsers> LoginAsync(Modes mode = null)
         {
             return await httpClient.PostSingleDataRequest(Configuration.SetUserFunctions, _user, "Login");
         }
@@ -81,7 +83,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Fuction_State
         }
 
 
-        public async Task<ActivistUser> GetCashAmountAsync(Modes mode = null)
+        public async Task<IActivistUser> GetCashAmountAsync(Modes mode = null)
         {
             return await httpClient.GetSingleDataRequest(Configuration.PromoitProductFunctions, _activistUser, "GetCashAmount");
         }

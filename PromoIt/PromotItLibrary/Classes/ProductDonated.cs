@@ -14,10 +14,11 @@ using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
 using PromotItLibrary.Interfaces;
+using PromotItLibrary.Enums;
 
 namespace PromotItLibrary.Classes
 {
-    public class ProductDonated : IProductDonated, IActionsProduct_ProductDonated, ILinkedListProduct_ProductDonated, IDataTabletProduct_ProductDonated
+    public class ProductDonated : IProductDonated
     {
         private static MySQL mySQL = Configuration.MySQL;
         private HTTPClient httpClient = Configuration.HTTPClient;
@@ -26,8 +27,8 @@ namespace PromotItLibrary.Classes
         private LinkedListProduct linkedListProduct;
         private DataTabletProduct dataTabletProduct;
 
-        public ProductInCampaign ProductInCampaign { get; set; }
-        public Users ActivistUser { get; set; }
+        public IProductInCampaign ProductInCampaign { get; set; }
+        public IUsers ActivistUser { get; set; }
         public string Quantity { get; set; }
         public string Shipped { get; set; }
         public string Id { get; set; }

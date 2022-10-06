@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Interfaces.Variables_Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using PromotItLibrary.Patterns.Actions;
@@ -16,11 +17,8 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Interfaces
 {
-    interface ICampaign
+    public interface ICampaign : ICampaign_Variables, IActionsCampaign, ILinkedListCampaign
     {
-        string Name { get; set; }
-        string Hashtag { get; set; }
-        string Url { get; set; }
-        Users NonProfitUser { get; set; }
+
     }
 }

@@ -16,6 +16,8 @@ using System.Threading.Tasks;
 using PromotItLibrary.Patterns.LinkedLists.Queue_State;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State;
 using PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 
 namespace PromotItLibrary.Patterns.LinkedLists
 {
@@ -45,12 +47,12 @@ namespace PromotItLibrary.Patterns.LinkedLists
             return linkedListCampaign;
         }
 
-        public async Task<List<Campaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
+        public async Task<List<ICampaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
         {
             return await LinkedListMode(mode).MySql_GetAllCampaignsNonProfit_ListAsync();
         }
 
-        public async Task<List<Campaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null)
+        public async Task<List<ICampaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null)
         {
             return await LinkedListMode(mode).MySQL_GetAllCampaigns_ListAsync();
         }

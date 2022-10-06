@@ -12,7 +12,7 @@ namespace PromotItLibrary.Patterns.DataTables.DataTables_Interfaces
 {
     interface IDataTableCampaign
     {
-        Task<DataTable> GetAllCampaignsNonProfit_DataTableAsync();
-        Task<DataTable> GetAllCampaigns_DataTableAsync();
+        public Task<DataTable> GetAllCampaignsNonProfit_DataTableAsync();
+        public Task<DataTable> GetAllCampaigns_DataTableAsync();
     }
 }

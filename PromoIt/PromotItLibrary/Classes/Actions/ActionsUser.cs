@@ -1,5 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
@@ -67,7 +69,7 @@ namespace PromotItLibrary.Patterns.Actions
             return actionsUser;
         }
 
-        public async Task<Users> LoginAsync(Modes mode = null)
+        public async Task<IUsers> LoginAsync(Modes mode = null)
         {
             return await ActionMode(mode, _user).LoginAsync();
         }
@@ -94,7 +96,7 @@ namespace PromotItLibrary.Patterns.Actions
         }
 
 
-        public async Task<ActivistUser> GetCashAmountAsync(Modes mode = null)
+        public async Task<IActivistUser> GetCashAmountAsync(Modes mode = null)
         {
             if (_activistUser == null) return null;
             return await ActionMode(mode, _activistUser).GetCashAmountAsync();

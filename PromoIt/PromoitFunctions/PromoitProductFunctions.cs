@@ -13,6 +13,8 @@ using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
 using System.Threading;
 using PromotItLibrary.Patterns;
+using PromotItLibrary.Enums;
+using PromotItLibrary.Interfaces;
 
 namespace PromoitFunction
 {
@@ -64,7 +66,7 @@ namespace PromoitFunction
                         else if (type == "GetCashAmount")
                         {
                             className = "Activist Get Cash Amount";
-                            ActivistUser activistUser = HTTPClient.JsonStringToSingleObject<ActivistUser>(data);
+                            IActivistUser activistUser = HTTPClient.JsonStringToSingleObject<ActivistUser>(data);
                             if (activistUser == null) throw new Exception($"GET: No {className} Found In Databae!");
                             activistUser = await activistUser.GetCashAmountAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");

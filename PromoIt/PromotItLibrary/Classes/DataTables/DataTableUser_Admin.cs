@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.LinkedLists.DataTables_Interfaces;
 using System;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists
 {
-    public class DataTableUser : IDataTableUser
+    public class DataTableUser_Admin : IDataTableUser_Admin
     {
 
         private AdminUser _adminUser;
 
 
-        public DataTableUser(AdminUser adminUser) 
+        public DataTableUser_Admin(AdminUser adminUser) 
         {
             _adminUser = adminUser;
         }
@@ -27,7 +28,7 @@ namespace PromotItLibrary.Patterns.LinkedLists
             if (_adminUser == null) return null;
 
             DataTable dataTable = new DataTable();
-            List<Users> userList = await _adminUser.MySQL_GetAllUsers_ListAsync();
+            List<IUsers> userList = await _adminUser.MySQL_GetAllUsers_ListAsync();
             foreach (string culmn in new[] { "Name", "UserName", "Type" })
                 dataTable.Columns.Add(culmn);
 
@@ -59,7 +60,7 @@ namespace PromotItLibrary.Patterns.LinkedLists
             if (_adminUser == null) return null;
 
             DataTable dataTable = new DataTable();
-            List<Campaign> campaignsList = await (new Campaign()).MySQL_GetAllCampaigns_ListAsync();       //From Campaign Class
+            List<ICampaign> campaignsList = await (new Campaign()).MySQL_GetAllCampaigns_ListAsync();       //From Campaign Class
             foreach (string culmn in new[] { "Hashtag", "Webpage", "Creator" }) dataTable.Columns.Add(culmn);
 
             if (campaignsList == null)

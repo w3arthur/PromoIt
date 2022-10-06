@@ -83,6 +83,8 @@ namespace PromotItLibrary.Models
             return mycontent;
         }
         //Get
+
+
         public async Task<List<T>> GetMultipleDataRequest<T>(string getUrl, T obj, string type = "")
         {
             string objString = ObjectToJsonString(obj);
