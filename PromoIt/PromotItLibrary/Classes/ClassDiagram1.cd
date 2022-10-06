@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PromotItLibrary.Classes.ActivistUser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAACAAAAAAAAAAQAAAAAAAAAACACAAAAAAAAQ=</HashCode>
+      <FileName>Classes\ActivistUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PromotItLibrary.Classes.AdminUser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIBAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\AdminUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PromotItLibrary.Classes.BusinessUser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\BusinessUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PromotItLibrary.Classes.Campaign" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAEYAABAAIQAAEAAAAgACAgGAAACCAA=</HashCode>
+      <FileName>Classes\Campaign.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PromotItLibrary.Classes.NonProfitUser" Collapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\NonProfitUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PromotItLibrary.Classes.ProductDonated" BaseTypeListCollapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAABAAAgAgEAAQAAAAQAIAAAAggIAQAgAACAAA=</HashCode>
+      <FileName>Classes\ProductDonated.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Classes.ProductInCampaign" BaseTypeListCollapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACAAABAQAAAAAEAAAAAAQAAIEAAEwAAAQAgAACAAA=</HashCode>
+      <FileName>Classes\ProductInCampaign.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Classes.Tweet" BaseTypeListCollapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIKAAQABAAAABAAAAAAAgAAAAGAAAgCAAAAAAACBAA=</HashCode>
+      <FileName>Classes\Tweet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Classes.Users" Collapsed="true">
+    <Position X="12.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ggAAAAAAAAAAAAAAAAAAAAQAAQAACAggAwAAAAIDAAA=</HashCode>
+      <FileName>Classes\Users.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_Fuction_State.ActionsCampaign_Function" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAgBAAAAAAAAAAAgAAAACAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_Function_State\ActionsCampaign_Function.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_Fuction_State.ActionsProduct_Function" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAACAACAAAAAAAAAACAAAQAAAAAAgAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_Function_State\ActionsProduct_Function.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_Fuction_State.ActionsTweet_Function" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAAAAAAAAAAAAAAAAAgAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_Function_State\ActionsTweet_Function.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_Fuction_State.ActionsUser_Function" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAACEAAAAAAAAACAAAAAAIggQCAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_Function_State\ActionsUser_Function.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_MySql_State.ActionsCampaign_MySql" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAgBAAAAAAAAAAAgAAAACAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_MySql_State\ActionsCampaign_MySql.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_MySql_State.ActionsProduct_MySql" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAACAACAAAAAAAAAACAAAQAAAAAAgAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_MySql_State\ActionsProduct_MySql.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_MySql_State.ActionsTweet_MySql" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAAAAAAAAAAAAAAAAAgAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_MySql_State\ActionsTweet_MySql.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_MySql_State.ActionsUser_MySql" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAACEAAAAAAAAACAAAAAAIggQCAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_MySql_State\ActionsUser_MySql.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_Queue_State.ActionsCampaign_Queue" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAgBAAAAAAAAAAAgAAAACAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_Queue_State\ActionsCampaign_Queue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_Queue_State.ActionsProduct_Queue" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAACAACAAAAAAAAAACAAAQAAAAAAgAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_Queue_State\ActionsProduct_Queue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_Queue_State.ActionsTweet_Queue" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAAAAAAAAAAAAAAAAAgAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_Queue_State\ActionsTweet_Queue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.Actions_Queue_State.ActionsUser_Queue" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAACEAAAAAAAAACAAAAAAIggQCAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\Actions_Queue_State\ActionsUser_Queue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.ActionsCampaign" BaseTypeListCollapsed="true">
+    <Position X="22" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAABAAAAAAAAAAAgAAAgCAAACAAA=</HashCode>
+      <FileName>Classes\Actions\ActionsCampaign.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.ActionsProduct" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAACAACCAAAAAAAAACAAAQAIAAAAggAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\ActionsProduct.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.ActionsTweet" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIIAAAAACAAAAAAAAAAAAAAAAAAAAgAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\ActionsTweet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.ActionsUser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAACACEAAAAAAAAACAAAAAAIggQiAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\ActionsUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

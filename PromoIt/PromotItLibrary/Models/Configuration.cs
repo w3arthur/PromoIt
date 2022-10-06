@@ -11,8 +11,10 @@ namespace PromotItLibrary.Models
     public class Configuration
     {
         /*TODO*/
+        // Fix Key Organization
         // Fix Enums
         // refactore
+        // improve interface implamentation
         // set state pattern for configureations for 
         // why there is static on mySQL ?
         // check if can change linkedlist to array
