@@ -9,6 +9,7 @@ namespace PromotItLibrary.Models
     public class Configuration
     {
         /*TODO*/
+        // set state pattern foir configureations for 
         // why there is static on mySQL ?
         // check if can change linkedlist to array
         /*set web assembly*/
@@ -16,13 +17,12 @@ namespace PromotItLibrary.Models
         /*add IDisposible to each class, like MySQL, and using for each applying in programming*/
         /*Fix MySQL (Multi) Request, For Async Method*/
         /*fix close mysql after each call*/
-        /*Fix Modes for all Classes if(s) use (Strategy) or (State Pattern)*/
         /*Add Read From File Development*/
         /*Add user Token For any working*/
         /*Add Transaction to each procedure*/
         /*Set Transactions*/
         /*Set CosmosDB*/
-        /*Close connection*/
+        /*Close connection for mysql after each action*/
         /*Check Alon Version*/
         /*Cosmos /MongoDB*/
         /*Fix Exeption on register by check if it still count, make Exeption OOP*/
