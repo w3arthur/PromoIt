@@ -8,7 +8,6 @@ using System.Net.Http;
 using System.Web;
 
 using System.Threading;
-using PromotItLibrary.Classes;
 
 namespace PromotItLibrary.Models
 {

@@ -73,18 +73,13 @@ namespace PromotItLibrary.Models
                 int? outPut = Cmd?.ExecuteNonQuery();
                 if (outPut == null && outPut <= 0)
                 {
-                    if (IsTries()) return QuaryExecute();
-                    TriesReset();
-                    NullifiedValues();
-                    return false;
+                    if (!IsTries()) return false;
+                    return QuaryExecute();
                 }
-                TriesReset();
-                NullifiedValues();
                 return true;
             }
             catch { }
-            TriesReset();
-            NullifiedValues();
+            finally { TriesReset(); NullifiedValues(); }
             return false;
         }
         public async Task<bool> QuaryExecuteAsync()  // inserts
@@ -98,18 +93,13 @@ namespace PromotItLibrary.Models
                 int? outPut = await Cmd?.ExecuteNonQueryAsync();
                 if (outPut == null && outPut <= 0)
                 {
-                    if ( IsTries() )  return await QuaryExecuteAsync();
-                    TriesReset();
-                    NullifiedValues();
-                    return false;
+                    if (!IsTries()) return false;
+                    return await QuaryExecuteAsync();
                 }
-                TriesReset();
-                NullifiedValues();
                 return true;
             }
             catch { }
-            TriesReset();
-            NullifiedValues();
+            finally { TriesReset(); NullifiedValues(); }
             return false;
         }
 
@@ -117,78 +107,62 @@ namespace PromotItLibrary.Models
         {
             try
             {
-                if (IsTries())
-                {
-                    using MySqlDataReader rdr = Rdr;
-                    Rdr =  Cmd?.ExecuteReader();
-                    if (Rdr == null)
-                        return  GetQueryMultyResults();
-                    TriesReset();
-                    NullifiedValues();
-                    return Rdr;
-                }
+                if (!IsTries()) return null;
+                using MySqlDataReader rdr = Rdr;
+                Rdr =  Cmd?.ExecuteReader();
+                if (Rdr == null)
+                    return  GetQueryMultyResults();
+                TriesReset();
+                NullifiedValues();
+                return Rdr;
             }
             catch { return GetQueryMultyResults(); }
-            TriesReset();
-            return null;
+            finally { TriesReset(); }
         }
         public async Task<MySqlDataReader> GetQueryMultyResultsAsync() // selects
         {
             try
             {
-                if (IsTries())
-                {
-                    using MySqlDataReader rdr = Rdr;
-                    Rdr = (MySqlDataReader)await Cmd?.ExecuteReaderAsync();
-                    if (Rdr == null)
-                        return await GetQueryMultyResultsAsync();
-                    TriesReset();
-                    NullifiedValues();
-                    return Rdr;
-                }
+                if (!IsTries()) return null;
+                using MySqlDataReader rdr = Rdr;
+                Rdr = (MySqlDataReader)await Cmd?.ExecuteReaderAsync();
+                if (Rdr == null) return await GetQueryMultyResultsAsync();
+                NullifiedValues();
+                return Rdr;
             }
             catch { return await GetQueryMultyResultsAsync(); }
-            TriesReset();
-            return null;
+            finally { TriesReset(); }
         }
 
         public MySqlDataAdapter QuaryDataAdapter()
         {
             try
             {
-                if (IsTries())
-                {
-                    using MySqlDataAdapter dar = Dar;
-                    Dar = new MySqlDataAdapter(Cmd);
-                    if (Dar == null)
-                        return  QuaryDataAdapter();
-                    TriesReset();
-                    NullifiedValues();
-                    return dar;
-                }
+                if (!IsTries()) return null;
+                using MySqlDataAdapter dar = Dar;
+                Dar = new MySqlDataAdapter(Cmd);
+                if (Dar == null)
+                    return  QuaryDataAdapter();
+                NullifiedValues();
+                return dar;
             }
             catch { return  QuaryDataAdapter(); }
-            TriesReset();
-            return null;
+            finally { TriesReset(); }
         }
         public async Task<MySqlDataAdapter> QuaryDataAdapterAsync()
         {
             try
             {
-                if (IsTries())
-                {
-                    using MySqlDataAdapter dar = Dar;
-                    Dar = new MySqlDataAdapter(Cmd);
-                    if (Dar == null)
-                        return await QuaryDataAdapterAsync();
-                    TriesReset();
-                    NullifiedValues();
-                    return dar;
-                }
+                if (!IsTries()) return null;
+                using MySqlDataAdapter dar = Dar;
+                Dar = new MySqlDataAdapter(Cmd);
+                if (Dar == null)
+                    return await QuaryDataAdapterAsync();
+                NullifiedValues();
+                return dar;
             }
             catch { return await QuaryDataAdapterAsync(); }
-            TriesReset();
-            return null;
+            finally { TriesReset(); }
         }
 
         public string QuaryScalarExecuteAsync() { if (Stm == null) return "NoQuery"; string output = Cmd?.ExecuteScalar().ToString(); NullifiedValues(); return output; } //1 value data as string
