@@ -1,9 +1,9 @@
 ﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns.Actions.Fuction_State;
-using PromotItLibrary.Patterns.Actions.Interfaces;
-using PromotItLibrary.Patterns.Actions.MySql_State;
-using PromotItLibrary.Patterns.Actions.Queue_State;
+using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
+using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
+using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
+using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +26,7 @@ namespace PromotItLibrary.Patterns.Actions
             httpClient = _httpClient;
         }
 
-        private IActionsCampaign AtionMode(Modes _mode) 
+        private IActionsCampaign ActionMode(Modes _mode) 
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
                 actionsCampaign = new ActionsCampaign_Queue(_campaign, mySQL, httpClient);
@@ -40,12 +40,12 @@ namespace PromotItLibrary.Patterns.Actions
 
         public async Task<bool> SetNewCampaignAsync(Modes mode = null)
         {
-            return await AtionMode(mode).SetNewCampaignAsync();
+            return await ActionMode(mode).SetNewCampaignAsync();
         }
 
         public async Task<bool> DeleteCampaignAsync(Modes mode = null)
         {
-            return await AtionMode(mode).DeleteCampaignAsync();
+            return await ActionMode(mode).DeleteCampaignAsync();
         }
 
 

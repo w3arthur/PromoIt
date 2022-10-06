@@ -1,14 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns.Actions.Interfaces;
+using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PromotItLibrary.Patterns.Actions.MySql_State
+namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
 {
     public class ActionsUser_MySql : IActionsUser
     {

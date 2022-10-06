@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PromotItLibrary.Patterns.Actions.Interfaces
+namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
 {
     interface IActionsProduct
     {

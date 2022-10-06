@@ -1,9 +1,9 @@
 ﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns.Actions.Fuction_State;
-using PromotItLibrary.Patterns.Actions.Interfaces;
-using PromotItLibrary.Patterns.Actions.MySql_State;
-using PromotItLibrary.Patterns.Actions.Queue_State;
+using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
+using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
+using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
+using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace PromotItLibrary.Patterns.Actions
             _productInCampaign = productInCampaign;
         }
 
-        private IActionsProduct AtionMode(Modes _mode)
+        private IActionsProduct ActionMode(Modes _mode)
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
                 actionsProduct = new ActionsProduct_Queue(_productDonated, _productInCampaign, mySQL, httpClient);
@@ -62,19 +62,19 @@ namespace PromotItLibrary.Patterns.Actions
         public async Task<bool> SetBuyAnItemAsync(Modes mode = null)
         {
             if (_productDonated == null) return false;
-            return await AtionMode(mode).SetBuyAnItemAsync();
+            return await ActionMode(mode).SetBuyAnItemAsync();
         }
 
         public async Task<bool> SetProductShippingAsync(Modes mode = null)
         {
             if (_productDonated == null) return false;
-            return await AtionMode(mode).SetProductShippingAsync();
+            return await ActionMode(mode).SetProductShippingAsync();
         }
 
         public async Task<bool> SetNewProductAsync(Modes mode = null)
         {
             if (_productInCampaign == null) return false;
-            return await AtionMode(mode).SetNewProductAsync();
+            return await ActionMode(mode).SetNewProductAsync();
         }
 
 

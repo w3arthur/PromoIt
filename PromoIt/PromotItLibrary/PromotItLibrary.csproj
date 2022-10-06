@@ -19,6 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Classes\DataTables\Function_State\" />
+    <Folder Include="Classes\DataTables\Interfaces\" />
+    <Folder Include="Classes\DataTables\MySql_State\" />
+    <Folder Include="Classes\DataTables\Queue_State\" />
     <Folder Include="Interfaces\DataTables\" />
   </ItemGroup>
 

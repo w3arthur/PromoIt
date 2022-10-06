@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PromotItLibrary.Patterns.Actions.Interfaces
+namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
 {
-    interface IActionsTweet
+    interface IActionsCampaign
     {
-        Task<bool> SetTweetCashAsync();
+        Task<bool> SetNewCampaignAsync();
+        Task<bool> DeleteCampaignAsync();
     }
 }

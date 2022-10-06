@@ -2,6 +2,10 @@
 using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
+using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State;
+using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
+using PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State;
+using PromotItLibrary.Patterns.LinkedLists.Queue_State;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,9 +20,8 @@ namespace PromotItLibrary.Patterns.LinkedLists
 
         private static MySQL mySQL;
         private HTTPClient httpClient;
-
         private AdminUser _adminUser;
-
+        ILinkeListUser linkeListUser;
 
         public LinkeListUser(AdminUser adminUser, MySQL _mySQL, HTTPClient _httpClient) 
         {
@@ -26,45 +29,21 @@ namespace PromotItLibrary.Patterns.LinkedLists
             mySQL= _mySQL;
             httpClient = _httpClient;
         }
-
+        private ILinkeListUser LinkedListMode(Modes _mode)  //only for admin
+        {
+            if ((_mode ?? Configuration.Mode) == Modes.Queue)
+                linkeListUser = new LinkeListUser_Queue(_adminUser, mySQL, httpClient);
+            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
+                linkeListUser = new LinkeListUser_Function(_adminUser, mySQL, httpClient);
+            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                linkeListUser = new LinkeListUser_MySql(_adminUser, mySQL, httpClient);
+            return linkeListUser;
+        }
 
         public async Task<List<Users>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
         {
             if (_adminUser == null) return null;
-
-            try
-            {   //Queue and Functions
-                if ((mode ?? Configuration.Mode) == Modes.Queue)
-                    return await httpClient.GetMultipleDataRequest(Configuration.SetUserQueue, new Users(), "GetAllUsers");
-                if ((mode ?? Configuration.Mode) == Modes.Functions)
-                    return await httpClient.GetMultipleDataRequest(Configuration.SetUserFunctions, new Users(), "GetAllUsers");
-            }
-            catch { return null; }
-
-            if ((mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-            {
-                mySQL.Quary("SELECT name,user_name,user_type FROM users");
-                using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();
-                List<Users> userList = new List<Users>();
-                while (results != null && results.Read()) //for 1 result: if (mdr.Read())
-                {
-                    try
-                    {
-                        userList.Add
-                            (
-                                new Users()
-                                {
-                                    Name = results.GetString("name"),
-                                    UserName = results.GetString("user_name"),
-                                    UserType = results.GetString("user_type"),
-                                }
-                            );
-                    }
-                    catch { };
-                }
-                return userList;
-            }
-            return null;
+            return await LinkedListMode(mode).MySQL_GetAllUsers_ListAsync();
         }
 
     }

@@ -1,9 +1,9 @@
 ﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns.Actions.Fuction_State;
-using PromotItLibrary.Patterns.Actions.Interfaces;
-using PromotItLibrary.Patterns.Actions.MySql_State;
-using PromotItLibrary.Patterns.Actions.Queue_State;
+using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
+using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
+using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
+using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace PromotItLibrary.Patterns.Actions
             httpClient = _httpClient;
             _tweet = tweet;
         }
-        private IActionsTweet AtionMode(Modes _mode)
+        private IActionsTweet ActionMode(Modes _mode)
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
                 actionsTweet = new ActionsTweet_Queue(_tweet, mySQL, httpClient);
@@ -38,7 +38,7 @@ namespace PromotItLibrary.Patterns.Actions
 
         public async Task<bool> SetTweetCashAsync(Modes mode = null)
         {
-            return await AtionMode(mode).SetTweetCashAsync();
+            return await ActionMode(mode).SetTweetCashAsync();
         }
     }
 }

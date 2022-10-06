@@ -1,10 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns.Actions.Fuction_State;
-using PromotItLibrary.Patterns.Actions.Interfaces;
-using PromotItLibrary.Patterns.Actions.MySql_State;
-using PromotItLibrary.Patterns.Actions.Queue_State;
+using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
+using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
+using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
+using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +56,7 @@ namespace PromotItLibrary.Patterns.Actions
             httpClient = _httpClient;
         }
 
-        private IActionsUser AtionMode(Modes _mode, dynamic @user)
+        private IActionsUser ActionMode(Modes _mode, dynamic @user)
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
                 actionsUser = new ActionsUser_Queue(@user, mySQL, httpClient);
@@ -69,26 +69,26 @@ namespace PromotItLibrary.Patterns.Actions
 
         public async Task<Users> LoginAsync(Modes mode = null)
         {
-            return await AtionMode(mode, _user).LoginAsync();
+            return await ActionMode(mode, _user).LoginAsync();
         }
 
         public async Task<bool> RegisterAsync(Modes mode = null)
         {
             if (_activistUser != null)
             {
-                return await AtionMode(mode, _activistUser).RegisterAsync();
+                return await ActionMode(mode, _activistUser).RegisterAsync();
             }
             else if (_adminUser != null)
             {
-                return await AtionMode(mode, _adminUser).RegisterAsync();
+                return await ActionMode(mode, _adminUser).RegisterAsync();
             }
             else if (_nonProfitUser != null)
             {
-                return await AtionMode(mode, _nonProfitUser).RegisterAsync();
+                return await ActionMode(mode, _nonProfitUser).RegisterAsync();
             }
             else if (_businessUser != null)
             {
-                return await AtionMode(mode, _businessUser).RegisterAsync();
+                return await ActionMode(mode, _businessUser).RegisterAsync();
             }
             return false;
         }
@@ -97,7 +97,7 @@ namespace PromotItLibrary.Patterns.Actions
         public async Task<ActivistUser> GetCashAmountAsync(Modes mode = null)
         {
             if (_activistUser == null) return null;
-            return await AtionMode(mode, _activistUser).GetCashAmountAsync();
+            return await ActionMode(mode, _activistUser).GetCashAmountAsync();
         }
 
     }
