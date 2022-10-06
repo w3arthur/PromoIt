@@ -16,7 +16,6 @@ namespace PromotItLibrary.Patterns.Actions
 
         private Modes _mode = null;
 
-
         public ActionsCampaign(Campaign campaign, MySQL _mySQL, HTTPClient _httpClient)
         {
             _campaign = campaign;

@@ -11,8 +11,8 @@ namespace PromotItLibrary.Classes
     public class BusinessUser : Users
     {
 
-        public BusinessUser() : base() { UserType = "business"; actionsUser = new ActionsUser(this, mySQL, httpClient); }
-        public BusinessUser(Users user) : base(user) { UserType = "business"; actionsUser = new ActionsUser(this, mySQL, httpClient); }
+        public BusinessUser() : base() { UserType = "business";  }
+        public BusinessUser(Users user) : base(user) { UserType = "business"; }
 
 
     }

@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PromotItLibrary.Classes.ActivistUser">
+    <Position X="9" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAACAAAAAAAAAAQAAAAAAAAAACACAAAAAAAAQ=</HashCode>
+      <FileName>Classes\ActivistUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.ActionsCampaign">
+    <Position X="14.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAgBAAAAAAAAAAAgAAAACAAACAAA=</HashCode>
+      <FileName>Classes\Actions\ActionsCampaign.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.ActionsProduct">
+    <Position X="12.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAACAACAAAAAAAAAACAAAQAAAAAAggAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\ActionsProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.ActionsTweet">
+    <Position X="16.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAAAAAAAAAAAAAAAAAgAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\ActionsTweet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.Actions.ActionsUser">
+    <Position X="18" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAACEAAAAAAAAACAAAAAAIggQCAAAAACAAA=</HashCode>
+      <FileName>Classes\Actions\ActionsUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.DataTables.DataTableCampaign">
+    <Position X="12.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Classes\DataTables\DataTableCampaign.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.DataTables.DataTabletProduct">
+    <Position X="14.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAgAAAAAACAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\DataTables\DataTabletProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.DataTables.DataTableTweet">
+    <Position X="16.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\DataTables\DataTableTweet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.LinkedLists.DataTableUser">
+    <Position X="18" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAABAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Classes\DataTables\DataTableUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.LinkedLists.LinkedListCampaign">
+    <Position X="14.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAIAAAAAIAAAAAAAAgAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\LinkedLists\LinkedListCampaign.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.LinkedLists.LinkedListProduct">
+    <Position X="12.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABCAAAAAAAAAACAAAAAAAAAAgAIAAAAAACAAA=</HashCode>
+      <FileName>Classes\LinkedLists\LinkedListProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.LinkedLists.LinkedListTweet">
+    <Position X="16.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAgAAAAAAAAgAAAAAAAACAAA=</HashCode>
+      <FileName>Classes\LinkedLists\LinkedListTweet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Patterns.LinkedLists.LinkeListUser">
+    <Position X="18" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAgAQAAAAAACAAA=</HashCode>
+      <FileName>Classes\LinkedLists\LinkeListUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Classes.AdminUser">
+    <Position X="11" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIBAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\AdminUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Classes.BusinessUser">
+    <Position X="9" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\BusinessUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Classes.Campaign">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAEYAABAAIQAAEAAAAgACAgGAAACCAA=</HashCode>
+      <FileName>Classes\Campaign.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Classes.Modes">
+    <Position X="21" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAIAAJAQABAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Classes\Modes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Classes.NonProfitUser">
+    <Position X="11" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\NonProfitUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Classes.ProductDonated">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAABAAAgAgEAAQAAAAQAIAAAAggIAQAgAACAAA=</HashCode>
+      <FileName>Classes\ProductDonated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Classes.ProductInCampaign">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACAAABAQAAAAAEAAAAAAQAAIEAAEwAAAQAgAACAAA=</HashCode>
+      <FileName>Classes\ProductInCampaign.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Classes.Tweet">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIKAAQABAAAABAAAAAAAgAAAAGAAAgCAAAAAAACBAA=</HashCode>
+      <FileName>Classes\Tweet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PromotItLibrary.Classes.Users">
+    <Position X="10" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ggAAAAAAAAAAAAAAAAAAAAQAAQAACAggAwAAAAIDAAA=</HashCode>
+      <FileName>Classes\Users.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="PromotItLibrary.Patterns.State.Database" Collapsed="true">
+    <Position X="21" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\State\Database.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PromotItLibrary.Patterns.State.Mode1" Collapsed="true">
+    <Position X="21" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\State\Mode1.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
