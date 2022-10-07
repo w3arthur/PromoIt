@@ -1,6 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
-using PromotItLibrary.Interfaces.Variables_Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using PromotItLibrary.Patterns.Actions;
@@ -19,9 +18,14 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Interfaces
 {
-    public interface IProductInCampaign : IProductInCampaign_Variables, IActionsProduct_ProductInCampaign, ILinkedListProduct_ProductInCampaign, IDataTabletProduct_ProductInCampaign
+    public interface IProductInCampaign
     {
-
+        string Id { get; set; }
+        string Name { get; set; }
+        string Quantity { get; set; }
+        string Price { get; set; }
+        IUsers BusinessUser { get; set; }
+        ICampaign Campaign { get; set; }
     }
 
 }

@@ -62,7 +62,7 @@ namespace PromotItFormApp.RegisterPanels
             {
                 if (txtUserName.Text == "" || txtPassword.Text == "")
                     throw new Exception("Please provide a username and password");
-                IUsers user = new Users()
+                Users user = new Users()
                 {
                     UserName = txtUserName.Text.Trim(),
                     UserPassword = txtPassword.Text.Trim(),

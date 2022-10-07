@@ -18,7 +18,7 @@ using PromotItLibrary.Enums;
 
 namespace PromotItLibrary.Classes
 {
-    public class ProductDonated : IProductDonated
+    public class ProductDonated : IProductDonated, IActionsProduct_ProductDonated, ILinkedListProduct_ProductDonated, IDataTabletProduct_ProductDonated
     {
         private static MySQL mySQL = Configuration.MySQL;
         private HTTPClient httpClient = Configuration.HTTPClient;

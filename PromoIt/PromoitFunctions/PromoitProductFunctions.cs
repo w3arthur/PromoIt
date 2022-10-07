@@ -62,15 +62,14 @@ namespace PromoitFunction
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(productInCampaignList));
                         }
 
-
                         else if (type == "GetCashAmount")
                         {
                             className = "Activist Get Cash Amount";
-                            IActivistUser activistUser = HTTPClient.JsonStringToSingleObject<ActivistUser>(data);
+                            ActivistUser activistUser = HTTPClient.JsonStringToSingleObject<ActivistUser>(data);
                             if (activistUser == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            activistUser = await activistUser.GetCashAmountAsync(FunctionOrDatabaseMode);
+                            IActivistUser activistUserData = await activistUser.GetCashAmountAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
-                            return new OkObjectResult(HTTPClient.ObjectToJsonString(activistUser));
+                            return new OkObjectResult(HTTPClient.ObjectToJsonString(activistUserData));
                         }
 
                     }

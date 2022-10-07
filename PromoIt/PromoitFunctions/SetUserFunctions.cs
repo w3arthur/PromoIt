@@ -66,7 +66,7 @@ namespace PromoitFunction
                     {
                         if (type == "Login")
                         {
-                            IUsers user = HTTPClient.JsonStringToSingleObject<Users>(data);
+                            Users user = HTTPClient.JsonStringToSingleObject<Users>(data);
                             if (user == null) throw new Exception($"POST: No {className} IS Enterd");
                             try
                             {

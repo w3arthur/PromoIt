@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Classes
 {
-    public class ProductInCampaign : IProductInCampaign
+    public class ProductInCampaign : IProductInCampaign, IActionsProduct_ProductInCampaign, ILinkedListProduct_ProductInCampaign, IDataTabletProduct_ProductInCampaign
     {
         private static MySQL mySQL = Configuration.MySQL;
         private HTTPClient httpClient = Configuration.HTTPClient;

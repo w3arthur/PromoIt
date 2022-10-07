@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Classes
 {
-    public class Campaign : ICampaign
+    public class Campaign : ICampaign, IActionsCampaign, ILinkedListCampaign
     {
         //Move to Interfaces
         private static MySQL mySQL = Configuration.MySQL;

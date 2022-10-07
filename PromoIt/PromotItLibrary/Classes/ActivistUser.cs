@@ -10,10 +10,11 @@ using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.Actions;
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
+using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 
 namespace PromotItLibrary.Classes
 {
-    public class ActivistUser : Users, IActivistUser
+    public class ActivistUser : Users, IActivistUser, IActionsUser_ActivistUser
     {
         public static string CashDefultSet { get; } = Configuration.ActivistCashDefultSet;
 

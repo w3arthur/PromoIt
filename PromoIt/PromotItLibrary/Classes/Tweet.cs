@@ -20,7 +20,7 @@ using Tweetinvi.Core.Models;
 
 namespace PromotItLibrary.Classes
 {
-    public class Tweet : ITweet
+    public class Tweet : ITweet, IActionsTweet, ILinkedListTweet
     {
         private static MySQL mySQL = Configuration.MySQL;
         private HTTPClient httpClient = Configuration.HTTPClient;

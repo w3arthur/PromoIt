@@ -38,7 +38,7 @@ namespace PromotItFormApp.LandingPanels
         {
             try
             {
-                IAdminUser adminUser = new AdminUser(Configuration.CorrentUser);
+                AdminUser adminUser = new AdminUser(Configuration.CorrentUser);
                 DataTable tbl = await adminUser.GetAllCampaignsAdmin_DataTableAsync();
                 dgrdReportsData.DataSource = tbl;
 
@@ -48,7 +48,7 @@ namespace PromotItFormApp.LandingPanels
         {
             try
             {
-                IAdminUser adminUser = new AdminUser(Configuration.CorrentUser);
+                AdminUser adminUser = new AdminUser(Configuration.CorrentUser);
                 DataTable tbl = await adminUser.GetAllUsers_DataTableAsync();
                 dgrdReportsData.DataSource = tbl;
 

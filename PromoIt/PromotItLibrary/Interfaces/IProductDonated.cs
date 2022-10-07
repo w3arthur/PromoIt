@@ -14,12 +14,15 @@ using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
 using PromotItLibrary.Classes;
-using PromotItLibrary.Interfaces.Variables_Interfaces;
 
 namespace PromotItLibrary.Interfaces
 {
-    public interface IProductDonated : IProductDonated_Variables, IActionsProduct_ProductDonated, ILinkedListProduct_ProductDonated, IDataTabletProduct_ProductDonated
+    public interface IProductDonated
     {
-
+        IProductInCampaign ProductInCampaign { get; set; }
+        IUsers ActivistUser { get; set; }
+        string Quantity { get; set; }
+        string Shipped { get; set; }
+        string Id { get; set; }
     }
 }

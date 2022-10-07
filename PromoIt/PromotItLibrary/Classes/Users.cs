@@ -15,7 +15,7 @@ using PromotItLibrary.Enums;
 
 namespace PromotItLibrary.Classes
 {
-    public class Users : IUsers
+    public class Users : IUsers, IActionsUser_AllUsers
     {
         protected static MySQL mySQL = Configuration.MySQL;
         protected HTTPClient httpClient = Configuration.HTTPClient;

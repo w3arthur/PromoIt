@@ -12,11 +12,12 @@ using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using PromotItLibrary.Patterns.Actions;
 using PromotItLibrary.Patterns.LinkedLists;
+using PromotItLibrary.Patterns.LinkedLists.DataTables_Interfaces;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 
 namespace PromotItLibrary.Classes
 {
-    public class AdminUser : Users, IAdminUser
+    public class AdminUser : Users, IAdminUser, ILinkeListUser_Admin, IDataTableUser_Admin
     {
         public AdminUser() : base() {
             UserType = "admin";

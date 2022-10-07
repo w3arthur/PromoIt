@@ -57,7 +57,7 @@ namespace PromotItFormApp.LandingPanels
 
         private async Task GetCashAmountAsync()
         {
-            IActivistUser activistUser = new ActivistUser(Configuration.CorrentUser);
+            ActivistUser activistUser = new ActivistUser(Configuration.CorrentUser);
             try
             {
                 IActivistUser result = (await activistUser.GetCashAmountAsync());
