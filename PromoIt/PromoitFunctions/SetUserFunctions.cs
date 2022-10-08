@@ -43,7 +43,7 @@ namespace PromoitFunction
                     if (type == "GetAllUsers")
                     {
                         className = "Get All Users List";
-                        List<IUsers> userList = await (new AdminUser()).MySQL_GetAllUsers_ListAsync(FunctionOrDatabaseMode);
+                        List<IUsers> userList = await (new AdminUser()).GetAllUsers_ListAsync(FunctionOrDatabaseMode);
                         log.LogInformation($"{azureFunctionString} Found {className}");
                         return new OkObjectResult(HTTPClient.ObjectToJsonString(userList));
                     }

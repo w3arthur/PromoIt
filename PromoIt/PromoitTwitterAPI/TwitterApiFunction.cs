@@ -29,7 +29,7 @@ namespace PromoitTwitterAPI
             // Please write sites without WWW and campaigns without #
             List<Tweet> tweetList = new List<Tweet>();
             Campaign campaign1 = new Campaign();
-            List<Campaign> campaignList = await campaign1.MySQL_GetAllCampaigns_ListAsync();    //MYSQL QUERY
+            List<Campaign> campaignList = await campaign1.GetAllCampaigns_ListAsync();    //MYSQL QUERY
             foreach (Campaign campaign in campaignList)    // Each Campaogn
             {
                     var searchIterator = twitterUserClient.SearchV2.GetSearchTweetsV2Iterator("#" + campaign.Hashtag);  //#

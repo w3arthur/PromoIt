@@ -47,14 +47,14 @@ namespace PromotItLibrary.Patterns.LinkedLists
             return linkedListCampaign;
         }
 
-        public async Task<List<ICampaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
+        public async Task<List<ICampaign>> GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
         {
-            return await LinkedListMode(mode).MySql_GetAllCampaignsNonProfit_ListAsync();
+            return await LinkedListMode(mode).GetAllCampaignsNonProfit_ListAsync();
         }
 
-        public async Task<List<ICampaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null)
+        public async Task<List<ICampaign>> GetAllCampaigns_ListAsync(Modes mode = null)
         {
-            return await LinkedListMode(mode).MySQL_GetAllCampaigns_ListAsync();
+            return await LinkedListMode(mode).GetAllCampaigns_ListAsync();
         }
 
     }

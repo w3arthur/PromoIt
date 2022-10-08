@@ -45,7 +45,7 @@ namespace PromoitFunction
                             className = "Get Campaign List for NonProfit";
                             Campaign campaign = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                             if (campaign == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<ICampaign> campaignList = await campaign.MySql_GetAllCampaignsNonProfit_ListAsync(FunctionOrDatabaseMode);
+                            List<ICampaign> campaignList = await campaign.GetAllCampaignsNonProfit_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(campaignList));
                         }
@@ -55,7 +55,7 @@ namespace PromoitFunction
                             className = "Get Campaign List";
                             Campaign campaign = HTTPClient.JsonStringToSingleObject<Campaign>(data);
                             if (campaign == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<ICampaign> campaignList = await campaign.MySQL_GetAllCampaigns_ListAsync(FunctionOrDatabaseMode);
+                            List<ICampaign> campaignList = await campaign.GetAllCampaigns_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(campaignList));
                         }

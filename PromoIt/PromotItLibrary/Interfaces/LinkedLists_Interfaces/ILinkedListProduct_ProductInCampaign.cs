@@ -13,6 +13,6 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedL
 {
     public interface ILinkedListProduct_ProductInCampaign
     {
-        Task<List<ProductInCampaign>> MySQL_GetProductList_ListAsync(Modes mode = null);
+        Task<List<ProductInCampaign>> GetProductList_ListAsync(Modes mode = null);
     }
 }

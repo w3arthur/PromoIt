@@ -28,7 +28,7 @@ namespace PromotItLibrary.Patterns.DataTables
             if (_productDonated == null) return null;
 
             DataTable dataTable = new DataTable();
-            List<ProductDonated> productDonatedList = await _productDonated.MySQL_GetDonatedProductForShipping_ListAsync();
+            List<ProductDonated> productDonatedList = await _productDonated.GetDonatedProductForShipping_ListAsync();
             foreach (string culmn in new[] { "clmnActivist", "clmnProduct", "clmnProductDonatedId" })
                 dataTable.Columns.Add(culmn);
 
@@ -59,7 +59,7 @@ namespace PromotItLibrary.Patterns.DataTables
             if (_productInCampaign == null) return null;
 
             DataTable dataTable = new DataTable();
-            List<ProductInCampaign> productInCampaignList = await _productInCampaign.MySQL_GetProductList_ListAsync();
+            List<ProductInCampaign> productInCampaignList = await _productInCampaign.GetProductList_ListAsync();
             foreach (string culmn in new[] { "clmnProductId", "clmnBusinessUser", "clmnProductName", "clmnProductQuantity", "clmnProductPrice" })
                 dataTable.Columns.Add(culmn);
             if (productInCampaignList == null)

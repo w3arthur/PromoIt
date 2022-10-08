@@ -15,6 +15,6 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedL
 {
     public interface ILinkeListUser_Admin
     {
-         Task<List<IUsers>> MySQL_GetAllUsers_ListAsync(Modes mode = null);
+         Task<List<IUsers>> GetAllUsers_ListAsync(Modes mode = null);
     }
 }

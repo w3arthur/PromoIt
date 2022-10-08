@@ -27,7 +27,7 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
             _tweet = tweet;
         }
 
-        public async Task<List<Tweet>> MySQL_GetAllTweets_ListAsync(Modes mode = null)
+        public async Task<List<Tweet>> GetAllTweets_ListAsync(Modes mode = null)
         {
             List<Tweet> tweetList = new List<Tweet>();
             mySQL.Quary("SELECT campaign_hashtag,activist_user_name,retweets FROM tweets");

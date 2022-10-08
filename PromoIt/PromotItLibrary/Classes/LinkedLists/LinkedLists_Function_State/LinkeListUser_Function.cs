@@ -31,7 +31,7 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State
         }
 
 
-        public async Task<List<IUsers>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
+        public async Task<List<IUsers>> GetAllUsers_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest<IUsers>(Configuration.SetUserFunctions, null, "GetAllUsers");
         }

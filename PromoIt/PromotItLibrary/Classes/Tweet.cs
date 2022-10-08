@@ -47,9 +47,11 @@ namespace PromotItLibrary.Classes
         public async Task<bool> SetTweetCashAsync(Modes mode = null) =>
             await actionsTweet.SetTweetCashAsync(mode);
 
-        //LinkedList and DataTable
-        public async Task<List<Tweet>> MySQL_GetAllTweets_ListAsync(Modes mode = null) =>
-            await linkedListTweet.MySQL_GetAllTweets_ListAsync(mode);
+        //LinkedList
+        public async Task<List<Tweet>> GetAllTweets_ListAsync(Modes mode = null) =>
+            await linkedListTweet.GetAllTweets_ListAsync(mode);
+
+        //DataTable
         public async Task<DataTable> GetAllTweets_DataTableAsync() =>
             await dataTableTweet.GetAllTweets_DataTableAsync();
 

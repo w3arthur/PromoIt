@@ -27,12 +27,12 @@ namespace PromotItLibrary.Patterns.LinkedLists.Queue_State
             httpClient = _httpClient;
         }
 
-        public async Task<List<ICampaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
+        public async Task<List<ICampaign>> GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignQueue, _campaign, "GetAllCampaignsNonProfit");
         }
 
-        public async Task<List<ICampaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null)
+        public async Task<List<ICampaign>> GetAllCampaigns_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignQueue, _campaign, "GetAllCampaigns");
         }

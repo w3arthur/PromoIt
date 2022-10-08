@@ -48,16 +48,16 @@ namespace PromotItLibrary.Patterns.LinkedLists
             return linkedListProduct;
         }
 
-        public async Task<List<ProductDonated>> MySQL_GetDonatedProductForShipping_ListAsync(Modes mode = null)
+        public async Task<List<ProductDonated>> GetDonatedProductForShipping_ListAsync(Modes mode = null)
         {
             if (_productDonated == null) return null;
-            return await LinkedListMode(mode).MySQL_GetDonatedProductForShipping_ListAsync();
+            return await LinkedListMode(mode).GetDonatedProductForShipping_ListAsync();
         }
 
-        public async Task<List<ProductInCampaign>> MySQL_GetProductList_ListAsync(Modes mode = null)
+        public async Task<List<ProductInCampaign>> GetProductList_ListAsync(Modes mode = null)
         {
             if (_productInCampaign == null) return null;
-            return await LinkedListMode(mode).MySQL_GetProductList_ListAsync();
+            return await LinkedListMode(mode).GetProductList_ListAsync();
         }
 
     }

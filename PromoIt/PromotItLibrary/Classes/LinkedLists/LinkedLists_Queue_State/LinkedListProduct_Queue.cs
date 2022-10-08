@@ -29,12 +29,12 @@ namespace PromotItLibrary.Patterns.LinkedLists.Queue_State
         }
 
 
-        public async Task<List<ProductDonated>> MySQL_GetDonatedProductForShipping_ListAsync(Modes mode = null)
+        public async Task<List<ProductDonated>> GetDonatedProductForShipping_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest(Configuration.PromoitProductQueue, _productDonated, "GetDonatedProductForShipping");
         }
 
-        public async Task<List<ProductInCampaign>> MySQL_GetProductList_ListAsync(Modes mode = null)
+        public async Task<List<ProductInCampaign>> GetProductList_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest(Configuration.PromoitProductQueue, _productInCampaign, "GetProductList");
         }

@@ -27,7 +27,7 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
             httpClient = _httpClient;
         }
 
-        public async Task<List<ICampaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
+        public async Task<List<ICampaign>> GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
         {
             // Error, no npo user
             if (_campaign.NonProfitUser.UserName == null) throw new Exception("No set for npo User");
@@ -55,7 +55,7 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
             return campaignsList;
         }
 
-        public async Task<List<ICampaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null)
+        public async Task<List<ICampaign>> GetAllCampaigns_ListAsync(Modes mode = null)
         {
             mySQL.Quary("SELECT * FROM campaigns");
             using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();

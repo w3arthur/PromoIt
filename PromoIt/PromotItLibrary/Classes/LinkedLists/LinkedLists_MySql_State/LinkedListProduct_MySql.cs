@@ -29,7 +29,7 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
         }
 
 
-        public async Task<List<ProductDonated>> MySQL_GetDonatedProductForShipping_ListAsync(Modes mode = null)
+        public async Task<List<ProductDonated>> GetDonatedProductForShipping_ListAsync(Modes mode = null)
         {
             // Error, no business user
             if (_productDonated.ProductInCampaign.BusinessUser.UserType != "business" && _productDonated.ProductInCampaign.BusinessUser.UserName == null) throw new Exception("No set for business User");
@@ -59,7 +59,7 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
             return productDonatedList;
         }
 
-        public async Task<List<ProductInCampaign>> MySQL_GetProductList_ListAsync(Modes mode = null)
+        public async Task<List<ProductInCampaign>> GetProductList_ListAsync(Modes mode = null)
         {
             if (_productInCampaign.Campaign.Hashtag == null) throw new Exception("No set for Campaign Hashtag");
             mySQL.SetQuary("SELECT * FROM products_in_campaign WHERE campaign_hashtag = @hashtag AND Quantity > 0");

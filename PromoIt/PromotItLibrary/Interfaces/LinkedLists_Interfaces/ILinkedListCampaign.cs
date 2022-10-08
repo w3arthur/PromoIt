@@ -14,7 +14,7 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedL
 {
     public interface ILinkedListCampaign
     {
-        Task<List<ICampaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null);
-        Task<List<ICampaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null);
+        Task<List<ICampaign>> GetAllCampaignsNonProfit_ListAsync(Modes mode = null);
+        Task<List<ICampaign>> GetAllCampaigns_ListAsync(Modes mode = null);
     }
 }

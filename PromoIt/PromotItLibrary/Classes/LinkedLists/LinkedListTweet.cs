@@ -42,9 +42,9 @@ namespace PromotItLibrary.Patterns.LinkedLists
             return linkedListTweet;
         }
 
-        public async Task<List<Tweet>> MySQL_GetAllTweets_ListAsync(Modes mode = null)
+        public async Task<List<Tweet>> GetAllTweets_ListAsync(Modes mode = null)
         {
-            return await LinkedListMode(mode).MySQL_GetAllTweets_ListAsync();
+            return await LinkedListMode(mode).GetAllTweets_ListAsync();
         }
 
 

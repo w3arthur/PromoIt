@@ -28,7 +28,7 @@ namespace PromotItLibrary.Patterns.LinkedLists
             if (_adminUser == null) return null;
 
             DataTable dataTable = new DataTable();
-            List<IUsers> userList = await _adminUser.MySQL_GetAllUsers_ListAsync();
+            List<IUsers> userList = await _adminUser.GetAllUsers_ListAsync();
             foreach (string culmn in new[] { "Name", "UserName", "Type" })
                 dataTable.Columns.Add(culmn);
 
@@ -60,7 +60,7 @@ namespace PromotItLibrary.Patterns.LinkedLists
             if (_adminUser == null) return null;
 
             DataTable dataTable = new DataTable();
-            List<ICampaign> campaignsList = await (new Campaign()).MySQL_GetAllCampaigns_ListAsync();       //From Campaign Class
+            List<ICampaign> campaignsList = await (new Campaign()).GetAllCampaigns_ListAsync();       //From Campaign Class
             foreach (string culmn in new[] { "Hashtag", "Webpage", "Creator" }) dataTable.Columns.Add(culmn);
 
             if (campaignsList == null)

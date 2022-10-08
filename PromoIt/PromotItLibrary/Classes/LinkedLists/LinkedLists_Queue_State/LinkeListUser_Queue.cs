@@ -29,7 +29,7 @@ namespace PromotItLibrary.Patterns.LinkedLists.Queue_State
         }
 
 
-        public async Task<List<IUsers>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
+        public async Task<List<IUsers>> GetAllUsers_ListAsync(Modes mode = null)
         {
             return await httpClient.GetMultipleDataRequest<IUsers>(Configuration.SetUserQueue, null, "GetAllUsers");
         }

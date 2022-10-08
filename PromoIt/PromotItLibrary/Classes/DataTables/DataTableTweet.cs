@@ -24,7 +24,7 @@ namespace PromotItLibrary.Patterns.DataTables
         public async Task<DataTable> GetAllTweets_DataTableAsync()
         {
             DataTable dataTable = new DataTable();
-            List<Tweet> tweetList = await _tweet.MySQL_GetAllTweets_ListAsync();
+            List<Tweet> tweetList = await _tweet.GetAllTweets_ListAsync();
             foreach (string culmn in new[] { "Hashtag", "UserName", "Retweets" })
                 dataTable.Columns.Add(culmn);
 

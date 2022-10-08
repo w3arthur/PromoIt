@@ -49,16 +49,16 @@ namespace PromotItLibrary.Classes
         public async Task<bool> DeleteCampaignAsync(Modes mode = null) =>
             await actionsCampaign.DeleteCampaignAsync(mode);
 
-        //List and DataTable
-        public async Task<List<ICampaign>> MySql_GetAllCampaignsNonProfit_ListAsync(Modes mode = null) =>
-            await linkedListCampaign.MySql_GetAllCampaignsNonProfit_ListAsync(mode);
+        //List
+        public async Task<List<ICampaign>> GetAllCampaignsNonProfit_ListAsync(Modes mode = null) =>
+            await linkedListCampaign.GetAllCampaignsNonProfit_ListAsync(mode);
+        public async Task<List<ICampaign>> GetAllCampaigns_ListAsync(Modes mode = null) =>
+            await linkedListCampaign.GetAllCampaigns_ListAsync(mode);
 
+
+        //DataTable
         public async Task<DataTable> GetAllCampaignsNonProfit_DataTableAsync() =>
             await dataTableCampaign.GetAllCampaignsNonProfit_DataTableAsync();
-
-        public async Task<List<ICampaign>> MySQL_GetAllCampaigns_ListAsync(Modes mode = null) =>
-            await linkedListCampaign.MySQL_GetAllCampaigns_ListAsync(mode);
-
         public async Task<DataTable> GetAllCampaigns_DataTableAsync() =>
             await dataTableCampaign.GetAllCampaigns_DataTableAsync();
     }

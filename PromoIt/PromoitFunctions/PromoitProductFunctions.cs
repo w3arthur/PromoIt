@@ -47,7 +47,7 @@ namespace PromoitFunction
                             className = "Get Product List";
                             ProductInCampaign productInCampaign = HTTPClient.JsonStringToSingleObject<ProductInCampaign>(data);
                             if (productInCampaign == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<ProductInCampaign> productInCampaignList = await productInCampaign.MySQL_GetProductList_ListAsync(FunctionOrDatabaseMode);
+                            List<ProductInCampaign> productInCampaignList = await productInCampaign.GetProductList_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(productInCampaignList));
                         }
@@ -57,7 +57,7 @@ namespace PromoitFunction
                             className = "Get Product List";
                             ProductDonated productDonated = HTTPClient.JsonStringToSingleObject<ProductDonated>(data);
                             if (productDonated == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<ProductDonated> productInCampaignList = await productDonated.MySQL_GetDonatedProductForShipping_ListAsync(FunctionOrDatabaseMode);
+                            List<ProductDonated> productInCampaignList = await productDonated.GetDonatedProductForShipping_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"{azureFunctionString} Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(productInCampaignList));
                         }

@@ -42,10 +42,10 @@ namespace PromotItLibrary.Patterns.LinkedLists
             return linkeListUser;
         }
 
-        public async Task<List<IUsers>> MySQL_GetAllUsers_ListAsync(Modes mode = null)
+        public async Task<List<IUsers>> GetAllUsers_ListAsync(Modes mode = null)
         {
             if (_adminUser == null) return null;
-            return await LinkedListMode(mode).MySQL_GetAllUsers_ListAsync();
+            return await LinkedListMode(mode).GetAllUsers_ListAsync();
         }
 
     }

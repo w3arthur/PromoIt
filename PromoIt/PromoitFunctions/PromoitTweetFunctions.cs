@@ -46,7 +46,7 @@ namespace PromoitFunction
                             className = "Get All Tweet List";
                             Tweet tweet = HTTPClient.JsonStringToSingleObject<Tweet>(data);
                             if (tweet == null) throw new Exception($"GET: No {className} Found In Databae!");
-                            List<Tweet> campaignList = await tweet.MySQL_GetAllTweets_ListAsync(FunctionOrDatabaseMode);
+                            List<Tweet> campaignList = await tweet.GetAllTweets_ListAsync(FunctionOrDatabaseMode);
                             log.LogInformation($"Function Found {className}");
                             return new OkObjectResult(HTTPClient.ObjectToJsonString(campaignList));
                         }

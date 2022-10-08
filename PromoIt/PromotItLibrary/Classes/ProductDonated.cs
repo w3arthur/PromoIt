@@ -49,9 +49,11 @@ namespace PromotItLibrary.Classes
         public async Task<bool> SetProductShippingAsync(Modes mode = null) =>
             await actionsProduct.SetProductShippingAsync(mode);
 
-        // LinkedList and DataTable
-        public async Task<List<ProductDonated>> MySQL_GetDonatedProductForShipping_ListAsync(Modes mode = null) =>
-             await linkedListProduct.MySQL_GetDonatedProductForShipping_ListAsync(mode);
+        // LinkedList
+        public async Task<List<ProductDonated>> GetDonatedProductForShipping_ListAsync(Modes mode = null) =>
+             await linkedListProduct.GetDonatedProductForShipping_ListAsync(mode);
+
+        //DataTable
         public async Task<DataTable> GetDonatedProductForShipping_DataTableAsync() =>
              await dataTabletProduct.GetDonatedProductForShipping_DataTableAsync();
 

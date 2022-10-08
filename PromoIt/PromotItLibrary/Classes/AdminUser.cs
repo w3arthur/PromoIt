@@ -33,9 +33,11 @@ namespace PromotItLibrary.Classes
             dataTableUser = new DataTableUser_Admin(this);
         }
 
-        //LinkedList and DataTable
-        public async Task<List<IUsers>> MySQL_GetAllUsers_ListAsync(Modes mode = null) =>
-            await linkeListUser.MySQL_GetAllUsers_ListAsync(mode);
+        //LinkedList
+        public async Task<List<IUsers>> GetAllUsers_ListAsync(Modes mode = null) =>
+            await linkeListUser.GetAllUsers_ListAsync(mode);
+
+        //DataTable
         public async Task<DataTable> GetAllUsers_DataTableAsync() =>
             await dataTableUser.GetAllUsers_DataTableAsync();
         public async Task<DataTable> GetAllCampaignsAdmin_DataTableAsync() =>
