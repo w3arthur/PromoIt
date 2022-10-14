@@ -30,14 +30,14 @@ namespace PromotItLibrary.Patterns.Actions
             httpClient = _httpClient;
         }
 
-        private IActionsUser ActionMode(Modes _mode, dynamic @user)
+        private IActionsUser ActionMode(Modes _mode, IUsers user)
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsUser = new ActionsUser_Queue(@user, mySQL, httpClient);
+                actionsUser = new ActionsUser_Queue(user, mySQL, httpClient);
             else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsUser = new ActionsUser_Function(@user, mySQL, httpClient);
+                actionsUser = new ActionsUser_Function(user, mySQL, httpClient);
             if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsUser = new ActionsUser_MySql(@user, mySQL, httpClient);
+                actionsUser = new ActionsUser_MySql(user, mySQL, httpClient);
             return actionsUser;
         }
 

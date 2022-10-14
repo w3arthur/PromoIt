@@ -11,6 +11,7 @@ namespace PromotItLibrary.Models
     public class Configuration
     {
         /*TODO*/
+        // Split register to types! instead of if statement
         // Fix Key Organization
         // Fix Enums
         // refactore
