@@ -20,40 +20,12 @@ namespace PromotItLibrary.Patterns.Actions
 
         private static MySQL mySQL;
         private HTTPClient httpClient;
-        private Users _user;
-        private ActivistUser _activistUser;
-        private AdminUser _adminUser;
-        private NonProfitUser _nonProfitUser;
-        private BusinessUser _businessUser;
+        private IUsers _user;
         IActionsUser actionsUser;
 
-        public ActionsUser(Users user, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsUser(IUsers user, MySQL _mySQL, HTTPClient _httpClient)
         {
             _user = user;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
-        }
-        public ActionsUser(ActivistUser activistUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _activistUser = activistUser;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
-        }
-        public ActionsUser(AdminUser adminUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _adminUser = adminUser;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
-        }
-        public ActionsUser(NonProfitUser nonProfitUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _nonProfitUser = nonProfitUser;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
-        }
-        public ActionsUser(BusinessUser businessUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _businessUser = businessUser;
             mySQL = _mySQL;
             httpClient = _httpClient;
         }
@@ -76,30 +48,22 @@ namespace PromotItLibrary.Patterns.Actions
 
         public async Task<bool> RegisterAsync(Modes mode = null)
         {
-            if (_activistUser != null)
-            {
-                return await ActionMode(mode, _activistUser).RegisterAsync();
-            }
-            else if (_adminUser != null)
-            {
-                return await ActionMode(mode, _adminUser).RegisterAsync();
-            }
-            else if (_nonProfitUser != null)
-            {
-                return await ActionMode(mode, _nonProfitUser).RegisterAsync();
-            }
-            else if (_businessUser != null)
-            {
-                return await ActionMode(mode, _businessUser).RegisterAsync();
-            }
+            if (_user is ActivistUser)
+                return await ActionMode(mode, (ActivistUser)_user).RegisterAsync();
+            else if (_user is AdminUser)
+                return await ActionMode(mode, (AdminUser)_user).RegisterAsync();
+            else if (_user is NonProfitUser)
+                return await ActionMode(mode, (NonProfitUser)_user).RegisterAsync();
+            else if (_user is BusinessUser)
+                return await ActionMode(mode, (BusinessUser)_user).RegisterAsync();
             return false;
         }
 
 
         public async Task<IActivistUser> GetCashAmountAsync(Modes mode = null)
         {
-            if (_activistUser == null) return null;
-            return await ActionMode(mode, _activistUser).GetCashAmountAsync();
+            if (_user == null) return null;
+            return await ActionMode(mode, (ActivistUser)_user).GetCashAmountAsync();
         }
 
     }
