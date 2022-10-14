@@ -16,16 +16,16 @@ namespace PromotItLibrary.Patterns.Actions
     public class ActionsProduct : IActionsProduct
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private ProductDonated _productDonated;
-        private ProductInCampaign _productInCampaign;
-        IActionsProduct actionsProduct;
+        private readonly MySQL _mySQL;
+        private readonly HTTPClient _httpClient;
+        private readonly ProductDonated _productDonated;
+        private readonly ProductInCampaign _productInCampaign;
+        private IActionsProduct actionsProduct;
 
-        public ActionsProduct(ProductDonated productDonated, ProductInCampaign productInCampaign, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsProduct(ProductDonated productDonated, ProductInCampaign productInCampaign, MySQL mySQL, HTTPClient httpClient)
         {
-            mySQL = _mySQL;
-            httpClient = _httpClient;
+            _mySQL = mySQL;
+            _httpClient = httpClient;
             _productDonated = productDonated;
             _productInCampaign = productInCampaign;
         }
@@ -33,11 +33,11 @@ namespace PromotItLibrary.Patterns.Actions
         private IActionsProduct ActionMode(Modes _mode)
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsProduct = new ActionsProduct_Queue(_productDonated, _productInCampaign, mySQL, httpClient);
+                actionsProduct = new ActionsProduct_Queue(_productDonated, _productInCampaign, _httpClient);
             else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsProduct = new ActionsProduct_Function(_productDonated, _productInCampaign, mySQL, httpClient);
+                actionsProduct = new ActionsProduct_Function(_productDonated, _productInCampaign, _httpClient);
             if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsProduct = new ActionsProduct_MySql(_productDonated, _productInCampaign, mySQL, httpClient);
+                actionsProduct = new ActionsProduct_MySql(_productDonated, _productInCampaign, _mySQL);
             return actionsProduct;
         }
 

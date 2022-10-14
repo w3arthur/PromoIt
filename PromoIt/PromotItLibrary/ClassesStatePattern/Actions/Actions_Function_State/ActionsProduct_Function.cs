@@ -13,15 +13,13 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Fuction_State
     public class ActionsProduct_Function : IActionsProduct
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
+        private readonly HTTPClient _httpClient;
+        private readonly ProductDonated _productDonated;
+        private readonly ProductInCampaign _productInCampaign;
 
-        private ProductDonated _productDonated;
-        private ProductInCampaign _productInCampaign;
-
-        public ActionsProduct_Function(ProductDonated productDonated, ProductInCampaign productInCampaign, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsProduct_Function(ProductDonated productDonated, ProductInCampaign productInCampaign, HTTPClient httpClient)
         {
-            httpClient = _httpClient;
+            _httpClient = httpClient;
             _productDonated = productDonated;
             _productInCampaign = productInCampaign;
         }
@@ -29,17 +27,17 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Fuction_State
 
         public async Task<bool> SetBuyAnItemAsync(Modes mode = null)
         {
-            return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductFunctions, _productDonated, "SetBuyAnItem");
+            return (bool)await _httpClient.PostSingleDataInsert(Configuration.PromoitProductFunctions, _productDonated, "SetBuyAnItem");
         }
 
         public async Task<bool> SetProductShippingAsync(Modes mode = null)
         {
-            return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductFunctions, _productDonated, "SetProductShipping");
+            return (bool)await _httpClient.PostSingleDataInsert(Configuration.PromoitProductFunctions, _productDonated, "SetProductShipping");
         }
 
         public async Task<bool> SetNewProductAsync(Modes mode = null)
         {
-            return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitProductFunctions, _productInCampaign, "SetNewProduct");
+            return (bool)await _httpClient.PostSingleDataInsert(Configuration.PromoitProductFunctions, _productInCampaign, "SetNewProduct");
         }
 
     }

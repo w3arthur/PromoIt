@@ -11,6 +11,7 @@ namespace PromotItLibrary.Models
     public class Configuration
     {
         /*TODO*/
+        // Minimize the States to several Classes (They will combine all the)
         // Split register to types! instead of if statement
         // Fix Key Organization
         // Fix Enums

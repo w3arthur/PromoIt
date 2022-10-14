@@ -18,26 +18,26 @@ namespace PromotItLibrary.Patterns.Actions
     public class ActionsUser : IActionsUser
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private IUsers _user;
-        IActionsUser actionsUser;
+        private readonly MySQL _mySQL;
+        private readonly HTTPClient _httpClient;
+        private readonly IUsers _user;
+        private IActionsUser actionsUser;
 
-        public ActionsUser(IUsers user, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsUser(IUsers user, MySQL mySQL, HTTPClient httpClient)
         {
             _user = user;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
+            _mySQL = mySQL;
+            _httpClient = httpClient;
         }
 
         private IActionsUser ActionMode(Modes _mode, IUsers user)
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsUser = new ActionsUser_Queue(user, mySQL, httpClient);
+                actionsUser = new ActionsUser_Queue(user, _httpClient);
             else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsUser = new ActionsUser_Function(user, mySQL, httpClient);
-            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsUser = new ActionsUser_MySql(user, mySQL, httpClient);
+                actionsUser = new ActionsUser_Function(user, _mySQL, _httpClient);
+            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                actionsUser = new ActionsUser_MySql(user, _mySQL, _httpClient);
             return actionsUser;
         }
 

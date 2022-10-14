@@ -12,21 +12,18 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Queue_State
 {
     public class ActionsTweet_Queue : IActionsTweet
     {
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
+        private readonly HTTPClient _httpClient;
+        private readonly Tweet _tweet;
 
-        private Tweet _tweet;
-
-        public ActionsTweet_Queue(Tweet tweet, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsTweet_Queue(Tweet tweet, HTTPClient httpClient)
         {
-            mySQL = _mySQL;
-            httpClient = _httpClient;
+            _httpClient = httpClient;
             _tweet = tweet;
         }
 
         public async Task<bool> SetTweetCashAsync(Modes mode = null)
         {
-            return (bool)await httpClient.PostSingleDataInsert(Configuration.PromoitTweetQueue, _tweet, "SetTweetCash");
+            return (bool)await _httpClient.PostSingleDataInsert(Configuration.PromoitTweetQueue, _tweet, "SetTweetCash");
         }
     }
 }

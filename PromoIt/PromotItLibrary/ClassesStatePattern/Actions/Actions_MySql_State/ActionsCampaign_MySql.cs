@@ -12,34 +12,31 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
 {
     public class ActionsCampaign_MySql : IActionsCampaign
     {
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private Campaign _campaign;
+        private readonly MySQL _mySQL;
+        private readonly Campaign _campaign;
 
-        private Modes _mode = null;
-
-        public ActionsCampaign_MySql(Campaign campaign, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsCampaign_MySql(Campaign campaign, MySQL mySQL)
         {
             _campaign = campaign;
-            mySQL = _mySQL;
+            _mySQL = mySQL;
         }
 
 
         public async Task<bool> SetNewCampaignAsync(Modes mode = null)
         {
-            mySQL.Procedure("add_campaign");
-            mySQL.SetParameter("_name", _campaign.Name);
-            mySQL.SetParameter("_hashtag", _campaign.Hashtag);
-            mySQL.SetParameter("_webpage", _campaign.Url);
-            mySQL.SetParameter("_non_profit_user_name", _campaign.NonProfitUser.UserName);
-            return await mySQL.ProceduteExecuteAsync();
+            _mySQL.Procedure("add_campaign");
+            _mySQL.SetParameter("_name", _campaign.Name);
+            _mySQL.SetParameter("_hashtag", _campaign.Hashtag);
+            _mySQL.SetParameter("_webpage", _campaign.Url);
+            _mySQL.SetParameter("_non_profit_user_name", _campaign.NonProfitUser.UserName);
+            return await _mySQL.ProceduteExecuteAsync();
         }
 
         public async Task<bool> DeleteCampaignAsync(Modes mode = null)
         {
-            mySQL.Procedure("delete_campaign");
-            mySQL.QuaryParameter("_hashtag", _campaign.Hashtag);
-            return await mySQL.ProceduteExecuteAsync();
+            _mySQL.Procedure("delete_campaign");
+            _mySQL.QuaryParameter("_hashtag", _campaign.Hashtag);
+            return await _mySQL.ProceduteExecuteAsync();
         }
 
     }

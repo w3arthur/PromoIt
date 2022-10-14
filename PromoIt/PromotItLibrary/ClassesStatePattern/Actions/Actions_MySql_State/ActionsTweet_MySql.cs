@@ -12,26 +12,24 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
 {
     public class ActionsTweet_MySql : IActionsTweet
     {
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
+        private readonly MySQL _mySQL;
+        private readonly Tweet _tweet;
 
-        private Tweet _tweet;
-
-        public ActionsTweet_MySql(Tweet tweet, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsTweet_MySql(Tweet tweet, MySQL mySQL)
         {
-            mySQL = _mySQL;
+            _mySQL = mySQL;
             _tweet = tweet;
         }
 
         public async Task<bool> SetTweetCashAsync(Modes mode = null)
         {
-            mySQL.Procedure("add_tweet");
-            mySQL.ProcedureParameter("_tweeter_id", long.Parse(_tweet.Id));
-            mySQL.ProcedureParameter("_campaign_hashtag", _tweet.Campaign.Hashtag);
-            mySQL.ProcedureParameter("_activist_user_name", _tweet.ActivistUser.UserName);
-            mySQL.ProcedureParameter("_added_cash", _tweet.Cash);
-            mySQL.ProcedureParameter("_tweeter_retweets", _tweet.Retweets);
-            return await mySQL.ProceduteExecuteAsync();
+            _mySQL.Procedure("add_tweet");
+            _mySQL.ProcedureParameter("_tweeter_id", long.Parse(_tweet.Id));
+            _mySQL.ProcedureParameter("_campaign_hashtag", _tweet.Campaign.Hashtag);
+            _mySQL.ProcedureParameter("_activist_user_name", _tweet.ActivistUser.UserName);
+            _mySQL.ProcedureParameter("_added_cash", _tweet.Cash);
+            _mySQL.ProcedureParameter("_tweeter_retweets", _tweet.Retweets);
+            return await _mySQL.ProceduteExecuteAsync();
         }
     }
 }

@@ -15,9 +15,9 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
     public class ActionsUser_MySql : IActionsUser
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private IUsers _user;
+        private readonly MySQL mySQL;
+        private readonly HTTPClient httpClient;
+        private readonly IUsers _user;
 
         public ActionsUser_MySql(IUsers user, MySQL _mySQL, HTTPClient _httpClient)
         {

@@ -15,15 +15,15 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Fuction_State
     public class ActionsUser_Function : IActionsUser
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private IUsers _user;
+        private readonly MySQL _mySQL;
+        private readonly HTTPClient httpClient;
+        private readonly IUsers _user;
 
 
-        public ActionsUser_Function(IUsers user, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsUser_Function(IUsers user, MySQL mySQL, HTTPClient _httpClient)
         {
             _user = user;
-            mySQL = _mySQL;
+            _mySQL = mySQL;
             httpClient = _httpClient;
         }
 

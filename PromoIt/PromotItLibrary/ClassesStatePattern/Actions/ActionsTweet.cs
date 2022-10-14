@@ -15,25 +15,25 @@ namespace PromotItLibrary.Patterns.Actions
 {
     public class ActionsTweet : IActionsTweet
     {
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private Tweet _tweet;
-        IActionsTweet actionsTweet;
+        private readonly MySQL _mySQL;
+        private readonly HTTPClient _httpClient;
+        private readonly Tweet _tweet;
+        private IActionsTweet actionsTweet;
 
-        public ActionsTweet(Tweet tweet, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsTweet(Tweet tweet, MySQL mySQL, HTTPClient httpClient)
         {
-            mySQL = _mySQL;
-            httpClient = _httpClient;
+            _mySQL = mySQL;
+            _httpClient = httpClient;
             _tweet = tweet;
         }
         private IActionsTweet ActionMode(Modes _mode)
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsTweet = new ActionsTweet_Queue(_tweet, mySQL, httpClient);
+                actionsTweet = new ActionsTweet_Queue(_tweet, _httpClient);
             else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsTweet = new ActionsTweet_Function(_tweet, mySQL, httpClient);
+                actionsTweet = new ActionsTweet_Function(_tweet, _httpClient);
             if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsTweet = new ActionsTweet_MySql(_tweet, mySQL, httpClient);
+                actionsTweet = new ActionsTweet_MySql(_tweet, _mySQL);
             return actionsTweet;
         }
 

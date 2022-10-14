@@ -15,26 +15,26 @@ namespace PromotItLibrary.Patterns.Actions
 {
     public class ActionsCampaign : IActionsCampaign
     {
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private Campaign _campaign;
-        IActionsCampaign actionsCampaign;
+        private readonly MySQL _mySQL;
+        private readonly HTTPClient _httpClient;
+        private readonly Campaign _campaign;
+        private IActionsCampaign actionsCampaign;
 
-        public ActionsCampaign(Campaign campaign, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsCampaign(Campaign campaign, MySQL mySQL, HTTPClient httpClient)
         {
             _campaign = campaign;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
+            _mySQL = mySQL;
+            _httpClient = httpClient;
         }
 
         private IActionsCampaign ActionMode(Modes _mode) 
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsCampaign = new ActionsCampaign_Queue(_campaign, mySQL, httpClient);
+                actionsCampaign = new ActionsCampaign_Queue(_campaign, _httpClient);
             else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsCampaign = new ActionsCampaign_Function(_campaign, mySQL, httpClient);
+                actionsCampaign = new ActionsCampaign_Function(_campaign, _httpClient);
             if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsCampaign = new ActionsCampaign_MySql(_campaign, mySQL, httpClient);
+                actionsCampaign = new ActionsCampaign_MySql(_campaign, _mySQL);
             return actionsCampaign;
         }
 
