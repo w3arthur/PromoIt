@@ -16,25 +16,23 @@ namespace PromotItLibrary.Patterns.LinkedLists.Queue_State
     public class LinkedListCampaign_Queue : ILinkedListCampaign
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private ICampaign _campaign;
+        private readonly HTTPClient _httpClient;
+        private readonly ICampaign _campaign;
 
-        public LinkedListCampaign_Queue(Campaign campaign, MySQL _mySQL, HTTPClient _httpClient) 
+        public LinkedListCampaign_Queue(Campaign campaign, HTTPClient _httpClient) 
         {
             _campaign = campaign;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
+            this._httpClient = _httpClient;
         }
 
         public async Task<List<ICampaign>> GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
         {
-            return await httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignQueue, _campaign, "GetAllCampaignsNonProfit");
+            return await _httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignQueue, _campaign, "GetAllCampaignsNonProfit");
         }
 
         public async Task<List<ICampaign>> GetAllCampaigns_ListAsync(Modes mode = null)
         {
-            return await httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignQueue, _campaign, "GetAllCampaigns");
+            return await _httpClient.GetMultipleDataRequest(Configuration.PromoitCampaignQueue, _campaign, "GetAllCampaigns");
         }
 
     }

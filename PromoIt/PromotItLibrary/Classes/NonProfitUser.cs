@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
-using PromotItLibrary.Models;
-using PromotItLibrary.Patterns.Actions;
-using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
-using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
-using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 
 namespace PromotItLibrary.Classes
 {
@@ -24,7 +13,7 @@ namespace PromotItLibrary.Classes
             UserType = "non-profit";
             RunActions(this);
         }
-        //public NonProfitUser(Users user) : base(user) { UserType = "non-profit"; actionsUser = new ActionsUser(this, mySQL, httpClient); }
+        //public NonProfitUser(Users user) : this() { CopyUser(this); }
 
     }
 }

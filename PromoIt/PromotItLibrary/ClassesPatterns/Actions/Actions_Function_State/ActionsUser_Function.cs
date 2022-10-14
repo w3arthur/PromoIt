@@ -17,7 +17,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Fuction_State
 
         private readonly MySQL _mySQL;
         private readonly HTTPClient httpClient;
-        private readonly IUsers _user;
+        private readonly dynamic @_user;
 
 
         public ActionsUser_Function(IUsers user, MySQL mySQL, HTTPClient _httpClient)
@@ -34,15 +34,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Fuction_State
 
         public async Task<bool> RegisterAsync(Modes mode = null)
         {
-            if (_user is ActivistUser)
-                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserFunctions, (ActivistUser)_user, "");
-            else if (_user is AdminUser)
-                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserFunctions, (AdminUser)_user, "");
-            else if (_user is NonProfitUser)
-                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserFunctions, (NonProfitUser)_user, "");
-            else if (_user is BusinessUser)
-                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserFunctions, (BusinessUser)_user, "");
-            return false;
+            return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserFunctions, @_user, "");
         }
 
 

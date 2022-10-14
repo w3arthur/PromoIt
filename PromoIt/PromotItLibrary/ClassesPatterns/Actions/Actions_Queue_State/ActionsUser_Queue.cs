@@ -16,7 +16,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Queue_State
     {
 
         private readonly HTTPClient _httpClient;
-        private readonly IUsers _user;
+        private readonly dynamic @_user;
 
         public ActionsUser_Queue(IUsers user, HTTPClient httpClient)
         {
@@ -31,15 +31,7 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Queue_State
 
         public async Task<bool> RegisterAsync(Modes mode = null)
         {
-            if (_user is ActivistUser)
-                return (bool)await _httpClient.PostSingleDataInsert(Configuration.SetUserQueue, (ActivistUser)_user, "");
-            else if (_user is AdminUser)
-                return (bool)await _httpClient.PostSingleDataInsert(Configuration.SetUserQueue, (AdminUser)_user, "");
-            else if (_user is NonProfitUser)
-                return (bool)await _httpClient.PostSingleDataInsert(Configuration.SetUserQueue, (NonProfitUser)_user, "");
-            else if (_user is BusinessUser)
-                return (bool)await _httpClient.PostSingleDataInsert(Configuration.SetUserQueue, (BusinessUser)_user, "");
-            return false;
+            return (bool)await _httpClient.PostSingleDataInsert(Configuration.SetUserQueue, @_user, "");
         }
 
         public async Task<IActivistUser> GetCashAmountAsync(Modes mode = null)

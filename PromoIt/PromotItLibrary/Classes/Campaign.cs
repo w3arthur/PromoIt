@@ -1,29 +1,20 @@
-﻿using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
+﻿using System;
+using System.Data;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns;
-using PromotItLibrary.Patterns.Actions;
 using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
 using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 using PromotItLibrary.Patterns.DataTables;
 using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
-using PromotItLibrary.Patterns.LinkedLists;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 using PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State;
 using PromotItLibrary.Patterns.LinkedLists.Queue_State;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace PromotItLibrary.Classes
 {
@@ -45,29 +36,31 @@ namespace PromotItLibrary.Classes
         public Campaign() 
         {
             //Action States
-            if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsCampaign = new ActionsCampaign_Queue(this, _httpClient);
-            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsCampaign = new ActionsCampaign_Function(this, _httpClient);
-            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsCampaign = new ActionsCampaign_MySql(this, _mySQL);
-
             //LinkedList States
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                linkedListCampaign = new LinkedListCampaign_Queue(this, _mySQL, _httpClient);
+            {
+                actionsCampaign = new ActionsCampaign_Queue(this, _httpClient);
+                linkedListCampaign = new LinkedListCampaign_Queue(this,  _httpClient);
+            }
             else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                linkedListCampaign = new LinkedListCampaign_Function(this, _mySQL, _httpClient);
+            {
+                actionsCampaign = new ActionsCampaign_Function(this, _httpClient);
+                linkedListCampaign = new LinkedListCampaign_Function(this,  _httpClient);
+            }
             else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                linkedListCampaign = new LinkedListCampaign_MySql(this, _mySQL, _httpClient);
-
-            //DataTable States ?
+            {
+                actionsCampaign = new ActionsCampaign_MySql(this, _mySQL);
+                linkedListCampaign = new LinkedListCampaign_MySql(this, _mySQL);
+            }
+               
+            //DataTable States
             dataTableCampaign = new DataTableCampaign(this);
         }
 
 
         //Actions
         public async Task<bool> SetNewCampaignAsync(Modes mode = null) =>
-        await actionsCampaign.SetNewCampaignAsync(mode);
+            await actionsCampaign.SetNewCampaignAsync(mode);
 
         public async Task<bool> DeleteCampaignAsync(Modes mode = null) =>
             await actionsCampaign.DeleteCampaignAsync(mode);

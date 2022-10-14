@@ -15,15 +15,13 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
     public class LinkedListProduct_MySql : ILinkedListProduct_ProductDonated, ILinkedListProduct_ProductInCampaign
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private ProductDonated _productDonated;
-        private ProductInCampaign _productInCampaign;
+        private readonly MySQL _mySQL;
+        private readonly ProductDonated _productDonated;
+        private readonly ProductInCampaign _productInCampaign;
 
-        public LinkedListProduct_MySql(ProductDonated productDonated, ProductInCampaign productInCampaign, MySQL _mySQL, HTTPClient _httpClient) 
+        public LinkedListProduct_MySql(ProductDonated productDonated, ProductInCampaign productInCampaign, MySQL mySQL) 
         {
-            mySQL = _mySQL;
-            httpClient = _httpClient;
+            _mySQL = mySQL;
             _productDonated = productDonated;
             _productInCampaign = productInCampaign;
         }
@@ -33,11 +31,11 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
         {
             // Error, no business user
             if (_productDonated.ProductInCampaign.BusinessUser.UserType != "business" && _productDonated.ProductInCampaign.BusinessUser.UserName == null) throw new Exception("No set for business User");
-            mySQL.Quary(" SELECT * FROM products_in_campaign pic JOIN products_donated pd on pic.id = pd.product_in_campaign_id WHERE pd.shipped = @_shipped AND pic.business_user_name = @_business_user_name LIMIT @_limit"); //replace with mySQL.Procedure() //add LIMIT 20 ~
-            mySQL.ProcedureParameter("_shipped", "not_shipped");
-            mySQL.ProcedureParameter("_business_user_name", _productDonated.ProductInCampaign.BusinessUser.UserName);
-            mySQL.ProcedureParameter("_limit", 10);
-            using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();
+            _mySQL.Quary(" SELECT * FROM products_in_campaign pic JOIN products_donated pd on pic.id = pd.product_in_campaign_id WHERE pd.shipped = @_shipped AND pic.business_user_name = @_business_user_name LIMIT @_limit"); //replace with mySQL.Procedure() //add LIMIT 20 ~
+            _mySQL.ProcedureParameter("_shipped", "not_shipped");
+            _mySQL.ProcedureParameter("_business_user_name", _productDonated.ProductInCampaign.BusinessUser.UserName);
+            _mySQL.ProcedureParameter("_limit", 10);
+            using MySqlDataReader results = await _mySQL.ProceduteExecuteMultyResultsAsync();
 
             List<ProductDonated> productDonatedList = new List<ProductDonated>();
             while (results != null && results.Read())
@@ -62,9 +60,9 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
         public async Task<List<ProductInCampaign>> GetProductList_ListAsync(Modes mode = null)
         {
             if (_productInCampaign.Campaign.Hashtag == null) throw new Exception("No set for Campaign Hashtag");
-            mySQL.SetQuary("SELECT * FROM products_in_campaign WHERE campaign_hashtag = @hashtag AND Quantity > 0");
-            mySQL.QuaryParameter("@hashtag", _productInCampaign.Campaign.Hashtag);
-            using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();
+            _mySQL.SetQuary("SELECT * FROM products_in_campaign WHERE campaign_hashtag = @hashtag AND Quantity > 0");
+            _mySQL.QuaryParameter("@hashtag", _productInCampaign.Campaign.Hashtag);
+            using MySqlDataReader results = await _mySQL.ProceduteExecuteMultyResultsAsync();
 
             List<ProductInCampaign> productInCampaignList = new List<ProductInCampaign>();
             while (results != null && results.Read())

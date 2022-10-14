@@ -17,24 +17,20 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
     public class LinkeListUser_MySql : ILinkeListUser_Admin
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-
+        private readonly MySQL _mySQL;
         private AdminUser _adminUser;
 
-
-        public LinkeListUser_MySql(AdminUser adminUser, MySQL _mySQL, HTTPClient _httpClient) 
+        public LinkeListUser_MySql(AdminUser adminUser, MySQL _mySQL) 
         {
             _adminUser = adminUser;
-            mySQL= _mySQL;
-            httpClient = _httpClient;
+            this._mySQL= _mySQL;
         }
 
 
         public async Task<List<IUsers>> GetAllUsers_ListAsync(Modes mode = null)
         {
-            mySQL.Quary("SELECT name,user_name,user_type FROM users");
-            using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();
+            _mySQL.Quary("SELECT name,user_name,user_type FROM users");
+            using MySqlDataReader results = await _mySQL.ProceduteExecuteMultyResultsAsync();
             List<IUsers> userList = new List<IUsers>();
             while (results != null && results.Read()) //for 1 result: if (mdr.Read())
             {

@@ -14,8 +14,8 @@ namespace PromotItLibrary.Patterns.DataTables
     public class DataTabletProduct : IDataTabletProduct_ProductDonated, IDataTabletProduct_ProductInCampaign
     {
 
-        private ProductDonated _productDonated;
-        private ProductInCampaign _productInCampaign;
+        private readonly ProductDonated _productDonated;
+        private readonly ProductInCampaign _productInCampaign;
 
         public DataTabletProduct(ProductDonated productDonated, ProductInCampaign productInCampaign) 
         {

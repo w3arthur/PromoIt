@@ -17,21 +17,18 @@ namespace PromotItLibrary.Patterns.LinkedLists.Queue_State
     public class LinkeListUser_Queue : ILinkeListUser_Admin
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private AdminUser _adminUser;
+        private readonly HTTPClient _httpClient;
+        private readonly AdminUser _adminUser;
 
-        public LinkeListUser_Queue(AdminUser adminUser, MySQL _mySQL, HTTPClient _httpClient) 
+        public LinkeListUser_Queue(AdminUser adminUser, HTTPClient _httpClient) 
         {
-            _adminUser = adminUser;
-            mySQL= _mySQL;
-            httpClient = _httpClient;
+            this._httpClient = _httpClient;
         }
 
 
         public async Task<List<IUsers>> GetAllUsers_ListAsync(Modes mode = null)
         {
-            return await httpClient.GetMultipleDataRequest<IUsers>(Configuration.SetUserQueue, null, "GetAllUsers");
+            return await _httpClient.GetMultipleDataRequest<IUsers>(Configuration.SetUserQueue, null, "GetAllUsers");
         }
 
     }

@@ -16,22 +16,20 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
     public class LinkedListTweet_MySql : ILinkedListTweet
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private Tweet _tweet;
+        private readonly MySQL _mySQL;
+        private readonly Tweet _tweet;
 
-        public LinkedListTweet_MySql(Tweet tweet, MySQL _mySQL, HTTPClient _httpClient) 
+        public LinkedListTweet_MySql(Tweet tweet, MySQL mySQL) 
         {
-            mySQL = _mySQL;
-            httpClient = _httpClient;
+            _mySQL = mySQL;
             _tweet = tweet;
         }
 
         public async Task<List<Tweet>> GetAllTweets_ListAsync(Modes mode = null)
         {
             List<Tweet> tweetList = new List<Tweet>();
-            mySQL.Quary("SELECT campaign_hashtag,activist_user_name,retweets FROM tweets");
-            using MySqlDataReader results = await mySQL.GetQueryMultyResultsAsync();
+            _mySQL.Quary("SELECT campaign_hashtag,activist_user_name,retweets FROM tweets");
+            using MySqlDataReader results = await _mySQL.GetQueryMultyResultsAsync();
             while (results != null && results.Read()) //for 1 result: if (mdr.Read())
             {
                 try

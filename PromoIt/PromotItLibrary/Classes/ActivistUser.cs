@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns.Actions;
-using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
-using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
-using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
-using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 
 namespace PromotItLibrary.Classes
 {
@@ -31,10 +21,7 @@ namespace PromotItLibrary.Classes
             UserType = "activist";
             RunActions(this);
         }
-        public ActivistUser(IUsers user) : this() 
-        { 
-            CopyUser(user);
-        }
+        public ActivistUser(IUsers user) : this()  { CopyUser(user); }
 
         //Actions
         public async Task<IActivistUser> GetCashAmountAsync(Modes mode = null) =>

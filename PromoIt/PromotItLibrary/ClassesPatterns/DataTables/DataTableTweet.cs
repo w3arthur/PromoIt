@@ -14,7 +14,7 @@ namespace PromotItLibrary.Patterns.DataTables
 {
     public  class DataTableTweet : IDataTableTweet
     {
-        private Tweet _tweet;
+        private readonly Tweet _tweet;
 
         public DataTableTweet(Tweet tweet) 
         {

@@ -16,24 +16,22 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
     public class LinkedListCampaign_MySql : ILinkedListCampaign
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private Campaign _campaign;
+        private readonly MySQL _mySQL;
+        private readonly Campaign _campaign;
 
-        public LinkedListCampaign_MySql(Campaign campaign, MySQL _mySQL, HTTPClient _httpClient) 
+        public LinkedListCampaign_MySql(Campaign campaign, MySQL mySQL) 
         {
             _campaign = campaign;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
+            _mySQL = mySQL;
         }
 
         public async Task<List<ICampaign>> GetAllCampaignsNonProfit_ListAsync(Modes mode = null)
         {
             // Error, no npo user
             if (_campaign.NonProfitUser.UserName == null) throw new Exception("No set for npo User");
-            mySQL.Quary("SELECT * FROM campaigns where non_profit_user_name=@np_user_name"); //replace with mySQL.Procedure() //add LIMIT 20 ~
-            mySQL.ProcedureParameter("np_user_name", _campaign.NonProfitUser.UserName);
-            using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();
+            _mySQL.Quary("SELECT * FROM campaigns where non_profit_user_name=@np_user_name"); //replace with mySQL.Procedure() //add LIMIT 20 ~
+            _mySQL.ProcedureParameter("np_user_name", _campaign.NonProfitUser.UserName);
+            using MySqlDataReader results = await _mySQL.ProceduteExecuteMultyResultsAsync();
             List<ICampaign> campaignsList = new List<ICampaign>();
             while (results != null && results.Read()) //for 1 result: if (mdr.Read())
             {
@@ -57,8 +55,8 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State
 
         public async Task<List<ICampaign>> GetAllCampaigns_ListAsync(Modes mode = null)
         {
-            mySQL.Quary("SELECT * FROM campaigns");
-            using MySqlDataReader results = await mySQL.ProceduteExecuteMultyResultsAsync();
+            _mySQL.Quary("SELECT * FROM campaigns");
+            using MySqlDataReader results = await _mySQL.ProceduteExecuteMultyResultsAsync();
             List<ICampaign> campaignsList = new List<ICampaign>();
             while (results != null && results.Read())
             {

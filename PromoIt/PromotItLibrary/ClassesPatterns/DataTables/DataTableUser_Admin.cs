@@ -15,8 +15,7 @@ namespace PromotItLibrary.Patterns.LinkedLists
     public class DataTableUser_Admin : IDataTableUser_Admin
     {
 
-        private AdminUser _adminUser;
-
+        private readonly AdminUser _adminUser;
 
         public DataTableUser_Admin(AdminUser adminUser) 
         {

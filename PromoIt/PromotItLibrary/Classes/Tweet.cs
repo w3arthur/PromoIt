@@ -1,33 +1,22 @@
-﻿using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
+﻿using System;
+using System.Data;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns;
-using PromotItLibrary.Patterns.Actions;
 using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
 using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 using PromotItLibrary.Patterns.DataTables;
 using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
-using PromotItLibrary.Patterns.LinkedLists;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 using PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State;
 using PromotItLibrary.Patterns.LinkedLists.Queue_State;
-using System;
-using System.Collections.Generic;
 
-using System.Data;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Tweetinvi.Core.Models;
-using Tweetinvi.Models;
+
 using ITweet = PromotItLibrary.Interfaces.ITweet;
 
 namespace PromotItLibrary.Classes
@@ -52,20 +41,22 @@ namespace PromotItLibrary.Classes
         public Tweet()
         {
             //Actions States
-            if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsTweet = new ActionsTweet_Queue(this, _httpClient);
-            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsTweet = new ActionsTweet_Function(this, _httpClient);
-            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsTweet = new ActionsTweet_MySql(this, _mySQL);
-
             //LinkedList States
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                linkedListTweet = new LinkedListTweet_Queue(this, _mySQL, _httpClient);
+            {
+                actionsTweet = new ActionsTweet_Queue(this, _httpClient);
+                linkedListTweet = new LinkedListTweet_Queue(this, _httpClient);
+            }
             else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                linkedListTweet = new LinkedListTweet_Function(this, _mySQL, _httpClient);
-            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                linkedListTweet = new LinkedListTweet_MySql(this, _mySQL, _httpClient);
+            {
+                actionsTweet = new ActionsTweet_Function(this, _httpClient);
+                linkedListTweet = new LinkedListTweet_Function(this, _httpClient);
+            }
+            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+            {
+                actionsTweet = new ActionsTweet_MySql(this, _mySQL);
+                linkedListTweet = new LinkedListTweet_MySql(this, _mySQL);
+            }
 
             //DataTable States ?
             dataTableTweet = new DataTableTweet(this);

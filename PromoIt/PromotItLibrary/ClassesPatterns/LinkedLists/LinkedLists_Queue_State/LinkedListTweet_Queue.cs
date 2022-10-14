@@ -16,20 +16,18 @@ namespace PromotItLibrary.Patterns.LinkedLists.Queue_State
     public class LinkedListTweet_Queue : ILinkedListTweet
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
-        private Tweet _tweet;
+        private readonly HTTPClient _httpClient;
+        private readonly Tweet _tweet;
 
-        public LinkedListTweet_Queue(Tweet tweet, MySQL _mySQL, HTTPClient _httpClient) 
+        public LinkedListTweet_Queue(Tweet tweet, HTTPClient _httpClient) 
         {
-            mySQL = _mySQL;
-            httpClient = _httpClient;
+            this._httpClient = _httpClient;
             _tweet = tweet;
         }
 
         public async Task<List<Tweet>> GetAllTweets_ListAsync(Modes mode = null)
         {
-            return await httpClient.GetMultipleDataRequest(Configuration.PromoitTweetQueue, _tweet, "GetAllTweets");
+            return await _httpClient.GetMultipleDataRequest(Configuration.PromoitTweetQueue, _tweet, "GetAllTweets");
         }
 
 

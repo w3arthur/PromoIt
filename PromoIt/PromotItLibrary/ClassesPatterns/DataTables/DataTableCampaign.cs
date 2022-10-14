@@ -15,7 +15,7 @@ namespace PromotItLibrary.Patterns.DataTables
     public class DataTableCampaign : IDataTableCampaign
     {
 
-        private Campaign _campaign;
+        private readonly Campaign _campaign;
 
         public DataTableCampaign(Campaign campaign) 
         {

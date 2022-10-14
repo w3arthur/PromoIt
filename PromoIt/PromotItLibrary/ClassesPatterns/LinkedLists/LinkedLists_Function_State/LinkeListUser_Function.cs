@@ -17,23 +17,19 @@ namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State
     public class LinkeListUser_Function : ILinkeListUser_Admin
     {
 
-        private static MySQL mySQL;
-        private HTTPClient httpClient;
+        private readonly HTTPClient _httpClient;
+        private readonly AdminUser _adminUser;
 
-        private AdminUser _adminUser;
-
-
-        public LinkeListUser_Function(AdminUser adminUser, MySQL _mySQL, HTTPClient _httpClient) 
+        public LinkeListUser_Function(AdminUser adminUser, HTTPClient httpClient) 
         {
+            _httpClient = httpClient;
             _adminUser = adminUser;
-            mySQL= _mySQL;
-            httpClient = _httpClient;
         }
 
 
         public async Task<List<IUsers>> GetAllUsers_ListAsync(Modes mode = null)
         {
-            return await httpClient.GetMultipleDataRequest<IUsers>(Configuration.SetUserFunctions, null, "GetAllUsers");
+            return await _httpClient.GetMultipleDataRequest<IUsers>(Configuration.SetUserFunctions, null, "GetAllUsers");
         }
 
     }

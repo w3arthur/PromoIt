@@ -20,6 +20,6 @@ namespace PromotItLibrary.Classes
             UserType = "business";
             RunActions(this);
         }
-       // public BusinessUser(Users user) : base(user) { UserType = "business"; actionsUser = new ActionsUser(this, mySQL, httpClient); }
+        //public BusinessUser(Users user) : this(user) { CopyUser(this); }
     }
 }

@@ -1,21 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
 using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
-using PromotItLibrary.Patterns;
-using PromotItLibrary.Patterns.Actions;
-using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
-using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
-using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 using PromotItLibrary.Patterns.LinkedLists;
 using PromotItLibrary.Patterns.LinkedLists.DataTables_Interfaces;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State;
@@ -34,21 +23,19 @@ namespace PromotItLibrary.Classes
             UserType = "admin";
             RunActions(this);
 
-            //LinkedList States
+            //LinkedList States Admin
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                linkeListUser = new LinkeListUser_Queue(this, _mySQL, _httpClient);
+                linkeListUser = new LinkeListUser_Queue(this, _httpClient);
             else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                linkeListUser = new LinkeListUser_Function(this, _mySQL, _httpClient);
+                linkeListUser = new LinkeListUser_Function(this, _httpClient);
             if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                linkeListUser = new LinkeListUser_MySql(this, _mySQL, _httpClient);
+                linkeListUser = new LinkeListUser_MySql(this, _mySQL);
 
-            //DataTable States ?
+            //DataTable Admin
             dataTableUser = new DataTableUser_Admin(this);
         }
 
-        public AdminUser(IUsers user) : this() {
-            CopyUser(user);
-        }
+        public AdminUser(IUsers user) : this() { CopyUser(user); }
 
         //LinkedList
         public async Task<List<IUsers>> GetAllUsers_ListAsync(Modes mode = null) =>
