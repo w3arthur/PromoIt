@@ -17,42 +17,12 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Queue_State
 
         private static MySQL mySQL;
         private HTTPClient httpClient;
-
-        private Users _user;
-        private ActivistUser _activistUser;
-        private AdminUser _adminUser;
-        private NonProfitUser _nonProfitUser;
-        private BusinessUser _businessUser;
+        private IUsers _user;
 
 
-        public ActionsUser_Queue(Users user, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsUser_Queue(IUsers user, MySQL _mySQL, HTTPClient _httpClient)
         {
             _user = user;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
-        }
-        public ActionsUser_Queue(ActivistUser activistUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _activistUser = activistUser;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
-        }
-        public ActionsUser_Queue(AdminUser adminUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _adminUser = adminUser;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
-        }
-        public ActionsUser_Queue(NonProfitUser nonProfitUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _nonProfitUser = nonProfitUser;
-            mySQL = _mySQL;
-            httpClient = _httpClient;
-        }
-        public ActionsUser_Queue(BusinessUser businessUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _businessUser = businessUser;
-            mySQL = _mySQL;
             httpClient = _httpClient;
         }
 
@@ -63,28 +33,21 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Queue_State
 
         public async Task<bool> RegisterAsync(Modes mode = null)
         {
-            if (_activistUser != null)
-            {
-                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserQueue, _activistUser, "");
-            }
-            else if (_adminUser != null)
-            {
-                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserQueue, _adminUser, "");
-            }
-            else if (_nonProfitUser != null)
-            {
-                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserQueue, _nonProfitUser, "");
-            }
-            else if (_businessUser != null)
-            {
-                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserQueue, _businessUser, "");
-            }
+            if (_user is ActivistUser)
+                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserQueue, (ActivistUser)_user, "");
+            else if (_user is AdminUser)
+                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserQueue, (AdminUser)_user, "");
+            else if (_user is NonProfitUser)
+                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserQueue, (NonProfitUser)_user, "");
+            else if (_user is BusinessUser)
+                return (bool)await httpClient.PostSingleDataInsert(Configuration.SetUserQueue, (BusinessUser)_user, "");
             return false;
         }
 
         public async Task<IActivistUser> GetCashAmountAsync(Modes mode = null)
         {
-            return await httpClient.GetSingleDataRequest(Configuration.PromoitProductQueue, _activistUser, "GetCashAmount");
+            if (!(_user is ActivistUser)) return null;
+            return await httpClient.GetSingleDataRequest(Configuration.PromoitProductQueue, (ActivistUser)_user, "GetCashAmount");
         }
 
     }

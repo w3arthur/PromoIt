@@ -17,37 +17,11 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
 
         private static MySQL mySQL;
         private HTTPClient httpClient;
+        private IUsers _user;
 
-        private Users _user;
-        private ActivistUser _activistUser;
-        private AdminUser _adminUser;
-        private NonProfitUser _nonProfitUser;
-        private BusinessUser _businessUser;
-
-
-        public ActionsUser_MySql(Users user, MySQL _mySQL, HTTPClient _httpClient)
+        public ActionsUser_MySql(IUsers user, MySQL _mySQL, HTTPClient _httpClient)
         {
-            _user = user;
-            mySQL = _mySQL;
-        }
-        public ActionsUser_MySql(ActivistUser activistUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _activistUser = activistUser;
-            mySQL = _mySQL;
-        }
-        public ActionsUser_MySql(AdminUser adminUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _adminUser = adminUser;
-            mySQL = _mySQL;
-        }
-        public ActionsUser_MySql(NonProfitUser nonProfitUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _nonProfitUser = nonProfitUser;
-            mySQL = _mySQL;
-        }
-        public ActionsUser_MySql(BusinessUser businessUser, MySQL _mySQL, HTTPClient _httpClient)
-        {
-            _businessUser = businessUser;
+             _user = user;
             mySQL = _mySQL;
         }
 
@@ -77,8 +51,9 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
 
         public async Task<bool> RegisterAsync(Modes mode = null)
         {
-            if (_activistUser != null)
+            if (_user is ActivistUser)
             {
+                ActivistUser _activistUser = (ActivistUser)_user;
                 mySQL.Procedure("register_activist");
                 mySQL.ProcedureParameter("_username", _activistUser.UserName);
                 mySQL.ProcedureParameter("_password", _activistUser.UserPassword);
@@ -89,16 +64,18 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
                 mySQL.ProcedureParameter("_cash", _activistUser.Cash ?? ActivistUser.CashDefultSet);
                 return await mySQL.ProceduteExecuteAsync();
             }
-            else if (_adminUser != null)
+            else if (_user is AdminUser)
             {
+                AdminUser _adminUser = (AdminUser)_user;
                 mySQL.Procedure("register_admin");
                 mySQL.SetParameter("_name", _adminUser.Name);
                 mySQL.SetParameter("_username", _adminUser.UserName);
                 mySQL.SetParameter("_password", _adminUser.UserPassword);
                 return await mySQL.ProceduteExecuteAsync();
             }
-            else if (_nonProfitUser != null)
+            else if (_user is NonProfitUser)
             {
+                NonProfitUser _nonProfitUser = (NonProfitUser)_user;
                 mySQL.Procedure("register_non_profit");
                 mySQL.SetParameter("_username", _nonProfitUser.UserName);
                 mySQL.SetParameter("_password", _nonProfitUser.UserPassword);
@@ -107,8 +84,9 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
                 mySQL.SetParameter("_website", _nonProfitUser.WebSite);
                 return await mySQL.ProceduteExecuteAsync();
             }
-            else if (_businessUser != null)
+            else if (_user is BusinessUser)
             {
+                BusinessUser _businessUser = (BusinessUser)_user;
                 mySQL.Procedure("register_business");
                 mySQL.SetParameter("_username", _businessUser.UserName);
                 mySQL.SetParameter("_password", _businessUser.UserPassword);
@@ -121,6 +99,8 @@ namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
 
         public async Task<IActivistUser> GetCashAmountAsync(Modes mode = null)
         {
+            if (!(_user is ActivistUser)) return null;
+            ActivistUser _activistUser = (ActivistUser)_user;
             mySQL.Quary("SELECT cash FROM promoit.users_activists Where user_name = @_username LIMIT 1");
             mySQL.ProcedureParameter("_username", _activistUser.UserName);
             using MySqlDataReader results = await mySQL.GetQueryMultyResultsAsync();
