@@ -10,8 +10,12 @@ using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
 using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 using PromotItLibrary.Patterns.DataTables;
+using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
 using PromotItLibrary.Patterns.LinkedLists;
+using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
+using PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State;
+using PromotItLibrary.Patterns.LinkedLists.Queue_State;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,30 +34,33 @@ namespace PromotItLibrary.Classes
         private HTTPClient _httpClient = Configuration.HTTPClient;
         Modes _mode;
         private IActionsCampaign actionsCampaign;
-        private LinkedListCampaign linkedListCampaign;
-        private DataTableCampaign dataTableCampaign;
+        private ILinkedListCampaign linkedListCampaign;
+        private IDataTableCampaign dataTableCampaign;
 
         public string Name { get; set; }
         public string Hashtag { get; set; }
         public string Url { get; set; }
         public IUsers NonProfitUser { get; set; }
 
-
-
-
         public Campaign() 
         {
-            //Action
+            //Action States
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
                 actionsCampaign = new ActionsCampaign_Queue(this, _httpClient);
             else if ((_mode ?? Configuration.Mode) == Modes.Functions)
                 actionsCampaign = new ActionsCampaign_Function(this, _httpClient);
-            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
                 actionsCampaign = new ActionsCampaign_MySql(this, _mySQL);
 
+            //LinkedList States
+            if ((_mode ?? Configuration.Mode) == Modes.Queue)
+                linkedListCampaign = new LinkedListCampaign_Queue(this, _mySQL, _httpClient);
+            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
+                linkedListCampaign = new LinkedListCampaign_Function(this, _mySQL, _httpClient);
+            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                linkedListCampaign = new LinkedListCampaign_MySql(this, _mySQL, _httpClient);
 
-
-            linkedListCampaign = new LinkedListCampaign(this, _mySQL, _httpClient);
+            //DataTable States ?
             dataTableCampaign = new DataTableCampaign(this);
         }
 

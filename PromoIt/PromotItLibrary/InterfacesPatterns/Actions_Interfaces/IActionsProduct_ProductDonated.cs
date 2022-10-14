@@ -12,5 +12,6 @@ namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
     {
         Task<bool> SetBuyAnItemAsync(Modes mode = null);
         Task<bool> SetProductShippingAsync(Modes mode = null);
+        //Task SetTwitterMessagTweet_SetBuyAnItemAsync();
     }
 }

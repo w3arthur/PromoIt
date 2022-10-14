@@ -12,17 +12,24 @@ using Tweetinvi.Core.Models;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using PromotItLibrary.Enums;
+using MySqlX.XDevAPI;
+using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
+using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
+using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
+using System.Net.Http;
+using System.Xml.Linq;
+using Tweetinvi.Models;
+using PromotItLibrary.Patterns.LinkedLists.DataTables_Interfaces;
 
 namespace PromotItLibrary.Classes
 {
     public class Users : IUsers, IActionsUser_AllUsers
     {
-        protected static MySQL mySQL = Configuration.MySQL;
-        protected HTTPClient httpClient = Configuration.HTTPClient;
+        protected MySQL _mySQL = Configuration.MySQL;
+        protected HTTPClient _httpClient = Configuration.HTTPClient;
 
-        protected ActionsUser actionsUser;
-        protected LinkeListUser_Admin linkeListUser;
-        protected DataTableUser_Admin dataTableUser;
+        protected Modes _mode;
+        protected IActionsUser actionsUser;
 
         public string UserName { get; set; }
         public string UserPassword { get; set; }
@@ -31,7 +38,14 @@ namespace PromotItLibrary.Classes
         public string Token { get; set; }
         public Users() 
         {
-            actionsUser = new ActionsUser(this, mySQL, httpClient);
+            //Action States
+            if ((_mode ?? Configuration.Mode) == Modes.Queue)
+                actionsUser = new ActionsUser_Queue(this, _httpClient);
+            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
+                actionsUser = new ActionsUser_Function(this, _mySQL, _httpClient);
+            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                actionsUser = new ActionsUser_MySql(this, _mySQL, _httpClient);
+
         }
 
         public Users(IUsers user) : this()

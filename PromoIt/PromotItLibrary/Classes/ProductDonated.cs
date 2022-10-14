@@ -15,17 +15,27 @@ using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Enums;
+using MySqlX.XDevAPI;
+using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
+using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
+using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
+using System.Net.Http;
+using System.Xml.Linq;
+using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State;
+using PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State;
+using PromotItLibrary.Patterns.LinkedLists.Queue_State;
 
 namespace PromotItLibrary.Classes
 {
     public class ProductDonated : IProductDonated, IActionsProduct_ProductDonated, ILinkedListProduct_ProductDonated, IDataTabletProduct_ProductDonated
     {
-        private static MySQL mySQL = Configuration.MySQL;
-        private HTTPClient httpClient = Configuration.HTTPClient;
+        private MySQL _mySQL = Configuration.MySQL;
+        private HTTPClient _httpClient = Configuration.HTTPClient;
 
-        private ActionsProduct actionsProduct;
-        private LinkedListProduct linkedListProduct;
-        private DataTabletProduct dataTabletProduct;
+        private Modes _mode;
+        private IActionsProduct actionsProduct;
+        private ILinkedListProduct linkedListProduct;
+        private IDataTabletProduct dataTabletProduct;
 
         public IProductInCampaign ProductInCampaign { get; set; }
         public IUsers ActivistUser { get; set; }
@@ -35,15 +45,45 @@ namespace PromotItLibrary.Classes
 
         public ProductDonated()
         {
-            actionsProduct = new ActionsProduct(this, null, mySQL, httpClient);
-            linkedListProduct = new LinkedListProduct(this, null, mySQL, httpClient);
+            //Actions State
+            if ((_mode ?? Configuration.Mode) == Modes.Queue)
+                actionsProduct = new ActionsProduct_Queue(this, null, _httpClient);
+            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
+                actionsProduct = new ActionsProduct_Function(this, null, _httpClient);
+            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                actionsProduct = new ActionsProduct_MySql(this, null, _mySQL);
+
+            //LinkdeList States
+            if ((_mode ?? Configuration.Mode) == Modes.Queue)
+                linkedListProduct = new LinkedListProduct_Queue(this, null, _mySQL, _httpClient);
+            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
+                linkedListProduct = new LinkedListProduct_Function(this, null, _mySQL, _httpClient);
+            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                linkedListProduct = new LinkedListProduct_MySql(this, null, _mySQL, _httpClient);
+
+            //DataTable States ?
             dataTabletProduct = new DataTabletProduct(this, null);
         }
 
 
         //Actions
-        public async Task SetTwitterMessagTweet_SetBuyAnItemAsync() =>
-            await actionsProduct.SetTwitterMessagTweet_SetBuyAnItemAsync();
+        public async Task SetTwitterMessagTweet_SetBuyAnItemAsync()
+        {
+            try
+            {
+                await Twitter.SetTwitterMessage_SetBuyAnItemAsync($"Product: {this.ProductInCampaign.Name}, Quantity {this.Quantity}" +
+                    $"\nOrdered by Social Activist: @{this.ActivistUser.UserName}" +
+                    $"\nFrom Business: {this.ProductInCampaign.BusinessUser.UserName}");
+                Loggings.ReportLog($"Trying To Set a tweet for buying an item, Activist UserName ({this.ActivistUser.UserName}) CampaignName ({this.ProductInCampaign.Name}) BuisnessUserName ({this.ProductInCampaign.BusinessUser.UserName})" +
+                    $"\nProductId ({this.ProductInCampaign.Id}) Quantity ({this.Quantity})");
+            }
+            catch
+            {  //Twitter exeption
+                Loggings.ErrorLog($"Some error to set a tweet for buying an item, Activist UserName ({this.ActivistUser.UserName}) CampaignName ({this.ProductInCampaign.Name}) BuisnessUserName ({this.ProductInCampaign.BusinessUser.UserName})" +
+                    $"\nProductId ({this.ProductInCampaign.Id}) Quantity ({this.Quantity})");
+            }
+        }
+
         public async Task<bool> SetBuyAnItemAsync(Modes mode = null) =>
             await actionsProduct.SetBuyAnItemAsync(mode);
         public async Task<bool> SetProductShippingAsync(Modes mode = null) =>

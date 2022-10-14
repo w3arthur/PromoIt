@@ -1,33 +1,46 @@
 ﻿using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
 using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using PromotItLibrary.Patterns.Actions;
+using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
 using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
+using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
+using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 using PromotItLibrary.Patterns.DataTables;
+using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
 using PromotItLibrary.Patterns.LinkedLists;
+using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
+using PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State;
+using PromotItLibrary.Patterns.LinkedLists.Queue_State;
 using System;
 using System.Collections.Generic;
 
 using System.Data;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Tweetinvi.Core.Models;
+using Tweetinvi.Models;
+using ITweet = PromotItLibrary.Interfaces.ITweet;
 
 namespace PromotItLibrary.Classes
 {
     public class Tweet : ITweet, IActionsTweet, ILinkedListTweet
     {
-        private static MySQL mySQL = Configuration.MySQL;
-        private HTTPClient httpClient = Configuration.HTTPClient;
+        private static MySQL _mySQL = Configuration.MySQL;
+        private HTTPClient _httpClient = Configuration.HTTPClient;
 
-        private LinkedListTweet linkedListTweet;
-        private DataTableTweet dataTableTweet;
-        private ActionsTweet actionsTweet;
+        Modes _mode;
+        private IActionsTweet actionsTweet;
+        private ILinkedListTweet linkedListTweet;
+        private IDataTableTweet dataTableTweet;
 
         public string Id { get; set; }
         public ICampaign Campaign { get; set; }
@@ -38,8 +51,23 @@ namespace PromotItLibrary.Classes
 
         public Tweet()
         {
-            actionsTweet = new ActionsTweet( this, mySQL, httpClient);
-            linkedListTweet = new LinkedListTweet(this, mySQL, httpClient);
+            //Actions States
+            if ((_mode ?? Configuration.Mode) == Modes.Queue)
+                actionsTweet = new ActionsTweet_Queue(this, _httpClient);
+            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
+                actionsTweet = new ActionsTweet_Function(this, _httpClient);
+            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                actionsTweet = new ActionsTweet_MySql(this, _mySQL);
+
+            //LinkedList States
+            if ((_mode ?? Configuration.Mode) == Modes.Queue)
+                linkedListTweet = new LinkedListTweet_Queue(this, _mySQL, _httpClient);
+            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
+                linkedListTweet = new LinkedListTweet_Function(this, _mySQL, _httpClient);
+            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                linkedListTweet = new LinkedListTweet_MySql(this, _mySQL, _httpClient);
+
+            //DataTable States ?
             dataTableTweet = new DataTableTweet(this);
         }
 
