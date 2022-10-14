@@ -5,20 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Classes\DataTables\Function_State\**" />
-    <Compile Remove="Classes\DataTables\Interfaces\**" />
-    <Compile Remove="Classes\DataTables\MySql_State\**" />
-    <Compile Remove="Classes\DataTables\Queue_State\**" />
+    <Compile Remove="ClassesStatePattern\DataTables\Function_State\**" />
+    <Compile Remove="ClassesStatePattern\DataTables\Interfaces\**" />
+    <Compile Remove="ClassesStatePattern\DataTables\MySql_State\**" />
+    <Compile Remove="ClassesStatePattern\DataTables\Queue_State\**" />
     <Compile Remove="Interfaces\DataTables\**" />
-    <EmbeddedResource Remove="Classes\DataTables\Function_State\**" />
-    <EmbeddedResource Remove="Classes\DataTables\Interfaces\**" />
-    <EmbeddedResource Remove="Classes\DataTables\MySql_State\**" />
-    <EmbeddedResource Remove="Classes\DataTables\Queue_State\**" />
+    <EmbeddedResource Remove="ClassesStatePattern\DataTables\Function_State\**" />
+    <EmbeddedResource Remove="ClassesStatePattern\DataTables\Interfaces\**" />
+    <EmbeddedResource Remove="ClassesStatePattern\DataTables\MySql_State\**" />
+    <EmbeddedResource Remove="ClassesStatePattern\DataTables\Queue_State\**" />
     <EmbeddedResource Remove="Interfaces\DataTables\**" />
-    <None Remove="Classes\DataTables\Function_State\**" />
-    <None Remove="Classes\DataTables\Interfaces\**" />
-    <None Remove="Classes\DataTables\MySql_State\**" />
-    <None Remove="Classes\DataTables\Queue_State\**" />
+    <None Remove="ClassesStatePattern\DataTables\Function_State\**" />
+    <None Remove="ClassesStatePattern\DataTables\Interfaces\**" />
+    <None Remove="ClassesStatePattern\DataTables\MySql_State\**" />
+    <None Remove="ClassesStatePattern\DataTables\Queue_State\**" />
     <None Remove="Interfaces\DataTables\**" />
   </ItemGroup>
 

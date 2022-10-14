@@ -31,6 +31,7 @@ namespace PromoitFunction
             string className = "Data";
             log.LogInformation($"{azureFunctionString} Find {className} Activated");
 
+
             try
             {   //get
 
