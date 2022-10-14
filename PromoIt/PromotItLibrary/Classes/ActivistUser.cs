@@ -29,26 +29,11 @@ namespace PromotItLibrary.Classes
         public ActivistUser() : base()
         { 
             UserType = "activist";
-
-            //Action States ? duplicated
-            if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsUser = new ActionsUser_Queue(this, _httpClient);
-            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsUser = new ActionsUser_Function(this, _mySQL, _httpClient);
-            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsUser = new ActionsUser_MySql(this, _mySQL, _httpClient);
+            RunActions(this);
         }
-        public ActivistUser(IUsers user) : base(user) 
+        public ActivistUser(IUsers user) : this() 
         { 
-            UserType = "activist";
-
-            //Action States ? duplicated
-            if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsUser = new ActionsUser_Queue(this, _httpClient);
-            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsUser = new ActionsUser_Function(this, _mySQL, _httpClient);
-            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsUser = new ActionsUser_MySql(this, _mySQL, _httpClient);
+            CopyUser(user);
         }
 
         //Actions

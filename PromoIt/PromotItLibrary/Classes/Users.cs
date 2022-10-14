@@ -20,6 +20,8 @@ using System.Net.Http;
 using System.Xml.Linq;
 using Tweetinvi.Models;
 using PromotItLibrary.Patterns.LinkedLists.DataTables_Interfaces;
+using System.Reflection;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 
 namespace PromotItLibrary.Classes
 {
@@ -38,16 +40,27 @@ namespace PromotItLibrary.Classes
         public Users() 
         {
             //Action States
-            if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsUser = new ActionsUser_Queue(this, _httpClient);
-            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsUser = new ActionsUser_Function(this, _mySQL, _httpClient);
-            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsUser = new ActionsUser_MySql(this, _mySQL, _httpClient);
-
+            RunActions(this);
         }
 
         public Users(IUsers user) : this()
+        {
+            CopyUser(user);
+        }
+
+
+        protected void RunActions(dynamic @user)
+        {
+            if ((_mode ?? Configuration.Mode) == Modes.Queue)
+                actionsUser = new ActionsUser_Queue(@user, _httpClient);
+            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
+                actionsUser = new ActionsUser_Function(@user, _mySQL, _httpClient);
+            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
+                actionsUser = new ActionsUser_MySql(@user, _mySQL, _httpClient);
+        }
+
+
+        protected void CopyUser(IUsers user)
         {
             UserName = user.UserName;
             UserPassword = user.UserPassword;

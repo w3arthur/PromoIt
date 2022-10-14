@@ -22,14 +22,7 @@ namespace PromotItLibrary.Classes
         public NonProfitUser() : base()
         {
             UserType = "non-profit";
-
-            //Action States ? duplicated
-            if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsUser = new ActionsUser_Queue(this, _httpClient);
-            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsUser = new ActionsUser_Function(this, _mySQL, _httpClient);
-            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsUser = new ActionsUser_MySql(this, _mySQL, _httpClient);
+            RunActions(this);
         }
         //public NonProfitUser(Users user) : base(user) { UserType = "non-profit"; actionsUser = new ActionsUser(this, mySQL, httpClient); }
 

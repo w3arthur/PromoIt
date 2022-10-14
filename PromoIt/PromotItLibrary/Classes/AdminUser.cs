@@ -32,14 +32,7 @@ namespace PromotItLibrary.Classes
 
         public AdminUser() : base() {
             UserType = "admin";
-
-            //Action States ? duplicated
-            if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsUser = new ActionsUser_Queue(this, _httpClient);
-            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsUser = new ActionsUser_Function(this, _mySQL, _httpClient);
-            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsUser = new ActionsUser_MySql(this, _mySQL, _httpClient);
+            RunActions(this);
 
             //LinkedList States
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
@@ -53,27 +46,8 @@ namespace PromotItLibrary.Classes
             dataTableUser = new DataTableUser_Admin(this);
         }
 
-        public AdminUser(IUsers user) : base(user) {
-            UserType = "admin";
-
-            //Action States ? duplicated
-            if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsUser = new ActionsUser_Queue(this, _httpClient);
-            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsUser = new ActionsUser_Function(this, _mySQL, _httpClient);
-            else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsUser = new ActionsUser_MySql(this, _mySQL, _httpClient);
-
-            //LinkedList States
-            if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                linkeListUser = new LinkeListUser_Queue(this, _mySQL, _httpClient);
-            else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                linkeListUser = new LinkeListUser_Function(this, _mySQL, _httpClient);
-            if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                linkeListUser = new LinkeListUser_MySql(this, _mySQL, _httpClient);
-
-            //DataTable States ?
-            dataTableUser = new DataTableUser_Admin(this);
+        public AdminUser(IUsers user) : this() {
+            CopyUser(user);
         }
 
         //LinkedList
