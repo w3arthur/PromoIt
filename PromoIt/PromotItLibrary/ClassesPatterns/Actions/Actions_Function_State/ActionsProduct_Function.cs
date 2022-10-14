@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions.Actions_Fuction_State
 {
-    public class ActionsProduct_Function : IActionsProduct
+    public class ActionsProduct_Function : IActionsProduct_ProductDonated, IActionsProduct_ProductInCampaign
     {
 
         private readonly HTTPClient _httpClient;

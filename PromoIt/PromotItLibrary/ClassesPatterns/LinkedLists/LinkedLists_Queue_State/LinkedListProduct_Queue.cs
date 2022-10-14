@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists.Queue_State
 {
-    public class LinkedListProduct_Queue : ILinkedListProduct, ILinkedListProduct_ProductDonated
+    public class LinkedListProduct_Queue : ILinkedListProduct_ProductDonated, ILinkedListProduct_ProductInCampaign
     {
 
         private static MySQL mySQL;

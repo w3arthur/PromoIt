@@ -25,10 +25,9 @@ namespace PromotItLibrary.Classes
 {
     public class Users : IUsers, IActionsUser_AllUsers
     {
-        protected MySQL _mySQL = Configuration.MySQL;
-        protected HTTPClient _httpClient = Configuration.HTTPClient;
-
-        protected Modes _mode;
+        protected readonly MySQL _mySQL = Configuration.MySQL;
+        protected readonly HTTPClient _httpClient = Configuration.HTTPClient;
+        protected readonly Modes _mode;
         protected IActionsUser actionsUser;
 
         public string UserName { get; set; }

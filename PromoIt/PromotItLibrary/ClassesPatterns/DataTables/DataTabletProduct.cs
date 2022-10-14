@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.DataTables
 {
-    public class DataTabletProduct : IDataTabletProduct
+    public class DataTabletProduct : IDataTabletProduct_ProductDonated, IDataTabletProduct_ProductInCampaign
     {
 
         private ProductDonated _productDonated;

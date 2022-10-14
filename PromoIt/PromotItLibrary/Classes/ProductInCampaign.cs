@@ -28,13 +28,13 @@ namespace PromotItLibrary.Classes
 {
     public class ProductInCampaign : IProductInCampaign, IActionsProduct_ProductInCampaign, ILinkedListProduct_ProductInCampaign, IDataTabletProduct_ProductInCampaign
     {
-        private static MySQL _mySQL = Configuration.MySQL;
-        private HTTPClient _httpClient = Configuration.HTTPClient;
+        private readonly MySQL _mySQL = Configuration.MySQL;
+        private readonly HTTPClient _httpClient = Configuration.HTTPClient;
 
-        private Modes _mode;
-        private IActionsProduct actionsProduct;
-        private ILinkedListProduct linkedListProduct;
-        private IDataTabletProduct dataTabletProduct;
+        private readonly Modes _mode;
+        private readonly IActionsProduct_ProductInCampaign actionsProduct;
+        private readonly ILinkedListProduct_ProductInCampaign linkedListProduct;
+        private readonly IDataTabletProduct_ProductInCampaign dataTabletProduct;
 
 
         public string Id { get; set; }

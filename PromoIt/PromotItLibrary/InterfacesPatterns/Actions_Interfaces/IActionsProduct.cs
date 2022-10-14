@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions.Actions_Interfaces
 {
-    public interface IActionsProduct : IActionsProduct_ProductDonated, IActionsProduct_ProductInCampaign
+/*    public interface IActionsProduct : IActionsProduct_ProductDonated, IActionsProduct_ProductInCampaign
     {
 
-    }
+    }*/
 }

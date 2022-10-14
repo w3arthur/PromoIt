@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions.Actions_MySql_State
 {
-    public class ActionsProduct_MySql : IActionsProduct
+    public class ActionsProduct_MySql : IActionsProduct_ProductDonated, IActionsProduct_ProductInCampaign
     {
 
         private readonly MySQL _mySQL;

@@ -30,12 +30,12 @@ namespace PromotItLibrary.Classes
     public class Campaign : ICampaign, IActionsCampaign, ILinkedListCampaign
     {
         //Move to Interfaces
-        private static MySQL _mySQL = Configuration.MySQL;
-        private HTTPClient _httpClient = Configuration.HTTPClient;
-        Modes _mode;
-        private IActionsCampaign actionsCampaign;
-        private ILinkedListCampaign linkedListCampaign;
-        private IDataTableCampaign dataTableCampaign;
+        private readonly MySQL _mySQL = Configuration.MySQL;
+        private readonly HTTPClient _httpClient = Configuration.HTTPClient;
+        private readonly Modes _mode;
+        private readonly IActionsCampaign actionsCampaign;
+        private readonly ILinkedListCampaign linkedListCampaign;
+        private readonly IDataTableCampaign dataTableCampaign;
 
         public string Name { get; set; }
         public string Hashtag { get; set; }

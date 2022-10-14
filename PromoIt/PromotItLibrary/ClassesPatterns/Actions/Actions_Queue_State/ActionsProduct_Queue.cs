@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.Actions.Actions_Queue_State
 {
-    public class ActionsProduct_Queue : IActionsProduct
+    public class ActionsProduct_Queue : IActionsProduct_ProductDonated, IActionsProduct_ProductInCampaign
     {
 
         private readonly HTTPClient _httpClient;

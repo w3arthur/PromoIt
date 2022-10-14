@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.DataTables.DataTables_Interfaces
 {
-    public interface IDataTabletProduct : IDataTabletProduct_ProductDonated, IDataTabletProduct_ProductInCampaign
+/*    public interface IDataTabletProduct : IDataTabletProduct_ProductDonated, IDataTabletProduct_ProductInCampaign
     {
 
-    }
+    }*/
 }

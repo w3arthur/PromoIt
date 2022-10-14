@@ -27,8 +27,8 @@ namespace PromotItLibrary.Classes
 {
     public class AdminUser : Users, IAdminUser, ILinkeListUser_Admin, IDataTableUser_Admin
     {
-        private ILinkeListUser_Admin linkeListUser;
-        private IDataTableUser_Admin dataTableUser;
+        private readonly ILinkeListUser_Admin linkeListUser;
+        private readonly IDataTableUser_Admin dataTableUser;
 
         public AdminUser() : base() {
             UserType = "admin";

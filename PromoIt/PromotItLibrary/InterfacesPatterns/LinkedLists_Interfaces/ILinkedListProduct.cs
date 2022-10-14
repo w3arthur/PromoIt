@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces
 {
-    public interface ILinkedListProduct : ILinkedListProduct_ProductDonated, ILinkedListProduct_ProductInCampaign
+/*    public interface ILinkedListProduct : ILinkedListProduct_ProductDonated, ILinkedListProduct_ProductInCampaign
     {
 
-    }
+    }*/
 }

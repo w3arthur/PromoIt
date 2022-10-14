@@ -34,13 +34,13 @@ namespace PromotItLibrary.Classes
 {
     public class Tweet : ITweet, IActionsTweet, ILinkedListTweet
     {
-        private static MySQL _mySQL = Configuration.MySQL;
-        private HTTPClient _httpClient = Configuration.HTTPClient;
+        private readonly MySQL _mySQL = Configuration.MySQL;
+        private readonly HTTPClient _httpClient = Configuration.HTTPClient;
 
-        Modes _mode;
-        private IActionsTweet actionsTweet;
-        private ILinkedListTweet linkedListTweet;
-        private IDataTableTweet dataTableTweet;
+        private readonly Modes _mode;
+        private readonly IActionsTweet actionsTweet;
+        private readonly ILinkedListTweet linkedListTweet;
+        private readonly IDataTableTweet dataTableTweet;
 
         public string Id { get; set; }
         public ICampaign Campaign { get; set; }
