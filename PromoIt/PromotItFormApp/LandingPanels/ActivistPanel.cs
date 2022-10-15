@@ -2,7 +2,8 @@
 using PromotItFormApp.LandingPanels;
 using PromotItFormApp.LandingPanelsActions;
 using PromotItLibrary.Classes;
-using PromotItLibrary.Interfaces;
+using PromotItLibrary.Classes.Users;
+using PromotItLibrary.Interfaces.Users;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using System;

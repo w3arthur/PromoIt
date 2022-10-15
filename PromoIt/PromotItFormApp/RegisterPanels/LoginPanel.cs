@@ -9,11 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PromotItLibrary.Classes;
 using PromotItLibrary.Models;
 using PromotItFormApp;
-using PromotItLibrary.Interfaces;
 using PromotItLibrary.Patterns;
+using PromotItLibrary.Interfaces.Users;
+using PromotItLibrary.Classes.Users;
 
 namespace PromotItFormApp.RegisterPanels
 {

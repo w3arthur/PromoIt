@@ -1,8 +1,8 @@
 using Moq;
 using PromoitTesting.TestClasses;
-using PromotItLibrary.Classes;
+using PromotItLibrary.Classes.Users;
 using PromotItLibrary.Enums;
-using PromotItLibrary.Interfaces;
+using PromotItLibrary.Interfaces.Users;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using System;

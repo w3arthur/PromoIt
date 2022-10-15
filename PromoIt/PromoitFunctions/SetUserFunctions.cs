@@ -10,11 +10,11 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using PromotItLibrary.Models;
-using PromotItLibrary.Classes;
 using System.Threading;
 using PromotItLibrary.Patterns;
 using PromotItLibrary.Enums;
-using PromotItLibrary.Interfaces;
+using PromotItLibrary.Interfaces.Users;
+using PromotItLibrary.Classes.Users;
 
 namespace PromoitFunction
 {

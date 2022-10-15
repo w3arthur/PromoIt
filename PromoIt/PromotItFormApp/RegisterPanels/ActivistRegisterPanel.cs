@@ -1,4 +1,4 @@
-﻿ using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Patterns;
+using PromotItLibrary.Classes.Users;
 
 namespace PromotItFormApp.RegisterPanels
 {

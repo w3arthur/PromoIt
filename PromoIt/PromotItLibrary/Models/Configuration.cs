@@ -2,6 +2,7 @@
 using PromotItLibrary.Classes;
 using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
+using PromotItLibrary.Interfaces.Users;
 using System.Threading.Tasks;
 using Tweetinvi;
 
@@ -11,6 +12,7 @@ namespace PromotItLibrary.Models
     public class Configuration
     {
         /*TODO*/
+        // clear function dependencies on _MySQL and _HttpClient
         // Minimize the States to several Classes (They will combine all the)
         // Split register to types! instead of if statement
         // Fix Key Organization

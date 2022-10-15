@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using PromotItLibrary.Models;
 using PromotItLibrary.Classes;
 using PromotItLibrary.Patterns;
+using PromotItLibrary.Classes.Users;
 
 namespace PromotItFormApp.RegisterPanels
 {

@@ -14,7 +14,8 @@ using PromotItLibrary.Classes;
 using System.Threading;
 using PromotItLibrary.Patterns;
 using PromotItLibrary.Enums;
-using PromotItLibrary.Interfaces;
+using PromotItLibrary.Interfaces.Users;
+using PromotItLibrary.Classes.Users;
 
 namespace PromoitFunction
 {

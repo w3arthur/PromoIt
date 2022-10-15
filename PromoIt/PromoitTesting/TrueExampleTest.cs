@@ -1,7 +1,7 @@
 ﻿using Moq;
 using PromoitTesting.TestClasses;
 using PromotItLibrary.Classes;
-using PromotItLibrary.Interfaces;
+using PromotItLibrary.Interfaces.Users;
 using PromotItLibrary.Models;
 using System;
 using Xunit;

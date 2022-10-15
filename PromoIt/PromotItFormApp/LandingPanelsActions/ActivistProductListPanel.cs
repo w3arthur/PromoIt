@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Classes.Users;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
 using System;

@@ -10,6 +10,7 @@ using Xunit;
 using Tweetinvi;
 using Tweetinvi.Parameters;
 using PromotItLibrary.Patterns;
+using PromotItLibrary.Classes.Users;
 
 namespace PromoitTesting
 {

@@ -6,18 +6,19 @@ using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
-using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
 using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 using PromotItLibrary.Patterns.DataTables;
-using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State;
-using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 using PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State;
 using PromotItLibrary.Patterns.LinkedLists.Queue_State;
 
 
 using ITweet = PromotItLibrary.Interfaces.ITweet;
+using PromotItLibrary.Interfaces.Actions;
+using PromotItLibrary.Interfaces.DataTables;
+using PromotItLibrary.Interfaces.LinkedList;
+using PromotItLibrary.Interfaces.Users;
 
 namespace PromotItLibrary.Classes
 {

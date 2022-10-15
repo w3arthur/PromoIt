@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PromotItLibrary.Classes;
+using PromotItLibrary.Classes.Users;
 using Serilog;
 using Serilog.Sinks.File;
 

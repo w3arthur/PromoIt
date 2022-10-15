@@ -1,6 +1,6 @@
 ﻿using PromotItLibrary.Classes;
 using PromotItLibrary.Enums;
-using PromotItLibrary.Interfaces;
+using PromotItLibrary.Interfaces.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;

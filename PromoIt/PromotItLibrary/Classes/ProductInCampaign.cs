@@ -4,15 +4,16 @@ using System.Data;
 using System.Threading.Tasks;
 using PromotItLibrary.Enums;
 using PromotItLibrary.Interfaces;
+using PromotItLibrary.Interfaces.Actions;
+using PromotItLibrary.Interfaces.DataTables;
+using PromotItLibrary.Interfaces.LinkedList;
+using PromotItLibrary.Interfaces.Users;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns.Actions.Actions_Fuction_State;
-using PromotItLibrary.Patterns.Actions.Actions_Interfaces;
 using PromotItLibrary.Patterns.Actions.Actions_MySql_State;
 using PromotItLibrary.Patterns.Actions.Actions_Queue_State;
 using PromotItLibrary.Patterns.DataTables;
-using PromotItLibrary.Patterns.DataTables.DataTables_Interfaces;
 using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State;
-using PromotItLibrary.Patterns.LinkedLists.LinkedList_Function_State.LinkedLists_Interfaces;
 using PromotItLibrary.Patterns.LinkedLists.LinkedLists_MySql_State;
 using PromotItLibrary.Patterns.LinkedLists.Queue_State;
 
@@ -44,22 +45,22 @@ namespace PromotItLibrary.Classes
             //LinkedList States
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
             {
-                actionsProduct = new ActionsProduct_Queue(null, this, _httpClient);
-                linkedListProduct = new LinkedListProduct_Queue(null, this, _httpClient);
+                actionsProduct = new ActionsProduct_Queue(this, _httpClient);
+                linkedListProduct = new LinkedListProduct_Queue(this, _httpClient);
             }
             else if ((_mode ?? Configuration.Mode) == Modes.Functions)
             {
-                actionsProduct = new ActionsProduct_Function(null, this, _httpClient);
-                linkedListProduct = new LinkedListProduct_Function(null, this, _httpClient);
+                actionsProduct = new ActionsProduct_Function(this, _httpClient);
+                linkedListProduct = new LinkedListProduct_Function(this, _httpClient);
             }
             else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
             {
-                actionsProduct = new ActionsProduct_MySql(null, this, _mySQL);
-                linkedListProduct = new LinkedListProduct_MySql(null, this, _mySQL);
+                actionsProduct = new ActionsProduct_MySql(this, _mySQL);
+                linkedListProduct = new LinkedListProduct_MySql(this, _mySQL);
             }
                
             //DataTable States ?
-            dataTabletProduct = new DataTabletProduct(null, this);
+            dataTabletProduct = new DataTabletProduct(this);
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using PromotItLibrary.Classes;
+using PromotItLibrary.Classes.Users;
 using PromotItLibrary.Interfaces;
 using PromotItLibrary.Models;
 using PromotItLibrary.Patterns;
