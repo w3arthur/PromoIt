@@ -35,7 +35,7 @@ namespace PromotItLibrary.Classes.Users
         }
 
 
-        protected void RunActions<T>(T t_user) where T : IUsers
+        protected void RunActions<T>(T t_user) where T : IUsers //(AdminUser, BusinessUser, NonProfitUser, ActivistUser)
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
                 actionsUser = new ActionsUser_Queue(t_user, _httpClient);
