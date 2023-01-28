@@ -35,14 +35,14 @@ namespace PromotItLibrary.Classes.Users
         }
 
 
-        protected void RunActions(dynamic @user)
+        protected void RunActions<T>(T t_user) where T : IUsers
         {
             if ((_mode ?? Configuration.Mode) == Modes.Queue)
-                actionsUser = new ActionsUser_Queue(@user, _httpClient);
+                actionsUser = new ActionsUser_Queue(t_user, _httpClient);
             else if ((_mode ?? Configuration.Mode) == Modes.Functions)
-                actionsUser = new ActionsUser_Function(@user, _mySQL, _httpClient);
+                actionsUser = new ActionsUser_Function(t_user, _mySQL, _httpClient);
             else if ((_mode ?? Configuration.DatabaseMode) == Modes.MySQL)
-                actionsUser = new ActionsUser_MySql(@user, _mySQL, _httpClient);
+                actionsUser = new ActionsUser_MySql(t_user, _mySQL, _httpClient);
         }
 
 
