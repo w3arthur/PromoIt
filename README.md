@@ -16,8 +16,7 @@ Please run all the 4 projects:                                                  
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">  
-    <img src="https://www.upload.ee/image/13836004/LogoPromoit.png" alt="Logo" width="230" height="85">
-    <img src="https://www.upload.ee/image/13836007/ZioNET-Logo_new_new-156x66.png" alt="Logo" width="120" height="45"> <br>
+    <img src="https://www.upload.ee/image/13836004/LogoPromoit.png" alt="Logo" width="230" height="85"><br>
     <p>Project made by: Yaron Malul, Arthur Zarankin and Ariel Hillel.</p>
   </a>  
      <br />
