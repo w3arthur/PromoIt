@@ -190,3 +190,11 @@ Arthur Zarankin - [@GitHub](https://github.com/w3arthur) - w3arthur@gmail.com
 Project Link: [https://github.com/w3arthur/PromoIt](https://github.com/w3arthur/PromoIt)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+Diagrams:
+
+![UseCase](https://i.imgur.com/Rr7XRWQ.png)
+
+![ERD](https://i.imgur.com/YD94KeA.png)
